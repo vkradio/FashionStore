@@ -156,7 +156,7 @@ namespace ApplicationCore.Entities
         }
 
         public SkuInStock ParentSkuInStock { get { return _parent; } /*set { _parent = value; }*/ }
-        public string X { get { return _x; } /*set { _x = value; }*/ } // TODO: На set X и Y можно навесить изменение родителя => ускорить SkuInStock.TotalAmount.
+        public string X { get { return _x; } /*set { _x = value; }*/ } // TODO: It is possible to "bind" changing parent on set X and Y and so to accelerate SkuInStock.TotalAmount.
         public string Y { get { return _y; } /*set { _y = value; }*/ }
         public int Amount { get { return _amount; } set { Modify(); _amount = value; } }
         public DateTime Modified { get { return _modified; } }

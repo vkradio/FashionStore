@@ -4,35 +4,24 @@ namespace DalLegacy
 {
     public class BizObject : IComparable<BizObject>
     {
-        protected class ConstrainingSP : AbstractStoredProcedure
-        {
-            public ConstrainingSP(string in_spName, BizObject in_bizObject) : base(in_spName, "@in_objectId", in_bizObject.Id) {}
-        };
-
         protected const string C_IDPARAM = "@in_id";
         protected const string C_NAMEPARAM = "@in_name";
         protected static readonly DateTime c_minDate = new DateTime(1753, 1, 2);
         protected static readonly DateTime c_maxDate = new DateTime(9999, 12, 30);
 
-        /// <summary>
-        /// Флаг синхронного состояния с БД
-        /// </summary>
         protected bool _inSync = true;
-        /// <summary>
-        /// Наименование экземпляра объекта
-        /// </summary>
         protected string _name;
 
         /// <summary>
-        /// Первичный ключ
+        /// Primary key
         /// </summary>
         public virtual int Id { get; set; }
         /// <summary>
-        /// Опциональный родительский объект
+        /// Optional parent object
         /// </summary>
         public virtual BizObject Parent { get; set; }
         /// <summary>
-        /// Наименование экземпляра объекта
+        /// Object instance name
         /// </summary>
         public virtual string Name { get { return _name; } set { Modify(); _name = value; } }
 

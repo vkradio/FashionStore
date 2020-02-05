@@ -127,7 +127,7 @@ namespace ApplicationCore.Entities
             in_sp.AddParameter("@in_paymentByCard", _paymentByCard ? 1 : 0);
         }
 
-        // TODO: Реализовать возможность изменения записи журнала.
+        // TODO: Implement changing journal record.
         public override void Flush()
         {
             Debug.Assert(Validate() == null, "Debug.Assert(Validate() == null)");
@@ -137,7 +137,7 @@ namespace ApplicationCore.Entities
             if (!_isNew)
                 throw new InvalidOperationException("Cannot update DocSale - operation not allowed.");
 
-            // TODO: Родительский doc должен создаваться в рамках единой транзакции.
+            // TODO: Parent doc should be created in transaction.
             _doc = Doc.CreateNew(Doc.DocType.Sale);
             _doc.Flush();
             Id = _doc.Id;

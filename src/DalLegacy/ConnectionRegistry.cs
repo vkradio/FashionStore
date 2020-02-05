@@ -7,21 +7,13 @@ namespace DalLegacy
 {
     public class ConnectionRegistry
     {
-        static ConnectionRegistry _instance;
+        static ConnectionRegistry s_instance;
 
-        string _connectionString;
-
-        static ConnectionRegistry GetInstance()
-        {
-            if (_instance == null)
-                _instance = new ConnectionRegistry();
-            return _instance;
-        }
+        string connectionString;
 
         ConnectionRegistry()
         {
             SQLiteFunction.RegisterFunction(typeof(SQLiteCaseInsensitiveCollation));
-            //SQLiteFunction.RegisterFunction(typeof(SQLiteRegexpFunction));
             SQLiteFunction.RegisterFunction(typeof(SQLiteLikeCI));
         }
 
@@ -29,28 +21,19 @@ namespace DalLegacy
         {
             get
             {
-                if (_connectionString == null)
+                if (connectionString == null)
                     throw new InvalidOperationException("Get ConnectionRegistry.ConnectionString, while it is null.");
-                    //_connectionString = ConfigService.GlobalInstance().ConnectionString;
-                //if (_connectionString == null)
-                //{
-                //    SQLiteConnectionStringBuilder builder = new SQLiteConnectionStringBuilder();
-                //    builder.DataSource = "default.db3";
-                //    //builder.InitialCatalog = "anbkdb";
-                //    //builder.IntegratedSecurity = true;
-                //    _connectionString = builder.ConnectionString;
-                //}
-                return _connectionString;
+                return connectionString;
             }
-            set { _connectionString = value; } }
+
+            set => connectionString = value;
+        }
+
         public SQLiteConnection OpenNewConnection()
         {
-            //SQLiteFactory factory = (SQLiteFactory)DbProviderFactories.GetFactory("System.Data.SQLite");
-            //SQLiteConnection connection = (SQLiteConnection)factory.CreateConnection();
-            SQLiteConnection connection = new SQLiteConnection(ConnectionString);
-            //connection.ConnectionString = ConnectionString;
+            var connection = new SQLiteConnection(ConnectionString);
             connection.Open();
-            using (SQLiteCommand cmd = connection.CreateCommand())
+            using (var cmd = connection.CreateCommand())
             {
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = "PRAGMA foreign_keys = ON";
@@ -59,23 +42,16 @@ namespace DalLegacy
             return connection;
         }
 
-        public static ConnectionRegistry Instance { get { return GetInstance(); } }
-        public static void Init(string in_connectionString)
+        public static ConnectionRegistry Instance
         {
-            Instance.ConnectionString = in_connectionString;
+            get
+            {
+                if (s_instance == null)
+                    s_instance = new ConnectionRegistry();
+                return s_instance;
+            }
         }
 
-        //public static string DatabaseName { get { return new SqlConnectionStringBuilder(Instance.ConnectionString).InitialCatalog; } }
-        //public static Smo.Database SmoDatabase { get { return SmoWrapper.Server.Databases[DatabaseName]; } }
-        //public static string UserName
-        //{
-        //    get
-        //    {
-        //        SqlConnectionStringBuilder sqlConnStrBuilder = new SqlConnectionStringBuilder(Instance.ConnectionString);
-        //        return sqlConnStrBuilder.IntegratedSecurity ?
-        //            (string.IsNullOrEmpty(Environment.UserDomainName) ? string.Empty : Environment.UserDomainName + "\\") + Environment.UserName :
-        //            sqlConnStrBuilder.UserID;
-        //    }
-        //}
+        public static void Init(string connectionString) => Instance.ConnectionString = connectionString;
     };
 }

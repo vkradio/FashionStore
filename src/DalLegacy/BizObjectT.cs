@@ -53,6 +53,9 @@ namespace DalLegacy
 
     public abstract class BizObject<T> : BizObject2, IComparable<T> where T : BizObject<T>, new()
     {
+        const string c_errClassDoNotContainAttribute = "Class {0} do not containt the required SPNamesAttribute attribute.";
+        const string c_errClassDoNotContainAttributeValue = "Class {0} do not containt the required attribute value SPNames.{1}.";
+
         protected class GetObjectSql: CustomSqlCommand
         {
             public GetObjectSql(int in_id) : base(ProcNameRead)
@@ -158,9 +161,9 @@ namespace DalLegacy
             {
                 SPNamesAttribute a = Attribute.GetCustomAttribute(typeof(T), typeof(SPNamesAttribute)) as SPNamesAttribute;
                 if (a == null)
-                    throw new NotImplementedException(string.Format("Класс {0} не содержит обязательного атрибута SPNamesAttribute.", typeof(T).Name));
+                    throw new NotImplementedException(string.Format(c_errClassDoNotContainAttribute, typeof(T).Name));
                 if ( string.IsNullOrEmpty( a.Read ) )
-                    throw new NotImplementedException(string.Format("Класс {0} не содержит обязательного значения атрибута SPNames.Read.", typeof(T).Name));
+                    throw new NotImplementedException(string.Format(c_errClassDoNotContainAttributeValue, typeof(T).Name, "Read"));
                 return a.Read;
             }
         }
@@ -170,9 +173,9 @@ namespace DalLegacy
             {
                 SPNamesAttribute a = Attribute.GetCustomAttribute(typeof(T), typeof(SPNamesAttribute)) as SPNamesAttribute;
                 if (a == null)
-                    throw new NotImplementedException(string.Format("Класс {0} не содержит обязательного атрибута SPNamesAttribute.", typeof(T).Name));
+                    throw new NotImplementedException(string.Format(c_errClassDoNotContainAttribute, typeof(T).Name));
                 if ( string.IsNullOrEmpty( a.Delete ) )
-                    throw new NotImplementedException(string.Format("Класс {0} не содержит обязательного значения атрибута SPNames.Delete.", typeof(T).Name));
+                    throw new NotImplementedException(string.Format(c_errClassDoNotContainAttributeValue, typeof(T).Name, "Delete"));
                 return a.Delete;
             }
         }
@@ -182,9 +185,9 @@ namespace DalLegacy
             {
                 SPNamesAttribute a = Attribute.GetCustomAttribute(typeof(T), typeof(SPNamesAttribute)) as SPNamesAttribute;
                 if (a == null)
-                    throw new NotImplementedException(string.Format("Класс {0} не содержит обязательного атрибута SPNamesAttribute.", typeof(T).Name));
+                    throw new NotImplementedException(string.Format(c_errClassDoNotContainAttribute, typeof(T).Name));
                 if (string.IsNullOrEmpty(a.Add))
-                    throw new NotImplementedException(string.Format("Класс {0} не содержит обязательного значения атрибута SPNames.Add.", typeof(T).Name));
+                    throw new NotImplementedException(string.Format(c_errClassDoNotContainAttributeValue, typeof(T).Name, "Add"));
                 return a.Add;
             }
         }
@@ -194,9 +197,9 @@ namespace DalLegacy
             {
                 SPNamesAttribute a = Attribute.GetCustomAttribute(typeof(T), typeof(SPNamesAttribute)) as SPNamesAttribute;
                 if (a == null)
-                    throw new NotImplementedException(string.Format("Класс {0} не содержит обязательного атрибута SPNamesAttribute.", typeof(T).Name));
+                    throw new NotImplementedException(string.Format(c_errClassDoNotContainAttribute, typeof(T).Name));
                 if (string.IsNullOrEmpty(a.Update))
-                    throw new NotImplementedException(string.Format("Класс {0} не содержит обязательного значения атрибута SPNames.Update.", typeof(T).Name));
+                    throw new NotImplementedException(string.Format(c_errClassDoNotContainAttributeValue, typeof(T).Name, "Update"));
                 return a.Update;
             }
         }
@@ -259,47 +262,16 @@ namespace DalLegacy
             _isNew = false;
         }
 
-        /*public virtual string Delete(DataRow in_row)
-        {
-            if (in_row == null)
-                return string.Empty;
-            string err = Delete(Restore((int?)in_row["Id"]));
-            if (err != null)
-                return err;
-            in_row.Delete();
-            in_row.AcceptChanges();
-            return null;
-        }*/
         public static string Delete(T in_object)
         {
             if (in_object == null)
                 return null;
             DeleteObjectSql sp = new DeleteObjectSql(in_object);
             sp.Execute();
-            //DataTable t = sp.ResultDataTable;
-            //if (t == null)
-            //{
-                _cache.Remove(in_object);
-                return null;
-            //}
-            //return t.Rows[0].Field<string>(0);
-            //return null;
+            _cache.Remove(in_object);
+            return null;
         }
 
-        //public virtual ResultState DeleteRecord(DataRow in_newRow)
-        //{
-        //    try
-        //    {
-        //        string err = Delete(in_newRow);
-        //        return err == null ? ResultState.ResultSuccess : new ResultState(false, err);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Logger.LogException(ex);
-        //        return new ResultState(false, string.Format("Ошибка в программе: [{0}] {1}", ex.GetType().Name, ex.Message));
-        //    }
-        //}
-        //public virtual object PolymorphHole(object in_params) { return null; }
 
         protected virtual void FillUpdateParams(CustomSqlCommand in_sp)
         {

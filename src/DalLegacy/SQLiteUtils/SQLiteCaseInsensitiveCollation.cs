@@ -9,7 +9,9 @@ namespace DalLegacy.SQLiteUtils
         /// 
         /// CultureInfo for comparing strings in case insensitive manner
         /// 
-        private static readonly CultureInfo _cultureInfo = CultureInfo.CreateSpecificCulture("ru-RU");
+        //static readonly CultureInfo s_cultureInfo = CultureInfo.CreateSpecificCulture("ru-RU");
+        //static readonly CultureInfo s_cultureInfo = CultureInfo.CreateSpecificCulture("en-US");
+        static readonly CompareInfo s_compareInfo = CultureInfo.CreateSpecificCulture("en-US").CompareInfo;
 
         /// 
         /// Does case-insensitive comparison using _cultureInfo
@@ -17,9 +19,6 @@ namespace DalLegacy.SQLiteUtils
         /// Left string
         /// Right string
         /// The result of a comparison
-        public override int Compare(string x, string y)
-        {
-            return string.Compare(x, y, _cultureInfo, CompareOptions.IgnoreCase);
-        }
+        public override int Compare(string x, string y) => s_compareInfo.Compare(x, y, CompareOptions.IgnoreCase);
     };
 }
