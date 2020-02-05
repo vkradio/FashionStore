@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-using dress.su.domain.Model;
+using ApplicationCore.Entities;
 
 namespace FashionStoreWinForms.Widgets.PointOfSaleSelector
 {

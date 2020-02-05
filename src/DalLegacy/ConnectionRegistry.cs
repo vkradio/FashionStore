@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Data.SQLite;
 
-using sys;
-using sys.SQLiteUtils;
+using DalLegacy.SQLiteUtils;
 
-namespace MainLibrary.misc
+namespace DalLegacy
 {
     public class ConnectionRegistry
     {

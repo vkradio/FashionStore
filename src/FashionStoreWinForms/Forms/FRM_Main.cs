@@ -4,8 +4,8 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
-using MainLibrary.misc;
-using dress.su.domain.Model;
+using ApplicationCore.Entities;
+using DalLegacy;
 using FashionStoreWinForms.Properties;
 using FashionStoreWinForms.Sys;
 using FashionStoreWinForms.Utils;

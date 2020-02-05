@@ -6,9 +6,7 @@ using System.Data.SqlTypes;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
 
-using MainLibrary.misc;
-
-namespace MainLibrary.database
+namespace DalLegacy
 {
     /// <summary>
     /// Класс представляет собой унифицированный метод работы с хранимой процедурой.

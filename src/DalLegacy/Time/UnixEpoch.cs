@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace sys.Time
+namespace DalLegacy.Time
 {
     public static class UnixEpoch
     {

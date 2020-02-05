@@ -2,7 +2,7 @@
 using System.Data.SQLite;
 using System.Windows.Forms;
 
-using dress.su.domain.Model;
+using ApplicationCore.Entities;
 
 namespace FashionStoreWinForms.Forms
 {

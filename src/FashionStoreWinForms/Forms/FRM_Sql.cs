@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.SQLite;
 using System.Windows.Forms;
 
-using MainLibrary.misc;
+using DalLegacy;
 
 namespace FashionStoreWinForms.Forms
 {

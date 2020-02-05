@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows.Forms;
 
-using dress.su.domain.Model;
+using ApplicationCore.Entities;
 using FashionStoreWinForms.Sys;
 
 namespace FashionStoreWinForms.Widgets.PageViewSku

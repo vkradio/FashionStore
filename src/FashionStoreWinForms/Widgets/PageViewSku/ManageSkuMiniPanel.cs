@@ -2,12 +2,12 @@
 using System.Data;
 using System.Windows.Forms;
 
-using dress.su.domain.Model;
+using ApplicationCore.Entities;
 using FashionStoreWinForms.Forms;
 using FashionStoreWinForms.Properties;
 using FashionStoreWinForms.Sys;
 using FashionStoreWinForms.Widgets.Net;
-using MainLibrary.database.orm;
+using DalLegacy;
 
 namespace FashionStoreWinForms.Widgets.PageViewSku
 {

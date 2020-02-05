@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MainLibrary.database.orm
+namespace DalLegacy
 {
     public class BizObject : IComparable<BizObject>
     {

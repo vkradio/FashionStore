@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-using dress.su.domain.Model;
+using ApplicationCore.Entities;
+using DalLegacy;
 using FashionStoreWinForms.Forms;
 using FashionStoreWinForms.Sys;
+using FashionStoreWinForms.Utils;
 using FashionStoreWinForms.Widgets.Net;
-using MainLibrary.database.orm;
 
 namespace FashionStoreWinForms.Widgets.PageAddSku
 {

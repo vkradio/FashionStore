@@ -1,4 +1,4 @@
-﻿using dress.su.domain.Model;
+﻿using ApplicationCore.Entities;
 
 namespace FashionStoreWinForms.Sys
 {

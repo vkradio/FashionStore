@@ -2,10 +2,9 @@
 using System.Data;
 using System.Data.SQLite;
 
-using MainLibrary.database.orm;
-using MainLibrary.misc;
+using DalLegacy;
 
-namespace dress.su.domain.Model
+namespace ApplicationCore.Entities
 {
     [
         SPNames

@@ -27,7 +27,7 @@ to comply with my state of the art skill set. Nearest fixes presumably
 will include the following:
 
 * Add English language to UI (I18N → L11N);
-* Initial reformatting and refactoring C# code to comply more for my
+* Initial reformatting and refactoring C# code to comply more with my
   current coding practices;
 * Add unit tests;
 * Migrate back-end DLL project from .NET Framework → .NET Standard;

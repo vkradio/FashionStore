@@ -107,6 +107,7 @@
     <Compile Include="Sys\GlobalController.cs" />
     <Compile Include="Sys\Registry.cs" />
     <Compile Include="Utils\ArticleInStockExt.cs" />
+    <Compile Include="Utils\ComboBoxLightBizItemExtension.cs" />
     <Compile Include="Widgets\Net\FRM_CellSelector.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -175,21 +176,20 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ApplicationCore\ApplicationCore.csproj">
+      <Project>{d9544b13-3e6a-48da-a573-4b9b4a3e989a}</Project>
+      <Name>ApplicationCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DalLegacy\DalLegacy.csproj">
+      <Project>{21a5914b-e4a4-4b82-a683-796d123d33aa}</Project>
+      <Name>DalLegacy</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Data.SQLite.Core">
       <Version>1.0.112</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\dress.su.domain\dress.su.domain.csproj">
-      <Project>{0c7ff829-ac98-4b48-a508-ca0b92b76ea0}</Project>
-      <Name>dress.su.domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\dress.sys\dress.sys.csproj">
-      <Project>{545d5c92-7023-4ce8-a76f-f5d6702e7161}</Project>
-      <Name>dress.sys</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

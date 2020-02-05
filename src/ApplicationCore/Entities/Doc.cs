@@ -1,9 +1,9 @@
 ﻿using System;
 
-using MainLibrary.database.orm;
-using sys.Time;
+using DalLegacy;
+using DalLegacy.Time;
 
-namespace dress.su.domain.Model
+namespace ApplicationCore.Entities
 {
     [
         SPNames

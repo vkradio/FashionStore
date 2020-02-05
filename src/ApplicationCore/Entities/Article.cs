@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 
-using MainLibrary.database.orm;
-using MainLibrary.misc;
-using sys.Time;
+using DalLegacy;
+using DalLegacy.Time;
 
-namespace dress.su.domain.Model
+namespace ApplicationCore.Entities
 {
     [
         SPNames

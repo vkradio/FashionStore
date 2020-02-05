@@ -4,9 +4,7 @@ using System.Data;
 using System.Data.SQLite;
 using System.Diagnostics;
 
-using MainLibrary.misc;
-
-namespace MainLibrary.database.orm
+namespace DalLegacy
 {
     public class CustomSqlCommand
     {

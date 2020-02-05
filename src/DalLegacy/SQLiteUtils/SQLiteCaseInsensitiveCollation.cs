@@ -1,7 +1,7 @@
 ﻿using System.Data.SQLite;
 using System.Globalization;
 
-namespace sys.SQLiteUtils
+namespace DalLegacy.SQLiteUtils
 {
     [SQLiteFunction(FuncType = FunctionType.Collation, Name = "UTF8CI")]
     public class SQLiteCaseInsensitiveCollation : SQLiteFunction

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-using dress.su.domain.Model;
-using MainLibrary.database.orm;
+using ApplicationCore.Entities;
+using DalLegacy;
 
 namespace FashionStoreWinForms.Forms
 {

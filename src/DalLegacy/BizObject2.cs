@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 
-namespace MainLibrary.database.orm
+namespace DalLegacy
 {
     public abstract class BizObject2 : BizObject
     {
