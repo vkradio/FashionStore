@@ -1,0 +1,621 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="B_Search.Location" type="System.Drawing.Point, System.Drawing">
+    <value>404, 67</value>
+  </data>
+  <data name="B_Search.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="B_Search.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="B_Search.Text" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="&gt;&gt;B_Search.Name" xml:space="preserve">
+    <value>B_Search</value>
+  </data>
+  <data name="&gt;&gt;B_Search.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;B_Search.Parent" xml:space="preserve">
+    <value>PAN_SkuWONet</value>
+  </data>
+  <data name="&gt;&gt;B_Search.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="T_Name.Location" type="System.Drawing.Point, System.Drawing">
+    <value>73, 69</value>
+  </data>
+  <data name="T_Name.Size" type="System.Drawing.Size, System.Drawing">
+    <value>325, 20</value>
+  </data>
+  <data name="T_Name.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;T_Name.Name" xml:space="preserve">
+    <value>T_Name</value>
+  </data>
+  <data name="&gt;&gt;T_Name.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;T_Name.Parent" xml:space="preserve">
+    <value>PAN_SkuWONet</value>
+  </data>
+  <data name="&gt;&gt;T_Name.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="L_Name.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="L_Name.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 72</value>
+  </data>
+  <data name="L_Name.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 13</value>
+  </data>
+  <data name="L_Name.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="L_Name.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="&gt;&gt;L_Name.Name" xml:space="preserve">
+    <value>L_Name</value>
+  </data>
+  <data name="&gt;&gt;L_Name.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;L_Name.Parent" xml:space="preserve">
+    <value>PAN_SkuWONet</value>
+  </data>
+  <data name="&gt;&gt;L_Name.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="LU_Search.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LU_Search.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 33</value>
+  </data>
+  <data name="LU_Search.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 13</value>
+  </data>
+  <data name="LU_Search.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="LU_Search.Text" xml:space="preserve">
+    <value>LU_Search</value>
+  </data>
+  <data name="&gt;&gt;LU_Search.Name" xml:space="preserve">
+    <value>LU_Search</value>
+  </data>
+  <data name="&gt;&gt;LU_Search.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LU_Search.Parent" xml:space="preserve">
+    <value>PAN_SkuWONet</value>
+  </data>
+  <data name="&gt;&gt;LU_Search.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="LB_Sku.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LB_Sku.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 10</value>
+  </data>
+  <data name="LB_Sku.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 13</value>
+  </data>
+  <data name="LB_Sku.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="LB_Sku.Text" xml:space="preserve">
+    <value>LB_Sku</value>
+  </data>
+  <data name="&gt;&gt;LB_Sku.Name" xml:space="preserve">
+    <value>LB_Sku</value>
+  </data>
+  <data name="&gt;&gt;LB_Sku.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LB_Sku.Parent" xml:space="preserve">
+    <value>PAN_SkuWONet</value>
+  </data>
+  <data name="&gt;&gt;LB_Sku.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="CB_NetType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>179, 116</value>
+  </data>
+  <data name="CB_NetType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 21</value>
+  </data>
+  <data name="CB_NetType.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="&gt;&gt;CB_NetType.Name" xml:space="preserve">
+    <value>CB_NetType</value>
+  </data>
+  <data name="&gt;&gt;CB_NetType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CB_NetType.Parent" xml:space="preserve">
+    <value>PAN_SkuParams</value>
+  </data>
+  <data name="&gt;&gt;CB_NetType.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="L_NetType.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="L_NetType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, 119</value>
+  </data>
+  <data name="L_NetType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 13</value>
+  </data>
+  <data name="L_NetType.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="L_NetType.Text" xml:space="preserve">
+    <value>Size chart type</value>
+  </data>
+  <data name="&gt;&gt;L_NetType.Name" xml:space="preserve">
+    <value>L_NetType</value>
+  </data>
+  <data name="&gt;&gt;L_NetType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;L_NetType.Parent" xml:space="preserve">
+    <value>PAN_SkuParams</value>
+  </data>
+  <data name="&gt;&gt;L_NetType.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="B_Reset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>404, 111</value>
+  </data>
+  <data name="B_Reset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="B_Reset.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="B_Reset.Text" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="&gt;&gt;B_Reset.Name" xml:space="preserve">
+    <value>B_Reset</value>
+  </data>
+  <data name="&gt;&gt;B_Reset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;B_Reset.Parent" xml:space="preserve">
+    <value>PAN_SkuParams</value>
+  </data>
+  <data name="&gt;&gt;B_Reset.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="B_Save.Location" type="System.Drawing.Point, System.Drawing">
+    <value>404, 82</value>
+  </data>
+  <data name="B_Save.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="B_Save.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="B_Save.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="&gt;&gt;B_Save.Name" xml:space="preserve">
+    <value>B_Save</value>
+  </data>
+  <data name="&gt;&gt;B_Save.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;B_Save.Parent" xml:space="preserve">
+    <value>PAN_SkuParams</value>
+  </data>
+  <data name="&gt;&gt;B_Save.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="T_Margin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>179, 89</value>
+  </data>
+  <data name="T_Margin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="T_Margin.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="&gt;&gt;T_Margin.Name" xml:space="preserve">
+    <value>T_Margin</value>
+  </data>
+  <data name="&gt;&gt;T_Margin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;T_Margin.Parent" xml:space="preserve">
+    <value>PAN_SkuParams</value>
+  </data>
+  <data name="&gt;&gt;T_Margin.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="L_Margin.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="L_Margin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>49, 92</value>
+  </data>
+  <data name="L_Margin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>124, 13</value>
+  </data>
+  <data name="L_Margin.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="L_Margin.Text" xml:space="preserve">
+    <value>Margin (planned per unit)</value>
+  </data>
+  <data name="&gt;&gt;L_Margin.Name" xml:space="preserve">
+    <value>L_Margin</value>
+  </data>
+  <data name="&gt;&gt;L_Margin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;L_Margin.Parent" xml:space="preserve">
+    <value>PAN_SkuParams</value>
+  </data>
+  <data name="&gt;&gt;L_Margin.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="T_PriceOfSell.Location" type="System.Drawing.Point, System.Drawing">
+    <value>179, 63</value>
+  </data>
+  <data name="T_PriceOfSell.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="T_PriceOfSell.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;T_PriceOfSell.Name" xml:space="preserve">
+    <value>T_PriceOfSell</value>
+  </data>
+  <data name="&gt;&gt;T_PriceOfSell.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;T_PriceOfSell.Parent" xml:space="preserve">
+    <value>PAN_SkuParams</value>
+  </data>
+  <data name="&gt;&gt;T_PriceOfSell.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="L_PriceOfSell.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="L_PriceOfSell.Location" type="System.Drawing.Point, System.Drawing">
+    <value>76, 66</value>
+  </data>
+  <data name="L_PriceOfSell.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 13</value>
+  </data>
+  <data name="L_PriceOfSell.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="L_PriceOfSell.Text" xml:space="preserve">
+    <value>Sell price (planned)</value>
+  </data>
+  <data name="&gt;&gt;L_PriceOfSell.Name" xml:space="preserve">
+    <value>L_PriceOfSell</value>
+  </data>
+  <data name="&gt;&gt;L_PriceOfSell.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;L_PriceOfSell.Parent" xml:space="preserve">
+    <value>PAN_SkuParams</value>
+  </data>
+  <data name="&gt;&gt;L_PriceOfSell.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="T_PriceOfPurchase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>179, 36</value>
+  </data>
+  <data name="T_PriceOfPurchase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="T_PriceOfPurchase.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;T_PriceOfPurchase.Name" xml:space="preserve">
+    <value>T_PriceOfPurchase</value>
+  </data>
+  <data name="&gt;&gt;T_PriceOfPurchase.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;T_PriceOfPurchase.Parent" xml:space="preserve">
+    <value>PAN_SkuParams</value>
+  </data>
+  <data name="&gt;&gt;T_PriceOfPurchase.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="L_PriceOfPurchase.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="L_PriceOfPurchase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>86, 39</value>
+  </data>
+  <data name="L_PriceOfPurchase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 13</value>
+  </data>
+  <data name="L_PriceOfPurchase.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="L_PriceOfPurchase.Text" xml:space="preserve">
+    <value>Cost of purchase</value>
+  </data>
+  <data name="&gt;&gt;L_PriceOfPurchase.Name" xml:space="preserve">
+    <value>L_PriceOfPurchase</value>
+  </data>
+  <data name="&gt;&gt;L_PriceOfPurchase.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;L_PriceOfPurchase.Parent" xml:space="preserve">
+    <value>PAN_SkuParams</value>
+  </data>
+  <data name="&gt;&gt;L_PriceOfPurchase.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="T_Amount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>179, 10</value>
+  </data>
+  <data name="T_Amount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="T_Amount.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;T_Amount.Name" xml:space="preserve">
+    <value>T_Amount</value>
+  </data>
+  <data name="&gt;&gt;T_Amount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;T_Amount.Parent" xml:space="preserve">
+    <value>PAN_SkuParams</value>
+  </data>
+  <data name="&gt;&gt;T_Amount.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="L_Amount.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="L_Amount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>127, 13</value>
+  </data>
+  <data name="L_Amount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 13</value>
+  </data>
+  <data name="L_Amount.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="L_Amount.Text" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="&gt;&gt;L_Amount.Name" xml:space="preserve">
+    <value>L_Amount</value>
+  </data>
+  <data name="&gt;&gt;L_Amount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;L_Amount.Parent" xml:space="preserve">
+    <value>PAN_SkuParams</value>
+  </data>
+  <data name="&gt;&gt;L_Amount.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="PAN_SkuParams.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 89</value>
+  </data>
+  <data name="PAN_SkuParams.Size" type="System.Drawing.Size, System.Drawing">
+    <value>479, 144</value>
+  </data>
+  <data name="PAN_SkuParams.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="&gt;&gt;PAN_SkuParams.Name" xml:space="preserve">
+    <value>PAN_SkuParams</value>
+  </data>
+  <data name="&gt;&gt;PAN_SkuParams.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PAN_SkuParams.Parent" xml:space="preserve">
+    <value>PAN_SkuWONet</value>
+  </data>
+  <data name="&gt;&gt;PAN_SkuParams.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="PAN_SkuWONet.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="PAN_SkuWONet.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="PAN_SkuWONet.Size" type="System.Drawing.Size, System.Drawing">
+    <value>550, 233</value>
+  </data>
+  <data name="PAN_SkuWONet.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;PAN_SkuWONet.Name" xml:space="preserve">
+    <value>PAN_SkuWONet</value>
+  </data>
+  <data name="&gt;&gt;PAN_SkuWONet.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PAN_SkuWONet.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PAN_SkuWONet.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="PAN_Net.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="PAN_Net.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 233</value>
+  </data>
+  <data name="PAN_Net.Size" type="System.Drawing.Size, System.Drawing">
+    <value>550, 19</value>
+  </data>
+  <data name="PAN_Net.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;PAN_Net.Name" xml:space="preserve">
+    <value>PAN_Net</value>
+  </data>
+  <data name="&gt;&gt;PAN_Net.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PAN_Net.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PAN_Net.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>550, 252</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>PanelAddSku</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>

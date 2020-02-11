@@ -79,14 +79,14 @@ namespace FashionStoreWinForms.Widgets.Net
 
             Graphics g = CreateGraphics();
             
-            // 1. Измерение размеров.
+            // 1. Measure sizes.
             int maxWidthCapX, maxWidthCapY;
             NetUtil.MeasureNet(_netType, g, c_fieldWidth, out maxWidthCapX, out maxWidthCapY, out _widthCapX, out _widthCapY);
 
-            // 2. Рисование надписей.
+            // 2. Render labels.
             NetUtil.RenderLabels(_netType, this, maxWidthCapX, maxWidthCapY, _widthCapX, _widthCapY, c_labelWidthThreshold, c_height, c_gap, out _totalWidth, out _totalHeight);
 
-            // 3. Рисование текстовых полей сетки.
+            // 3. Render text labels of size chart.
             int xPos = maxWidthCapY + c_labelWidthThreshold * 2;
             for (int i = 0; i < _netType.CellsX.Count; i++)
             {

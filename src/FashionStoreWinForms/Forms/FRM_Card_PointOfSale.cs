@@ -3,14 +3,12 @@ using System.Data.SQLite;
 using System.Windows.Forms;
 
 using ApplicationCore.Entities;
+using FashionStoreWinForms.Properties;
 
 namespace FashionStoreWinForms.Forms
 {
     public partial class FRM_Card_PointOfSale : Form
     {
-        const string c_errConstraint    = "Невозможно удалить объект, у него имеются подчиненные объекты.";
-        const string c_errGeneric       = "Не удалось удалить объект. Технический код отказа: {0}.";
-
         void Clear()
         {
             T_Name.Text = string.Empty;
@@ -21,14 +19,14 @@ namespace FashionStoreWinForms.Forms
             int id;
             if (!int.TryParse(T_ReadId.Text, out id))
             {
-                MessageBox.Show("Неверный ID.", "Отказ", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(Resources.INVALID_ID, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return result;
             }
 
             result = PointOfSale.Restore(id);
             if (result == null)
             {
-                MessageBox.Show("Объект не найден.", "Отказ", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(Resources.OBJECT_NOT_FOUND, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return result;
             }
 
@@ -61,7 +59,7 @@ namespace FashionStoreWinForms.Forms
         }
         void B_Delete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(this, "Удалить объект?", "Внимание!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) != System.Windows.Forms.DialogResult.Yes)
+            if (MessageBox.Show(this, Resources.ASK_DELETE_OBJECT, Resources.WARNING_EXCLAMATION, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) != System.Windows.Forms.DialogResult.Yes)
                 return;
 
             PointOfSale o = GetObject();
@@ -75,9 +73,9 @@ namespace FashionStoreWinForms.Forms
                 {
                     //if (ex.ErrorCode == SQLiteErrorCode.Constraint)
                     if (ex.ResultCode == SQLiteErrorCode.Constraint)
-                        MessageBox.Show(this, c_errConstraint, "Отказ", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show(this, Resources.UNABLE_DELETE_OBJECT_HAS_CHILDREN, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     else
-                        MessageBox.Show(this, string.Format(c_errGeneric, ex.ErrorCode), "Отказ", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show(this, string.Format(Resources.UNABLE_DELETE_OBJECT_TECHNICAL_CODE, ex.ErrorCode), Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
             }

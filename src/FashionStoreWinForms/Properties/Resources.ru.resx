@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ALL_WAREHOUSES_SHORT" xml:space="preserve">
+    <value>все точки</value>
+  </data>
+  <data name="APP_BRAND" xml:space="preserve">
+    <value>Магазин одежды</value>
+  </data>
+  <data name="ASK_CANCEL_SALE" xml:space="preserve">
+    <value>Отменить продажу "{0}" на сумму {1} р.?</value>
+  </data>
+  <data name="ASK_DELETE_OBJECT" xml:space="preserve">
+    <value>Удалить объект?</value>
+  </data>
+  <data name="ASK_DELETE_SKU" xml:space="preserve">
+    <value>ВНИМАНИЕ! Действительно удалить весь товар "{0}" с закупочной ценой {1}? Также будет удален артикул, если он больше нигде не используется.</value>
+  </data>
+  <data name="ASK_PROCEED_AND_ABANDON_FORM_DATA" xml:space="preserve">
+    <value>На форме могут оставаться несохраненные данные. Выполнить новое действие?</value>
+  </data>
+  <data name="ASK_RESET_ALL_ENTERED_VALUES" xml:space="preserve">
+    <value>Сбросить все введенные значения?</value>
+  </data>
+  <data name="ASK_SHOW_ALL_SKUS_IN_THIS_STOCK" xml:space="preserve">
+    <value>Будет выведен полный список товара на точке. Продолжить?</value>
+  </data>
+  <data name="ASK_WHETHER_TO_CREATE_NEW_SKU" xml:space="preserve">
+    <value>Такого артикула нет. Начать оформление нового с таким наименованием?</value>
+  </data>
+  <data name="ATTENTION" xml:space="preserve">
+    <value>Внимание</value>
+  </data>
+  <data name="ATTENTION_ZERO_PRICE" xml:space="preserve">
+    <value>ВНИМАНИЕ! Цена 0, т.е. товар продается бесплатно.</value>
+  </data>
+  <data name="BACKUP_COMPLETED" xml:space="preserve">
+    <value>Резервное копирование завершено.</value>
+  </data>
+  <data name="BACKUP_FOLDER_NOT_EXISTS" xml:space="preserve">
+    <value>Не вставлен съемный диск для резервного копирования.</value>
+    <comment>Здесь простейший случай - подразумеваем, что это только флеш, хотя на самом деле может быть все, что угодно.</comment>
+  </data>
+  <data name="BACKUP_FOLDER_NOT_SET" xml:space="preserve">
+    <value>В настройках программы не задана папка резервного копирования.</value>
+  </data>
+  <data name="CANCELATION" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="CHOOSE_BACKUP_FOLDER" xml:space="preserve">
+    <value>Выберите папку резервного хранения</value>
+  </data>
+  <data name="CLICK_TO_VIEW_SELL_MOVE_SKU" xml:space="preserve">
+    <value>Нажмите сюда, чтобы посмотреть товар, продать или перебросить ({0})</value>
+  </data>
+  <data name="CONFIRMATION" xml:space="preserve">
+    <value>Подтверждение</value>
+  </data>
+  <data name="CONFIRM_MOVING_GOODS" xml:space="preserve">
+    <value>Перебросить товар "{0}" в количестве {1} ед. на точку {2}?</value>
+  </data>
+  <data name="CONFIRM_SELECTED_DATE" xml:space="preserve">
+    <value>Выбрана дата: {0} {1}
+Вы уверены?</value>
+  </data>
+  <data name="COST_OF_PURCHASE_SHORT" xml:space="preserve">
+    <value>Цена закуп.</value>
+  </data>
+  <data name="CRITICAL_ERROR" xml:space="preserve">
+    <value>Критическая ошибка</value>
+  </data>
+  <data name="CRITICAL_ERROR_MSG_COMMON1" xml:space="preserve">
+    <value>Произошла критическая ошибка. Приложение сейчас будет закрыто.</value>
+  </data>
+  <data name="CRITICAL_ERROR_MSG_COMMON2" xml:space="preserve">
+    <value>Это поможет найти и исправить дефект.</value>
+  </data>
+  <data name="CRITICAL_ERROR_MSG_DESCRIBE_ACTIONS" xml:space="preserve">
+    <value>Пожалуйста, опишите ваши действия, после которых это произошло, разработчику программы.</value>
+  </data>
+  <data name="CRITICAL_ERROR_MSG_SEND_FILE" xml:space="preserve">
+    <value>Пожалуйста, отправьте файл, который сейчас увидите, с описанием ваших действий, после которых это произошло, разработчику программы.</value>
+  </data>
+  <data name="CURRENT_WAREHOUSE_NOT_SELECTED" xml:space="preserve">
+    <value>Не выбрана текущая точка продаж.</value>
+  </data>
+  <data name="ERR_PART_CELL_QTY" xml:space="preserve">
+    <value>Допустимо только положительное целое число.</value>
+  </data>
+  <data name="ERR_PART_PRICE" xml:space="preserve">
+    <value>Допустимо только целое неотрицательное число в рублях.</value>
+  </data>
+  <data name="FAILURE" xml:space="preserve">
+    <value>Отказ</value>
+  </data>
+  <data name="FOUND_TOO_MUCH" xml:space="preserve">
+    <value>Найдено {0} позиций. Из-за ограничений памяти будет выведено показано только {1} из них. Для отображения всех нужных позиций вводите более точный поисковый запрос.</value>
+  </data>
+  <data name="GOODS_HAS_BEEN_MOVED" xml:space="preserve">
+    <value>Товар перемещен.</value>
+  </data>
+  <data name="INVALID_COST_OF_PURCHASE" xml:space="preserve">
+    <value>Неверное значение цены закупки.</value>
+  </data>
+  <data name="INVALID_COST_OF_PURCHASE_EXPLAINED" xml:space="preserve">
+    <value>Цена закупки задана неверно. Допустимо целое неотрицательное число.</value>
+  </data>
+  <data name="INVALID_ID" xml:space="preserve">
+    <value>Неверный ID.</value>
+  </data>
+  <data name="INVALID_SELL_PRICE" xml:space="preserve">
+    <value>Неверное значение плановой цены продажи.</value>
+  </data>
+  <data name="INVALID_SKU_QTY_IS_ENTERED" xml:space="preserve">
+    <value>Задано неверное количество товара.</value>
+  </data>
+  <data name="INVALID_SKU_QTY_IS_ENTERED_IN_CELL" xml:space="preserve">
+    <value>Задано неверное количество товара в ячейке {0}:{1}.</value>
+  </data>
+  <data name="INVALID_UNIT_PRICE_OF_SELL" xml:space="preserve">
+    <value>Указана неверная цена продажи.</value>
+  </data>
+  <data name="MESSAGE" xml:space="preserve">
+    <value>Сообщение</value>
+  </data>
+  <data name="NAME_NOT_SET" xml:space="preserve">
+    <value>Не задано наименование.</value>
+  </data>
+  <data name="NEW_DATE_IS_SAME_AS_OLD_ONE_SO_CHANGE_NOTHING" xml:space="preserve">
+    <value>Новая дата совпадает со старой, оставляем все без изменений.</value>
+  </data>
+  <data name="NOTHING_FOUND" xml:space="preserve">
+    <value>Ничего не найдено.</value>
+  </data>
+  <data name="NO_ROW_SELECTED" xml:space="preserve">
+    <value>Не выбрана строка.</value>
+  </data>
+  <data name="OBJECT_NOT_FOUND" xml:space="preserve">
+    <value>Объект не найден.</value>
+  </data>
+  <data name="PATH_TO_DB_NOT_SET" xml:space="preserve">
+    <value>Не задан путь к БД в настройках.</value>
+  </data>
+  <data name="PRICE_OF_STOCKS_SHORT" xml:space="preserve">
+    <value>Цена остаток</value>
+  </data>
+  <data name="PROGRAM_ALREADY_LAUCHED" xml:space="preserve">
+    <value>Программа "{0}" уже запущена. Вы нажали, возможно, случайно, запуск дважды.</value>
+  </data>
+  <data name="PROGRAM_AND_VERSION" xml:space="preserve">
+    <value>{0} версия {1}</value>
+  </data>
+  <data name="QTY_SHORT" xml:space="preserve">
+    <value>Кол-во</value>
+  </data>
+  <data name="QTY_TOO_BIG_FOR_GIVEN_CELL" xml:space="preserve">
+    <value>Указано слишком большое количество, в ячейке столько нет.</value>
+  </data>
+  <data name="QUESTION" xml:space="preserve">
+    <value>Вопрос</value>
+  </data>
+  <data name="QUESTION_ABOUT_DATE" xml:space="preserve">
+    <value>Вопрос по дате</value>
+  </data>
+  <data name="SALES_SUMMARY_LABEL" xml:space="preserve">
+    <value>Продаж: {0}  Сумма: {1}  Прибыль: {2}</value>
+  </data>
+  <data name="SELL_PRICE_SHORT" xml:space="preserve">
+    <value>Цена продажи</value>
+  </data>
+  <data name="SIZES" xml:space="preserve">
+    <value>Размеры</value>
+  </data>
+  <data name="SKU" xml:space="preserve">
+    <value>Артикул</value>
+  </data>
+  <data name="SKU_HAS_BEEN_SAVED" xml:space="preserve">
+    <value>Товар сохранён.</value>
+  </data>
+  <data name="SKU_IN_STOCK" xml:space="preserve">
+    <value>Товар в наличии ({0})</value>
+  </data>
+  <data name="SOME_SETTINGS_REQUIRE_TO_RELOAD_PROGRAM" xml:space="preserve">
+    <value>Некоторые настройки требуют перезапуска программы для вступления в силу.</value>
+  </data>
+  <data name="TOTAL" xml:space="preserve">
+    <value>Всего</value>
+  </data>
+  <data name="TOTALS_CAP" xml:space="preserve">
+    <value>ИТОГО</value>
+  </data>
+  <data name="UNABLE_DELETE_OBJECT_HAS_CHILDREN" xml:space="preserve">
+    <value>Невозможно удалить объект, у него имеются подчиненные объекты.</value>
+  </data>
+  <data name="UNABLE_DELETE_OBJECT_TECHNICAL_CODE" xml:space="preserve">
+    <value>Не удалось удалить объект. Технический код отказа: {0}.</value>
+  </data>
+  <data name="UNABLE_TO_CREATE_REPORT_LONG" xml:space="preserve">
+    <value>Не удается сохранить отчет. Возможно, сейчас открыта его старая копия - ее нужно закрыть. Если ничего не помогает, нужно перезагрузить (выключить и затем снова включить) компьютер.</value>
+  </data>
+  <data name="WARNING_EXCLAMATION" xml:space="preserve">
+    <value>Внимание!</value>
+  </data>
+  <data name="WILL_BE_SOLD_DETAILS" xml:space="preserve">
+    <value>Будет продано {0} ед. товара "{1}" по цене {2} р. за ед.</value>
+  </data>
+</root>

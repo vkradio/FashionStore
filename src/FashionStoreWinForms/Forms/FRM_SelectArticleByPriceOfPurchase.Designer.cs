@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FRM_SelectArticleByPriceOfPurchase));
             this.L_Question = new System.Windows.Forms.Label();
             this.L_Article = new System.Windows.Forms.Label();
             this.B_Choose = new System.Windows.Forms.Button();
@@ -39,78 +40,54 @@
             // 
             // L_Question
             // 
-            this.L_Question.Location = new System.Drawing.Point(12, 38);
+            resources.ApplyResources(this.L_Question, "L_Question");
             this.L_Question.Name = "L_Question";
-            this.L_Question.Size = new System.Drawing.Size(156, 44);
-            this.L_Question.TabIndex = 0;
-            this.L_Question.Text = "Выберите существующую закупочную цену или задайте новую.";
             // 
             // L_Article
             // 
-            this.L_Article.AutoSize = true;
-            this.L_Article.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_Article.Location = new System.Drawing.Point(12, 9);
+            resources.ApplyResources(this.L_Article, "L_Article");
             this.L_Article.Name = "L_Article";
-            this.L_Article.Size = new System.Drawing.Size(72, 17);
-            this.L_Article.TabIndex = 1;
-            this.L_Article.Text = "L_Article";
             // 
             // B_Choose
             // 
+            resources.ApplyResources(this.B_Choose, "B_Choose");
             this.B_Choose.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.B_Choose.Location = new System.Drawing.Point(12, 194);
             this.B_Choose.Name = "B_Choose";
-            this.B_Choose.Size = new System.Drawing.Size(75, 23);
-            this.B_Choose.TabIndex = 3;
-            this.B_Choose.Text = "Выбрать";
             this.B_Choose.UseVisualStyleBackColor = true;
             // 
             // B_Cancel
             // 
+            resources.ApplyResources(this.B_Cancel, "B_Cancel");
             this.B_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.B_Cancel.Location = new System.Drawing.Point(93, 194);
             this.B_Cancel.Name = "B_Cancel";
-            this.B_Cancel.Size = new System.Drawing.Size(75, 23);
-            this.B_Cancel.TabIndex = 4;
-            this.B_Cancel.Text = "Отмена";
             this.B_Cancel.UseVisualStyleBackColor = true;
             // 
             // LST_Prices
             // 
+            resources.ApplyResources(this.LST_Prices, "LST_Prices");
             this.LST_Prices.FormattingEnabled = true;
-            this.LST_Prices.Location = new System.Drawing.Point(12, 96);
             this.LST_Prices.Name = "LST_Prices";
-            this.LST_Prices.ScrollAlwaysVisible = true;
-            this.LST_Prices.Size = new System.Drawing.Size(156, 95);
-            this.LST_Prices.TabIndex = 5;
             this.LST_Prices.DoubleClick += new System.EventHandler(this.LST_Prices_DoubleClick);
             // 
             // T_NewPrice
             // 
-            this.T_NewPrice.Location = new System.Drawing.Point(12, 255);
+            resources.ApplyResources(this.T_NewPrice, "T_NewPrice");
             this.T_NewPrice.Name = "T_NewPrice";
-            this.T_NewPrice.Size = new System.Drawing.Size(100, 20);
-            this.T_NewPrice.TabIndex = 6;
             this.T_NewPrice.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.T_NewPrice_PreviewKeyDown);
             // 
             // B_NewPrice
             // 
-            this.B_NewPrice.Location = new System.Drawing.Point(12, 281);
+            resources.ApplyResources(this.B_NewPrice, "B_NewPrice");
             this.B_NewPrice.Name = "B_NewPrice";
-            this.B_NewPrice.Size = new System.Drawing.Size(75, 23);
-            this.B_NewPrice.TabIndex = 7;
-            this.B_NewPrice.Text = "Новая цена";
             this.B_NewPrice.UseVisualStyleBackColor = true;
             this.B_NewPrice.Click += new System.EventHandler(this.B_NewPrice_Click);
             // 
             // FRM_SelectArticleByPriceOfPurchase
             // 
             this.AcceptButton = this.B_Choose;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
             this.CancelButton = this.B_Cancel;
-            this.ClientSize = new System.Drawing.Size(181, 315);
             this.Controls.Add(this.B_NewPrice);
             this.Controls.Add(this.T_NewPrice);
             this.Controls.Add(this.LST_Prices);
@@ -124,8 +101,6 @@
             this.MinimizeBox = false;
             this.Name = "FRM_SelectArticleByPriceOfPurchase";
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Закупочная цена";
             this.ResumeLayout(false);
             this.PerformLayout();
 

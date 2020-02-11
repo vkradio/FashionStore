@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Data;
 using System.Windows.Forms;
 
 using ApplicationCore.Entities;
+using FashionStoreWinForms.Properties;
 using FashionStoreWinForms.Sys;
 
 namespace FashionStoreWinForms.Forms
@@ -18,11 +18,6 @@ namespace FashionStoreWinForms.Forms
             CustomRange
         };
 
-        const string c_captionConfirm = "Подтверждение";
-        const string c_captionFault = "Отказ";
-        const string c_askWillVoidSale = "Отменить продажу \"{0}\" на сумму {1} р.?";
-        const string c_noWayNoRowsSelected = "Не выбрана строка.";
-
         bool _canUpdateTable = true;
 
         void RefillTable() { RefillTable(DT_DateBegin.Value.Date, DT_DateEnd.Value.Date, DocSale.ShowRows.All); }
@@ -34,8 +29,21 @@ namespace FashionStoreWinForms.Forms
                 this.Cursor = Cursors.WaitCursor;
 
                 DGV_SalesJournal.DataSource = DocSale.ReadSalesJournal(Registry.CurrentPointOfSale, in_dateBegin, in_dateEnd, in_paymentTypes);
+
+                // Re-order columns manually; I was unable to figure out why they began to be shown disordered after translating UI to English
+                DGV_SalesJournal.Columns["COL_Date"].DisplayIndex = 0;
+                DGV_SalesJournal.Columns["COL_ArticleName"].DisplayIndex = 1;
+                DGV_SalesJournal.Columns["COL_Y"].DisplayIndex = 2;
+                DGV_SalesJournal.Columns["COL_X"].DisplayIndex = 3;
+                DGV_SalesJournal.Columns["COL_Units"].DisplayIndex = 4;
+                DGV_SalesJournal.Columns["COL_PriceOfPurchase"].DisplayIndex = 5;
+                DGV_SalesJournal.Columns["COL_PricePlan"].DisplayIndex = 6;
+                DGV_SalesJournal.Columns["COL_Price"].DisplayIndex = 7;
+                DGV_SalesJournal.Columns["COL_PriceSum"].DisplayIndex = 8;
+                DGV_SalesJournal.Columns["COL_Id"].DisplayIndex = 9;
+
                 DocSale.Summary summary = DocSale.GetSummary(Registry.CurrentPointOfSale, in_dateBegin, in_dateEnd, in_paymentTypes);
-                L_Summary.Text = string.Format("Продаж: {0}  Сумма: {1}  Прибыль: {2}", summary.Count, summary.Sum, summary.Profit);
+                L_Summary.Text = string.Format(Resources.SALES_SUMMARY_LABEL, summary.Count, summary.Sum, summary.Profit);
 
                 B_VoidSale.Enabled = DGV_SalesJournal.Rows.Count != 0;
             }
@@ -113,7 +121,7 @@ namespace FashionStoreWinForms.Forms
         {
             if (DGV_SalesJournal.Rows.GetRowCount(DataGridViewElementStates.Selected) <= 0)
             {
-                MessageBox.Show(this, c_noWayNoRowsSelected, c_captionFault, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Resources.NO_ROW_SELECTED, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -122,10 +130,10 @@ namespace FashionStoreWinForms.Forms
             string name = (string)row.Cells["COL_ArticleName"].Value;
             int sum = (int)(long)row.Cells["COL_PriceSum"].Value;
             
-            if (MessageBox.Show(this, string.Format(c_askWillVoidSale, name, sum), c_captionConfirm, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != System.Windows.Forms.DialogResult.Yes)
+            if (MessageBox.Show(this, string.Format(Resources.ASK_CANCEL_SALE, name, sum), Resources.CONFIRMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != System.Windows.Forms.DialogResult.Yes)
                 return;
 
-            // TODO: Обернуть в транзакцию.
+            // TODO: Implement transaction
             DocSale sale = DocSale.Restore(id);
             sale.Doc.TimeCancelled = DateTime.Now;
             SkuInStock skuInStock = SkuInStock.Restore(Article.Restore(sale.ArticleId), PointOfSale.Restore(sale.PointOfSaleId));
@@ -143,7 +151,7 @@ namespace FashionStoreWinForms.Forms
         {
             if (DGV_SalesJournal.Rows.GetRowCount(DataGridViewElementStates.Selected) <= 0)
             {
-                MessageBox.Show(this, c_noWayNoRowsSelected, c_captionFault, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Resources.NO_ROW_SELECTED, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -160,7 +168,7 @@ namespace FashionStoreWinForms.Forms
             }
 
             if (newDate == oldDate)
-                MessageBox.Show(this, "Новая дата совпадает со старой, оставляем все без изменений.", "Отмена", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Resources.NEW_DATE_IS_SAME_AS_OLD_ONE_SO_CHANGE_NOTHING, Resources.CANCELATION, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             else
             {
                 DocSale sale = DocSale.Restore((int)(long)row.Cells["COL_Id"].Value);

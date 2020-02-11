@@ -28,7 +28,7 @@ namespace FashionStoreWinForms.Widgets.Net
 
         public static void MeasureNet(DressMatrix in_netType, Graphics in_graphics, int in_fieldWidth, out int out_maxWidthCapX, out int out_maxWidthCapY, out int[] out_widthCapX, out int[] out_widthCapY)
         {
-            // 1. Измерить ширину самого левого столбца с надписями по Y.
+            // 1. Measure the width of the leftmost column with captions by Y.
             out_maxWidthCapY = 0;
             out_widthCapY = new int[in_netType.CellsY.Count];
             for (int i = 0; i < in_netType.CellsY.Count; i++)
@@ -38,8 +38,8 @@ namespace FashionStoreWinForms.Widgets.Net
                 out_maxWidthCapY = Math.Max(out_maxWidthCapY, width);
             }
 
-            // 2. Измерить ширину каждого из остальных столбоцов, выбрав самую широкую надпись
-            //    по X либо стандартную ширину TextBox.
+            // 2. Measure the width of every other column, taking the widthest caption by X, or
+            //    the standard TextBox width.
             out_maxWidthCapX = 0;
             out_widthCapX = new int[in_netType.CellsX.Count];
             for (int i = 0; i < in_netType.CellsX.Count; i++)

@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using ApplicationCore.Entities;
 using DalLegacy;
 using FashionStoreWinForms.Forms;
+using FashionStoreWinForms.Properties;
 using FashionStoreWinForms.Sys;
 using FashionStoreWinForms.Utils;
 using FashionStoreWinForms.Widgets.Net;
@@ -14,13 +15,10 @@ namespace FashionStoreWinForms.Widgets.PageAddSku
 {
     public partial class PanelAddSku : UserControl
     {
-        const string c_errPartPrice                 = " Допустимо только целое неотрицательное число в рублях.";
-        const string c_errPartCellAmount            = " Допустимо только положительное целое число.";
-        const string c_errInvalidPriceOfPurchase    = "Неверное значение цены закупки." + c_errPartPrice;
-        const string c_errInvalidPriceOfSell        = "Неверное значение плановой цены продажи." + c_errPartPrice;
-        const string c_errInvalidAmount             = "Задано неверное количество товара." + c_errPartCellAmount;
-        const string c_errInvalidCellAmount         = "Задано неверное количество товара в ячейке {0}:{1}." + c_errPartCellAmount;
-        const string c_msgSaved                     = "Товар сохранен.";
+        readonly string c_errInvalidCostOfPurchase = Resources.INVALID_COST_OF_PURCHASE + " " + Resources.ERR_PART_PRICE;
+        readonly string c_errInvalidSellPriceOfSell = Resources.INVALID_SELL_PRICE + " " + Resources.ERR_PART_PRICE;
+        readonly string c_errInvalidQty = Resources.INVALID_SKU_QTY_IS_ENTERED + " " + Resources.ERR_PART_CELL_QTY;
+        readonly string c_errInvalidCellQty = Resources.INVALID_SKU_QTY_IS_ENTERED_IN_CELL + " " + Resources.ERR_PART_CELL_QTY;
 
         int         _oldNetTypeIndex    = -1;
         int         _defaultHeight;
@@ -36,13 +34,13 @@ namespace FashionStoreWinForms.Widgets.PageAddSku
             if (!int.TryParse(T_PriceOfPurchase.Text, out out_priceOfPurchase) || out_priceOfPurchase < 0)
             {
                 T_PriceOfPurchase.Focus();
-                MessageBox.Show(this, c_errInvalidPriceOfPurchase, "Отказ", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, c_errInvalidCostOfPurchase, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             if (!int.TryParse(T_PriceOfSell.Text, out out_priceOfSell) || out_priceOfSell < 0)
             {
                 T_PriceOfSell.Focus();
-                MessageBox.Show(this, c_errInvalidPriceOfSell, "Отказ", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, c_errInvalidSellPriceOfSell, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             return true;
@@ -85,7 +83,7 @@ namespace FashionStoreWinForms.Widgets.PageAddSku
 
             if (err != null)
             {
-                MessageBox.Show(this, err, "Отказ", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, err, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
 
@@ -121,7 +119,7 @@ namespace FashionStoreWinForms.Widgets.PageAddSku
 
             int value;
             if (!int.TryParse(in_textBox.Text, out value) || value < 0)
-                return string.Format(c_errInvalidCellAmount, in_cell.X, in_cell.Y);
+                return string.Format(c_errInvalidCellQty, in_cell.X, in_cell.Y);
             else
             {
                 in_cell.Amount = value;
@@ -138,7 +136,7 @@ namespace FashionStoreWinForms.Widgets.PageAddSku
                 if (err != null)
                 {
                     T_Amount.Focus();
-                    return c_errInvalidAmount;
+                    return c_errInvalidQty;
                 }
             }
             else
@@ -222,8 +220,8 @@ namespace FashionStoreWinForms.Widgets.PageAddSku
                 B_Search_Click(sender, null);
         }
         /// <summary>
-        /// Выбор типа сетки.
-        /// <remarks>Доступен только для вновь добавляемого артикула.</remarks>
+        /// Selection of size chart type
+        /// <remarks>Enabled only for newly added SKUs</remarks>
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -238,8 +236,8 @@ namespace FashionStoreWinForms.Widgets.PageAddSku
             _oldNetTypeIndex = CB_NetType.SelectedIndex;
         }
         /// <summary>
-        /// Поиск артикула.
-        /// <remarks>Форма переключается в состояние редактирования товара на складе.</remarks>
+        /// Search of SKU
+        /// <remarks>Form is switching to warehouse stock edit mode.</remarks>
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -249,7 +247,7 @@ namespace FashionStoreWinForms.Widgets.PageAddSku
             
             if (string.IsNullOrWhiteSpace(T_Name.Text))
             {
-                MessageBox.Show(this, "Не задано наименование.", "Отказ", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Resources.NAME_NOT_SET, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 T_Name.Focus();
                 return;
             }
@@ -266,8 +264,8 @@ namespace FashionStoreWinForms.Widgets.PageAddSku
                 {
                     _article = null;
 
-                    // Спрашиваем о начале создания нового артикула.
-                    if (MessageBox.Show(this, "Такого артикула нет. Начать оформление нового с таким наименованием?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    // Ask whether to create new SKU
+                    if (MessageBox.Show(this, Resources.ASK_WHETHER_TO_CREATE_NEW_SKU, Resources.QUESTION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         _modified = true;
 
@@ -285,7 +283,7 @@ namespace FashionStoreWinForms.Widgets.PageAddSku
                 }
                 //else if (articles.Count > 1)
                 //{
-                //    // Выводим форму выбора артикулов по закупочной цене.
+                //    // Display form for selection SKU by cost of purchase.
                 //}
                 else
                 {
@@ -313,7 +311,7 @@ namespace FashionStoreWinForms.Widgets.PageAddSku
                             _article = frm.SelectedArticle;
                         }
 
-                        // Выводим его сетку и даем пользователю возможность заполнять.
+                        // Display a size chart and let user to fill it.
                         T_Name.ReadOnly = true;
                         T_PriceOfPurchase.ReadOnly = true;
                         B_Search.Enabled = false;
@@ -340,7 +338,7 @@ namespace FashionStoreWinForms.Widgets.PageAddSku
             }
         }
         /// <summary>
-        /// Сохранение введенных данных.
+        /// Save entered data.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -364,7 +362,7 @@ namespace FashionStoreWinForms.Widgets.PageAddSku
                     B_Reset.Enabled = false;
                     _modified = false;
 
-                    MessageBox.Show(this, c_msgSaved, "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(this, Resources.SKU_HAS_BEEN_SAVED, Resources.MESSAGE, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             finally
@@ -373,13 +371,13 @@ namespace FashionStoreWinForms.Widgets.PageAddSku
             }
         }
         /// <summary>
-        /// Возврат формы к состоянию поиска артикула.
+        /// Reset the form to search mode.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         void B_Reset_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(this, "Сбросить все введенные значения?", "Вопрос", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) != DialogResult.Yes)
+            if (MessageBox.Show(this, Resources.ASK_RESET_ALL_ENTERED_VALUES, Resources.QUESTION, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) != DialogResult.Yes)
                 return;
 
             _article = null;
@@ -418,8 +416,8 @@ namespace FashionStoreWinForms.Widgets.PageAddSku
             _defaultWidth = Width;
             _defaultHeight = Height;
 
-            LB_Sku.Text = string.Format("Товар в наличии ({0})", Registry.CurrentPointOfSale.Name);
-            LU_Search.Text = string.Format("Нажмите сюда, чтобы посмотреть товар, продать или перебросить ({0})", Registry.CurrentPointOfSale.Name);
+            LB_Sku.Text = string.Format(Resources.SKU_IN_STOCK, Registry.CurrentPointOfSale.Name);
+            LU_Search.Text = string.Format(Resources.CLICK_TO_VIEW_SELL_MOVE_SKU, Registry.CurrentPointOfSale.Name);
 
             Width = Math.Max(Math.Max(LB_Sku.Width, LU_Search.Width), Width);
 

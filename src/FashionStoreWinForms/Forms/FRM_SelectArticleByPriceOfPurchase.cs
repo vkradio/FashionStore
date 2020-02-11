@@ -4,14 +4,12 @@ using System.Windows.Forms;
 
 using ApplicationCore.Entities;
 using DalLegacy;
+using FashionStoreWinForms.Properties;
 
 namespace FashionStoreWinForms.Forms
 {
     public partial class FRM_SelectArticleByPriceOfPurchase : Form
     {
-        const string c_errInvalidNewPrice   = "Цена закупки задана неверно. Допустимо целое неотрицательное число.";
-        const string c_errDuplicateValue    = "Такая цена уже есть в списке. Введите другую цену или выберите такую цену из списка.";
-
         int?            _newPrice;
         List<Article>   _articles;
 
@@ -24,7 +22,7 @@ namespace FashionStoreWinForms.Forms
             int value;
             if (!int.TryParse(T_NewPrice.Text, out value) || value < 0)
             {
-                MessageBox.Show(this, c_errInvalidNewPrice, "Отказ", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Resources.INVALID_COST_OF_PURCHASE_EXPLAINED, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 T_NewPrice.Focus();
                 return;
             }
@@ -32,7 +30,7 @@ namespace FashionStoreWinForms.Forms
             foreach (Article article in _articles)
                 if (article.PriceOfPurchase == value)
                 {
-                    MessageBox.Show(this, c_errInvalidNewPrice, "Отказ", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(this, Resources.INVALID_COST_OF_PURCHASE, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     T_NewPrice.Focus();
                     return;
                 }

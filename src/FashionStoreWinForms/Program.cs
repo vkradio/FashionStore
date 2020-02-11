@@ -5,6 +5,7 @@ using System.Threading;
 using System.Windows.Forms;
 
 using FashionStoreWinForms.Forms;
+using FashionStoreWinForms.Properties;
 
 namespace FashionStoreWinForms
 {
@@ -29,11 +30,13 @@ namespace FashionStoreWinForms
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            //Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("ru-RU");
+
             bool singleInstance;
             _mutex = new Mutex(true, Assembly.GetExecutingAssembly().FullName, out singleInstance);
             if (!singleInstance)
             {
-                MessageBox.Show("Программа \"" + C_APP_BRAND + "\" уже запущена. Вы нажали, возможно, случайно, запуск дважды.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show(string.Format(Resources.PROGRAM_ALREADY_LAUCHED, Resources.APP_BRAND), Resources.ATTENTION, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
 
@@ -42,8 +45,7 @@ namespace FashionStoreWinForms
             _mutex.Close();
         }
 
-        public const string C_APP_BRAND = "РМ Одежда Розница";
-
-        public static string GetVersionString() { return string.Format("{0} версия {1}", C_APP_BRAND, CurrentVersion.ToString()); }
+        //public static string GetVersionString() { return string.Format(Resources.PROGRAM_AND_VERSION, Resources.APP_BRAND, CurrentVersion.ToString()); }
+        public static string GetVersionString() => Resources.APP_BRAND;
     }
 }

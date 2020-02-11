@@ -26,11 +26,11 @@ practices, and even in business logic. So, I plan to update this repo
 to comply with my state of the art skill set. Nearest fixes presumably
 will include the following:
 
-* Add English language to UI (I18N → L11N);
+* ~~Add English to UI instead of Russian (ideally I18N → L11N);~~
 * Initial reformatting and refactoring of C# code to comply more with my
   current coding practices;
 * Add unit tests;
 * ~~Migrate back-end DLL projects from .NET Framework → .NET Standard;~~
 * Migrate front-end WinForms project from .NET Framework → .NET Core;
-* Switch custom-written DAL to EF;
+* Switch custom-written DAL to EF Core;
 * Compliance with SOLID, design patterns and other best practices.

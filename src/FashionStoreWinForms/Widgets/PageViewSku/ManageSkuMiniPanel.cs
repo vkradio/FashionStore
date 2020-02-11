@@ -8,36 +8,13 @@ using FashionStoreWinForms.Properties;
 using FashionStoreWinForms.Sys;
 using FashionStoreWinForms.Widgets.Net;
 using DalLegacy;
+using System.Globalization;
 
 namespace FashionStoreWinForms.Widgets.PageViewSku
 {
     public partial class ManageSkuMiniPanel : UserControl
     {
-        const string c_captionFault         = "Отказ";
-        const string c_captionConfirmation  = "Подтверждение";
-        const string c_captionMessage       = "Сообщение";
-        const string c_errInvalidAmount     = "Указано неверное количество.";
-        const string c_errNoAmountInCell    = "Указано слишком большое количество, в ячейке столько нет.";
-        const string c_errInvalidUnitPrice  = "Указана неверная цена продажи.";
-        const string c_askDeleteSku         = "ВНИМАНИЕ! Действительно удалить весь товар \"{0}\" с закупочной ценой {1}? Также будет удален артикул, если он больше нигде не используется.";
-        const string c_askMove              = "Перебросить товар \"{0}\" в количестве {1} ед. на точку {2}?";
-        const string c_msgSkuMoved          = "Товар перемещен.";
-
-        readonly string[] c_months = new string[]
-        {
-            "январь",
-            "февраль",
-            "март",
-            "апрель",
-            "май",
-            "июнь",
-            "июль",
-            "август",
-            "сентябрь",
-            "октябрь",
-            "ноябрь",
-            "декабрь"
-        };
+        readonly string[] c_months = DateTimeFormatInfo.CurrentInfo.MonthNames;
 
         DataRow     _source;
         SkuInStock  _skuInStock;
@@ -67,7 +44,7 @@ namespace FashionStoreWinForms.Widgets.PageViewSku
             try
             {
                 Application.DoEvents();
-                _skuInStock = SkuInStock.Restore(_skuInStock.Article, _skuInStock.PointOfSale); // Это сделано для принудительного пересчитывания содержимого сетки.
+                _skuInStock = SkuInStock.Restore(_skuInStock.Article, _skuInStock.PointOfSale); // Force re-calculating of size cells in stock
                 using (FRM_CellSelector frmSelector = new FRM_CellSelector(_skuInStock))
                 {
                     this.Cursor = oldCur;
@@ -101,17 +78,17 @@ namespace FashionStoreWinForms.Widgets.PageViewSku
 
             if (!int.TryParse(T_Amount.Text, out amount) || amount < 1)
             {
-                MessageBox.Show(this, c_errInvalidAmount, c_captionFault, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Resources.INVALID_SKU_QTY_IS_ENTERED, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
             if (amount > _selectedCell.Amount)
             {
-                MessageBox.Show(this, c_errNoAmountInCell, c_captionFault, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Resources.QTY_TOO_BIG_FOR_GIVEN_CELL, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
             if (!int.TryParse(T_PriceOfSell.Text, out unitPrice) || unitPrice < 0)
             {
-                MessageBox.Show(this, c_errInvalidUnitPrice, c_captionFault, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Resources.INVALID_UNIT_PRICE_OF_SELL, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -130,7 +107,7 @@ namespace FashionStoreWinForms.Widgets.PageViewSku
                     if (maxOldDate.CompareTo(dateOfSale) > 0)
                     {
                         string month = c_months[dateOfSale.Month - 1].ToUpper();
-                        if (MessageBox.Show(this, string.Format("Выбрана дата: {0} {1}\nВы уверены?", dateOfSale.Day, month), "Вопрос по дате", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                        if (MessageBox.Show(this, string.Format(Resources.CONFIRM_SELECTED_DATE, dateOfSale.Day, month), Resources.QUESTION_ABOUT_DATE, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                             continue;
                     }
 
@@ -142,8 +119,8 @@ namespace FashionStoreWinForms.Widgets.PageViewSku
                 }
             }
 
-            // TODO: Придумать механизм транзакций и обернуть в него.
-            _selectedCell = _skuInStock[_selectedCell.X, _selectedCell.Y]; // Это сделано из-за того, что при выводе сетки текущая ячейка может отсоединиться от товара на объектном уровне (см. комментарий в пересчитывании товара выше).
+            // TODO: Implement transaction
+            _selectedCell = _skuInStock[_selectedCell.X, _selectedCell.Y]; // This is because of whilst render of the size chart, it's current cell can detach itself from the SKU on the object level (see comment about re-calculating above)
             _selectedCell.Amount -= amount;
             _skuInStock.Flush();
             DocSale sale = DocSale.CreateNew(dateOfSale, _skuInStock.Article, _skuInStock.PointOfSale, unitPrice, amount, _selectedCell, paymentByCard);
@@ -153,7 +130,7 @@ namespace FashionStoreWinForms.Widgets.PageViewSku
         }
         void B_Delete_Click(object sender, System.EventArgs e)
         {
-            if (MessageBox.Show(this, string.Format(c_askDeleteSku, _skuInStock.Article.Name, _skuInStock.Article.PriceOfPurchase), c_captionConfirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+            if (MessageBox.Show(this, string.Format(Resources.ASK_DELETE_SKU, _skuInStock.Article.Name, _skuInStock.Article.PriceOfPurchase), Resources.CONFIRMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 return;
 
             Cursor oldCursor = this.Cursor;
@@ -161,9 +138,9 @@ namespace FashionStoreWinForms.Widgets.PageViewSku
             {
                 this.Cursor = Cursors.WaitCursor;
 
-                // Для удаления SkuInStock достаточно удалить всего его ячейки, т.к. в БД нет соответствующего
-                // ему понятия, а есть только набор его ячеек.
-                // TODO: Обернуть в транзакцию.
+                // To delete SkuInStock it is enough to delete all it's cells, because there is no corresponding
+                // table in database, only a set of cells.
+                // TODO: Wrap into transaction
                 foreach (CellInStock cell in _skuInStock.Cells)
                 {
                     cell.Amount = 0;
@@ -174,7 +151,7 @@ namespace FashionStoreWinForms.Widgets.PageViewSku
                 {
                     string err = Article.Delete(_skuInStock.Article);
                     if (err != null)
-                        throw new ApplicationException(string.Format("Article.Delete для id {0} вернула: {1}", _skuInStock.Article.Id, err));
+                        throw new ApplicationException(string.Format("Article.Delete for id {0} returned: {1}", _skuInStock.Article.Id, err));
                 }
 
             }
@@ -190,20 +167,20 @@ namespace FashionStoreWinForms.Widgets.PageViewSku
             int amount;
             if (!int.TryParse(T_Amount.Text, out amount) || amount < 1)
             {
-                MessageBox.Show(this, c_errInvalidAmount, c_captionFault, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Resources.INVALID_SKU_QTY_IS_ENTERED, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
             if (amount > _selectedCell.Amount)
             {
-                MessageBox.Show(this, c_errNoAmountInCell, c_captionFault, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Resources.QTY_TOO_BIG_FOR_GIVEN_CELL, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
             PointOfSale pointOfSale = PointOfSale.Restore(((LiteBizItem)CB_PointsOfSale.SelectedItem).Value);
-            if (MessageBox.Show(this, string.Format(c_askMove, _skuInStock.Article.Name, amount, pointOfSale.Name), c_captionConfirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+            if (MessageBox.Show(this, string.Format(Resources.CONFIRM_MOVING_GOODS, _skuInStock.Article.Name, amount, pointOfSale.Name), Resources.CONFIRMATION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 return;
 
-            // TODO: Сюда транзакцию.
+            // TODO: Implement transaction
             SkuInStock skuInDestination = SkuInStock.Restore(_skuInStock.Article, pointOfSale);
             skuInDestination[_selectedCell.X, _selectedCell.Y].Amount += amount;
             skuInDestination.Flush();
@@ -212,7 +189,7 @@ namespace FashionStoreWinForms.Widgets.PageViewSku
             //_selectedCell.Flush();
 
             ((PanelViewSku)Parent.Parent.Parent).UpdateWOldSearch();
-            MessageBox.Show(this, c_msgSkuMoved, c_captionMessage, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(this, Resources.GOODS_HAS_BEEN_MOVED, Resources.MESSAGE, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public ManageSkuMiniPanel()

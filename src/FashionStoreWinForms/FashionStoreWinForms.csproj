@@ -154,6 +154,60 @@
     <Compile Include="Widgets\PointOfSaleSelector\PushButtonCheap.cs">
       <SubType>Component</SubType>
     </Compile>
+    <EmbeddedResource Include="Forms\FRM_Card_PointOfSale.resx">
+      <DependentUpon>FRM_Card_PointOfSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FRM_Card_PointOfSale.ru.resx">
+      <DependentUpon>FRM_Card_PointOfSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FRM_DressMatrix.resx">
+      <DependentUpon>FRM_DressMatrix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FRM_DressMatrix.ru.resx">
+      <DependentUpon>FRM_DressMatrix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FRM_Main.resx">
+      <DependentUpon>FRM_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FRM_Main.ru.resx">
+      <DependentUpon>FRM_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FRM_ReportParams.resx">
+      <DependentUpon>FRM_ReportParams.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FRM_ReportParams.ru.resx">
+      <DependentUpon>FRM_ReportParams.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FRM_SalesJournal.resx">
+      <DependentUpon>FRM_SalesJournal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FRM_SalesJournal.ru.resx">
+      <DependentUpon>FRM_SalesJournal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FRM_SelectArticleByPriceOfPurchase.resx">
+      <DependentUpon>FRM_SelectArticleByPriceOfPurchase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FRM_SelectArticleByPriceOfPurchase.ru.resx">
+      <DependentUpon>FRM_SelectArticleByPriceOfPurchase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FRM_SelectDateOfSale.resx">
+      <DependentUpon>FRM_SelectDateOfSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FRM_SelectDateOfSale.ru.resx">
+      <DependentUpon>FRM_SelectDateOfSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FRM_Sql.resx">
+      <DependentUpon>FRM_Sql.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FRM_Sql.ru.resx">
+      <DependentUpon>FRM_Sql.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FRM_UserSettings.resx">
+      <DependentUpon>FRM_UserSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FRM_UserSettings.ru.resx">
+      <DependentUpon>FRM_UserSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -162,7 +216,42 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Properties\Resources.ru.resx" />
+    <EmbeddedResource Include="Widgets\Net\FRM_CellSelector.resx">
+      <DependentUpon>FRM_CellSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Net\FRM_CellSelector.ru.resx">
+      <DependentUpon>FRM_CellSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Net\NetPanel.resx">
+      <DependentUpon>NetPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\PageAddSku\PanelAddSku.resx">
+      <DependentUpon>PanelAddSku.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\PageAddSku\PanelAddSku.ru.resx">
+      <DependentUpon>PanelAddSku.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\PageViewSku\ManageSkuMiniPanel.resx">
+      <DependentUpon>ManageSkuMiniPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\PageViewSku\ManageSkuMiniPanel.ru.resx">
+      <DependentUpon>ManageSkuMiniPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\PageViewSku\ManageSkuTable.resx">
+      <DependentUpon>ManageSkuTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\PageViewSku\ManageSkuTable.ru.resx">
+      <DependentUpon>ManageSkuTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\PageViewSku\PanelViewSku.resx">
+      <DependentUpon>PanelViewSku.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\PageViewSku\PanelViewSku.ru.resx">
+      <DependentUpon>PanelViewSku.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

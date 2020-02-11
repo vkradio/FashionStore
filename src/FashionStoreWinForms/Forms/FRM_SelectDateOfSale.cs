@@ -7,18 +7,15 @@ namespace FashionStoreWinForms.Forms
 {
     public partial class FRM_SelectDateOfSale : Form
     {
-        const string c_description      = "Будет продано {0} ед. товара \"{1}\" по цене {2} р. за ед.";
-        const string c_warnZeroPrice    = "ВНИМАНИЕ! Цена 0, т.е. товар продается бесплатно.";
-
         public FRM_SelectDateOfSale()
         {
             InitializeComponent();
         }
         public FRM_SelectDateOfSale(string in_articleName, int in_amount, int in_price) : this()
         {
-            string description = string.Format(c_description, in_amount, in_articleName, in_price);
+            string description = string.Format(Resources.WILL_BE_SOLD_DETAILS, in_amount, in_articleName, in_price);
             if (in_amount == 0)
-                description += Environment.NewLine + c_warnZeroPrice;
+                description += Environment.NewLine + Resources.ATTENTION_ZERO_PRICE;
             L_Desctription.Text = description;
 
             if (Settings.Default.LastDateOfSale == new DateTime(1900, 1, 1))

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FashionStoreWinForms.Properties;
+using System;
 using System.IO;
 using System.Windows.Forms;
 
@@ -6,16 +7,8 @@ namespace FashionStoreWinForms.Sys
 {
     internal static class CrashHandler
 	{
-        const string c_caption      = "Критическая ошибка";
-        const string c_msgCommon1   = "Произошла критическая ошибка. Приложение сейчас будет закрыто. ";
-        const string c_msgCommon2   = "Это поможет найти и исправить дефект.";
-        const string c_msgFull      = c_msgCommon1 +
-                                      "Пожалуйста, отправьте файл, который сейчас увидите, с описанием " +
-                                      "ваших действий, после которых это произошло, разработчику программы. " +
-                                      c_msgCommon2;
-        const string c_msgReduced   = c_msgCommon1 +
-                                      "Пожалуйста, опишите ваши действия, после которых это произошло, разработчику программы. " +
-                                      c_msgCommon2;
+        readonly static string msgFull = Resources.CRITICAL_ERROR_MSG_COMMON1 + " " + Resources.CRITICAL_ERROR_MSG_SEND_FILE + " " + Resources.CRITICAL_ERROR_MSG_COMMON2;
+        readonly static string msgReduced = Resources.CRITICAL_ERROR_MSG_COMMON1 + " " + Resources.CRITICAL_ERROR_MSG_DESCRIBE_ACTIONS + " " + Resources.CRITICAL_ERROR_MSG_COMMON2;
 
         static void AppDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
 		{
@@ -35,14 +28,7 @@ namespace FashionStoreWinForms.Sys
                     logSaved = false;
                 }
 
-                //// Если соединение было разорвано сервером или логин был убит, выводим сообщение об этом.
-                //if (ExceptionUtil.IsDisconnectedOrKilledLogin(ex))
-                //    MessageBox.Show("Сервер принудительно разорвал соединение, из-за чего продолжать работу невозможно. " +
-                //                    "Это может быть связано с регламентными работами на сервере, аварией сети или сервера " +
-                //                    "или удалением вашей учетной записи.", "Отказ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //// В противном случае выводим общее сообщение о критической ошибке.
-                //else
-                MessageBox.Show(logSaved ? c_msgFull : c_msgReduced, c_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(logSaved ? msgFull : msgReduced, Resources.CRITICAL_ERROR, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 //try { Logger.LogException(ex); } catch {}
 

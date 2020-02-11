@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FRM_UserSettings));
             this.B_Save = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.T_DbPath = new System.Windows.Forms.TextBox();
@@ -38,62 +39,42 @@
             // 
             // B_Save
             // 
-            this.B_Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.B_Save.Location = new System.Drawing.Point(348, 102);
+            resources.ApplyResources(this.B_Save, "B_Save");
             this.B_Save.Name = "B_Save";
-            this.B_Save.Size = new System.Drawing.Size(75, 23);
-            this.B_Save.TabIndex = 0;
-            this.B_Save.Text = "Сохранить";
             this.B_Save.UseVisualStyleBackColor = true;
             this.B_Save.Click += new System.EventHandler(this.B_Save_Click);
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(93, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Путь к файлу БД";
             // 
             // T_DbPath
             // 
-            this.T_DbPath.Location = new System.Drawing.Point(12, 25);
+            resources.ApplyResources(this.T_DbPath, "T_DbPath");
             this.T_DbPath.Name = "T_DbPath";
-            this.T_DbPath.Size = new System.Drawing.Size(411, 20);
-            this.T_DbPath.TabIndex = 2;
             // 
             // T_BackupFolder
             // 
-            this.T_BackupFolder.Location = new System.Drawing.Point(12, 68);
+            resources.ApplyResources(this.T_BackupFolder, "T_BackupFolder");
             this.T_BackupFolder.Name = "T_BackupFolder";
-            this.T_BackupFolder.Size = new System.Drawing.Size(384, 20);
-            this.T_BackupFolder.TabIndex = 3;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 52);
+            resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(191, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Папка для резервного копирования";
             // 
             // B_SelectBackupFolder
             // 
-            this.B_SelectBackupFolder.Location = new System.Drawing.Point(396, 68);
+            resources.ApplyResources(this.B_SelectBackupFolder, "B_SelectBackupFolder");
             this.B_SelectBackupFolder.Name = "B_SelectBackupFolder";
-            this.B_SelectBackupFolder.Size = new System.Drawing.Size(27, 20);
-            this.B_SelectBackupFolder.TabIndex = 5;
-            this.B_SelectBackupFolder.Text = "...";
             this.B_SelectBackupFolder.UseVisualStyleBackColor = true;
             this.B_SelectBackupFolder.Click += new System.EventHandler(this.B_SelectBackupFolder_Click);
             // 
             // FRM_UserSettings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(435, 137);
             this.Controls.Add(this.B_SelectBackupFolder);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.T_BackupFolder);
@@ -104,8 +85,6 @@
             this.MinimizeBox = false;
             this.Name = "FRM_UserSettings";
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Пользовательские настройки";
             this.Load += new System.EventHandler(this.FRM_UserSettings_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

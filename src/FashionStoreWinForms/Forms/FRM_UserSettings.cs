@@ -17,14 +17,14 @@ namespace FashionStoreWinForms.Forms
             Settings.Default.DbPath = T_DbPath.Text;
             Settings.Default.BackupFolder = T_BackupFolder.Text;
             Settings.Default.Save();
-            MessageBox.Show("Некоторые настройки требуют перезапуска программы для вступления в силу.", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(Resources.SOME_SETTINGS_REQUIRE_TO_RELOAD_PROGRAM, Resources.MESSAGE, MessageBoxButtons.OK, MessageBoxIcon.Information);
             DialogResult = System.Windows.Forms.DialogResult.OK;
         }
         void B_SelectBackupFolder_Click(object sender, EventArgs e)
         {
             using (FolderBrowserDialog dlg = new FolderBrowserDialog())
             {
-                dlg.Description = "Выберите папку резервного хранения";
+                dlg.Description = Resources.CHOOSE_BACKUP_FOLDER;
                 if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                     T_BackupFolder.Text = dlg.SelectedPath;
             }

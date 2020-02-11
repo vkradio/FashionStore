@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,9 +112,212 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ALL_WAREHOUSES_SHORT" xml:space="preserve">
+    <value>all WHs</value>
+  </data>
+  <data name="APP_BRAND" xml:space="preserve">
+    <value>Fashion Store</value>
+  </data>
+  <data name="ASK_CANCEL_SALE" xml:space="preserve">
+    <value>Cancel sale of "{0}" with price of {1}?</value>
+  </data>
+  <data name="ASK_DELETE_OBJECT" xml:space="preserve">
+    <value>Delete object?</value>
+  </data>
+  <data name="ASK_DELETE_SKU" xml:space="preserve">
+    <value>WARNING! Do you wish to remove all SKU "{0}" with purchasing price of {1}? If this SKU is not present in any other warehouses, it will be completely removed.</value>
+  </data>
+  <data name="ASK_PROCEED_AND_ABANDON_FORM_DATA" xml:space="preserve">
+    <value>The form can have unsaved data. Proceed with new action?</value>
+  </data>
+  <data name="ASK_RESET_ALL_ENTERED_VALUES" xml:space="preserve">
+    <value>Reset all entered values?</value>
+  </data>
+  <data name="ASK_SHOW_ALL_SKUS_IN_THIS_STOCK" xml:space="preserve">
+    <value>Show the full list of SKUs in this stock?</value>
+  </data>
+  <data name="ASK_WHETHER_TO_CREATE_NEW_SKU" xml:space="preserve">
+    <value>No such SKU. Start creating new SKU with such name?</value>
+  </data>
+  <data name="ATTENTION" xml:space="preserve">
+    <value>Attention</value>
+  </data>
+  <data name="ATTENTION_ZERO_PRICE" xml:space="preserve">
+    <value>ATTENTION! The price is 0, so item is sold for free.</value>
+  </data>
+  <data name="BACKUP_COMPLETED" xml:space="preserve">
+    <value>Backup completed.</value>
+  </data>
+  <data name="BACKUP_FOLDER_NOT_EXISTS" xml:space="preserve">
+    <value>Backup storage device is not attached.</value>
+    <comment>It is the simplest case, we assume it is only Flash stick, though it maybe anything else</comment>
+  </data>
+  <data name="BACKUP_FOLDER_NOT_SET" xml:space="preserve">
+    <value>Backup folder is not set in the program settings.</value>
+  </data>
+  <data name="CANCELATION" xml:space="preserve">
+    <value>Cancelation</value>
+  </data>
+  <data name="CHOOSE_BACKUP_FOLDER" xml:space="preserve">
+    <value>Choose backup folder</value>
+  </data>
+  <data name="CLICK_TO_VIEW_SELL_MOVE_SKU" xml:space="preserve">
+    <value>Click here to view, sell or move SKU ({0})</value>
+  </data>
+  <data name="CONFIRMATION" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="CONFIRM_MOVING_GOODS" xml:space="preserve">
+    <value>Move {1} units of SKU "{0}" to warehouse {3}?</value>
+  </data>
+  <data name="CONFIRM_SELECTED_DATE" xml:space="preserve">
+    <value>{0} of {1} has been selected.
+Continue?</value>
+  </data>
+  <data name="COST_OF_PURCHASE_SHORT" xml:space="preserve">
+    <value>Purch.cost</value>
+  </data>
+  <data name="CRITICAL_ERROR" xml:space="preserve">
+    <value>Critical error</value>
+  </data>
+  <data name="CRITICAL_ERROR_MSG_COMMON1" xml:space="preserve">
+    <value>Critical error happened. This application will be closed now.</value>
+  </data>
+  <data name="CRITICAL_ERROR_MSG_COMMON2" xml:space="preserve">
+    <value>This will help to find and fix the defect.</value>
+  </data>
+  <data name="CRITICAL_ERROR_MSG_DESCRIBE_ACTIONS" xml:space="preserve">
+    <value>Please describe to the developer your actions right before this error happened.</value>
+  </data>
+  <data name="CRITICAL_ERROR_MSG_SEND_FILE" xml:space="preserve">
+    <value>Please send the file which you'll see now, to the developer, with description of your actions right before this error happened.</value>
+  </data>
+  <data name="CURRENT_WAREHOUSE_NOT_SELECTED" xml:space="preserve">
+    <value>Current warehouse not selected.</value>
+  </data>
+  <data name="ERR_PART_CELL_QTY" xml:space="preserve">
+    <value>Allowed only integer positive number.</value>
+  </data>
+  <data name="ERR_PART_PRICE" xml:space="preserve">
+    <value>Allowed only integer (without cents) non-negative number.</value>
+  </data>
+  <data name="FAILURE" xml:space="preserve">
+    <value>Failure</value>
+  </data>
+  <data name="FOUND_TOO_MUCH" xml:space="preserve">
+    <value>{0} SKUs has been found. Because of memory constraints, it will be shown only {1} of them. For viewing all needed SKUs, please enter more precise search query.</value>
+  </data>
+  <data name="GOODS_HAS_BEEN_MOVED" xml:space="preserve">
+    <value>Goods has been moved.</value>
+  </data>
+  <data name="INVALID_COST_OF_PURCHASE" xml:space="preserve">
+    <value>Invalid cost of purchase.</value>
+  </data>
+  <data name="INVALID_COST_OF_PURCHASE_EXPLAINED" xml:space="preserve">
+    <value>Invalid cost of purchase. It should be an integer non-negative number.</value>
+  </data>
+  <data name="INVALID_ID" xml:space="preserve">
+    <value>Invalid ID.</value>
+  </data>
+  <data name="INVALID_SELL_PRICE" xml:space="preserve">
+    <value>Invalid planned sell price.</value>
+  </data>
+  <data name="INVALID_SKU_QTY_IS_ENTERED" xml:space="preserve">
+    <value>Invalid SKU quantity is entered.</value>
+  </data>
+  <data name="INVALID_SKU_QTY_IS_ENTERED_IN_CELL" xml:space="preserve">
+    <value>Invalid SKU quantity is entered in cell {0}:{1}.</value>
+  </data>
+  <data name="INVALID_UNIT_PRICE_OF_SELL" xml:space="preserve">
+    <value>Invalid price of sell per unit entered.</value>
+  </data>
+  <data name="MESSAGE" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="NAME_NOT_SET" xml:space="preserve">
+    <value>Name not set.</value>
+  </data>
+  <data name="NEW_DATE_IS_SAME_AS_OLD_ONE_SO_CHANGE_NOTHING" xml:space="preserve">
+    <value>New date is the same as an old one, so we change nothing.</value>
+  </data>
+  <data name="NOTHING_FOUND" xml:space="preserve">
+    <value>Nothing has been found.</value>
+  </data>
+  <data name="NO_ROW_SELECTED" xml:space="preserve">
+    <value>No row selected.</value>
+  </data>
+  <data name="OBJECT_NOT_FOUND" xml:space="preserve">
+    <value>Object not found.</value>
+  </data>
+  <data name="PATH_TO_DB_NOT_SET" xml:space="preserve">
+    <value>Path to database is not set in settings.</value>
+  </data>
+  <data name="PRICE_OF_STOCKS_SHORT" xml:space="preserve">
+    <value>Price stocks</value>
+  </data>
+  <data name="PROGRAM_ALREADY_LAUCHED" xml:space="preserve">
+    <value>The program "{0}" is already launched. Probably, you clicked on its launcher twice.</value>
+  </data>
+  <data name="PROGRAM_AND_VERSION" xml:space="preserve">
+    <value>{0} ver.{1}</value>
+  </data>
+  <data name="QTY_SHORT" xml:space="preserve">
+    <value>Qty</value>
+  </data>
+  <data name="QTY_TOO_BIG_FOR_GIVEN_CELL" xml:space="preserve">
+    <value>SKU quantity is too big, there is no such amount goods in this cell.</value>
+  </data>
+  <data name="QUESTION" xml:space="preserve">
+    <value>Question</value>
+  </data>
+  <data name="QUESTION_ABOUT_DATE" xml:space="preserve">
+    <value>Question about date</value>
+  </data>
+  <data name="SALES_SUMMARY_LABEL" xml:space="preserve">
+    <value>Sales number: {0}  Sum: {1}  Profit: {2}</value>
+  </data>
+  <data name="SELL_PRICE_SHORT" xml:space="preserve">
+    <value>Sell price</value>
+  </data>
+  <data name="SIZES" xml:space="preserve">
+    <value>Sizes</value>
+  </data>
+  <data name="SKU" xml:space="preserve">
+    <value>SKU</value>
+  </data>
+  <data name="SKU_HAS_BEEN_SAVED" xml:space="preserve">
+    <value>SKU has been saved.</value>
+  </data>
+  <data name="SKU_IN_STOCK" xml:space="preserve">
+    <value>SKU in stock ({0})</value>
+  </data>
+  <data name="SOME_SETTINGS_REQUIRE_TO_RELOAD_PROGRAM" xml:space="preserve">
+    <value>Some settings require to reload the program to take effect.</value>
+  </data>
+  <data name="TOTAL" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="TOTALS_CAP" xml:space="preserve">
+    <value>TOTALS</value>
+  </data>
+  <data name="UNABLE_DELETE_OBJECT_HAS_CHILDREN" xml:space="preserve">
+    <value>Unable to delete object, it has subordinate objects.</value>
+  </data>
+  <data name="UNABLE_DELETE_OBJECT_TECHNICAL_CODE" xml:space="preserve">
+    <value>Unable to delete object. Technical failure code: {0}.</value>
+  </data>
+  <data name="UNABLE_TO_CREATE_REPORT_LONG" xml:space="preserve">
+    <value>Unable to save a report file. Probably, its old copy is opened by another program - if so, you need to close it first. If it do not help, try to reboot your computer (or switch it off and then on).</value>
+  </data>
+  <data name="WARNING_EXCLAMATION" xml:space="preserve">
+    <value>Warning!</value>
+  </data>
+  <data name="WILL_BE_SOLD_DETAILS" xml:space="preserve">
+    <value>Will be sold {0} units of "{1}" with price of {2} per unit.</value>
+  </data>
 </root>

@@ -45,7 +45,7 @@ namespace FashionStoreWinForms.Widgets.PointOfSaleSelector
             this._paddingLeft = 10;
             this._paddingTop = 10;
 
-            this._demoButton = new PushButtonCheap(this.Font, new PointOfSale() { Name = "Кнопка" });
+            this._demoButton = new PushButtonCheap(this.Font, new PointOfSale() { Name = "Button" });
             this._demoButton.Parent = this;
             this._demoButton.Left = _paddingLeft;
             this._demoButton.Top = _paddingTop;

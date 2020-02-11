@@ -25,7 +25,8 @@ namespace DalLegacy
         public LiteBizItem(DataRow row) : this(row, "Id", "Name") { }
 
         public static List<LiteBizItem> FromTable(DataTable table) => table
-            .AsEnumerable()
+            .Rows
+            .Cast<DataRow>()
             .Select(row => new LiteBizItem(row))
             .Where(item => item.Text != "Центр.Рынок") // HACK: Check out this dirty tweak was fixed and then remove it.
             .ToList();

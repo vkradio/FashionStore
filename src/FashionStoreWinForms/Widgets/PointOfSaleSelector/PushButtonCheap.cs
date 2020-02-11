@@ -12,7 +12,7 @@ namespace FashionStoreWinForms.Widgets.PointOfSaleSelector
 
         public PushButtonCheap(Font in_font, PointOfSale in_pointOfSale)
         {
-            // TODO: Подделать ситуацию с "большим" шрифтом, чтобы он вмещался в высоту кнопки.
+            // TODO: Tweak to support large font, so it can go it to button's height
             this.Size = new Size(100, SystemInformation.CaptionButtonSize.Height + 10);
             this.Font = in_font;
 

@@ -17,14 +17,6 @@ namespace FashionStoreWinForms.Forms
 {
     public partial class FRM_Main : Form
     {
-        const string c_captionFault             = "Отказ";
-        const string c_captionMessage           = "Сообщение";
-        const string c_errNoCurrentPointOfSale  = "Не выбрана текущая точка продаж.";
-        const string c_errBackupFolderNotSet    = "В настройках программы не задана папка резервного копирования.";
-        const string c_errBackupFolderNotExists = "Не вставлен съемный диск для резервного копирования."; // TODO: Здесь простейший случай - подразумеваем, что это только флеш, хотя на самом деле может быть все, что угодно.
-        const string c_askNeedForSave           = "На форме могут оставаться несохраненные данные. Выполнить новое действие?";
-        const string c_msgBackupCopied          = "Резервное копирование завершено.";
-
         bool AskForSaveIfNeeded()
         {
             if (PAN_Workplace.Controls.Count != 0)
@@ -34,7 +26,7 @@ namespace FashionStoreWinForms.Forms
                 {
                     if (panAddSku.Modified)
                     {
-                        if (MessageBox.Show(this, c_askNeedForSave, "Вопрос", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) != System.Windows.Forms.DialogResult.Yes)
+                        if (MessageBox.Show(this, Resources.ASK_PROCEED_AND_ABANDON_FORM_DATA, Resources.QUESTION, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) != System.Windows.Forms.DialogResult.Yes)
                             return false;
                     }
                 }
@@ -47,12 +39,12 @@ namespace FashionStoreWinForms.Forms
         {
             Text = Program.GetVersionString();
 
-            // TODO: Здесь работа с унаследованной настройкой ConnectionString, ее со временем удалить.
+            // TODO: Legacy ConnectionString used; delete it sometime
             if (Settings.Default.DbPath == string.Empty)
             {
                 if (Settings.Default.ConnectionString == string.Empty)
                 {
-                    MessageBox.Show(this, "Не задан путь к БД в настройках.", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(this, Resources.PATH_TO_DB_NOT_SET, Resources.MESSAGE, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
@@ -119,16 +111,16 @@ namespace FashionStoreWinForms.Forms
         }
         void MI_Backup_Click(object sender, EventArgs e)
         {
-            // 1. Проверяем, есть ли путь к папке бекапов (косвенный признак того, вставлен ли флеш).
+            // 1. Checking out is there a path to backup folder (indirect sign of attached Flash stick)
             if (Settings.Default.BackupFolder == string.Empty)
             {
-                MessageBox.Show(this, c_errBackupFolderNotSet, c_captionFault, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Resources.BACKUP_FOLDER_NOT_SET, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
             DirectoryInfo di = new DirectoryInfo(Settings.Default.BackupFolder);
             if (!di.Exists)
             {
-                MessageBox.Show(this, c_errBackupFolderNotExists, c_captionFault, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Resources.BACKUP_FOLDER_NOT_EXISTS, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -138,7 +130,7 @@ namespace FashionStoreWinForms.Forms
                 this.Cursor = Cursors.WaitCursor;
                 Application.DoEvents();
 
-                // 2. Считываем последний номер бекапа за текущую дату, если есть, и прибавляем 1. Иначе текущий номер - 1.
+                // 2. Read the last backup number of current date, if any, and increment by 1. Else current number is 1.
                 int maxNumber = 0;
                 DateTime today = DateTime.Today;
                 foreach (FileInfo fi in di.GetFiles())
@@ -151,9 +143,9 @@ namespace FashionStoreWinForms.Forms
                 }
                 int newNumber = maxNumber + 1;
 
-                // 3. Создаем архив с бекапом.
-                // TODO: Пока просто копируем файл БД, в будущем нужно использовать Backup API: http://www.sqlite.org/backup.html
-                // TODO: Здесь добавить компрессию 7zip или другую.
+                // 3. Create backup archive
+                // TODO: Currently simply copying database file; in future use a Backup API: http://www.sqlite.org/backup.html
+                // TODO: Add 7zip compression or something similar
                 File.Copy(Settings.Default.DbPath, Path.Combine(Settings.Default.BackupFolder, string.Format("{0:0000}{1:00}{2:00}{3:00}.db3", today.Year, today.Month, today.Day, newNumber)));
             }
             finally
@@ -161,8 +153,8 @@ namespace FashionStoreWinForms.Forms
                 this.Cursor = oldCur;
             }
 
-            // 4. Сообщение пользователю о создании бекапа.
-            MessageBox.Show(this, c_msgBackupCopied, c_captionMessage, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // 4. Message to user about backup completion
+            MessageBox.Show(this, Resources.BACKUP_COMPLETED, Resources.MESSAGE, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public FRM_Main()
@@ -174,7 +166,7 @@ namespace FashionStoreWinForms.Forms
         {
             if (Registry.CurrentPointOfSale == null)
             {
-                MessageBox.Show(this, c_errNoCurrentPointOfSale, c_captionFault, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Resources.CURRENT_WAREHOUSE_NOT_SELECTED, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -190,7 +182,7 @@ namespace FashionStoreWinForms.Forms
         {
             if (Registry.CurrentPointOfSale == null)
             {
-                MessageBox.Show(this, c_errNoCurrentPointOfSale, c_captionFault, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Resources.CURRENT_WAREHOUSE_NOT_SELECTED, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -229,15 +221,15 @@ namespace FashionStoreWinForms.Forms
             }
 
             List<string> textLines = new List<string>();
-            string firstLine = "Артикул;Кол-во";
+            string firstLine = $"{Resources.SKU};{Resources.QTY_SHORT}";
             if (showPriceOfPurchase)
-                firstLine += ";Цена закуп.";
+                firstLine += $";{Resources.COST_OF_PURCHASE_SHORT}";
             if (showPriceOfSale)
-                firstLine += ";Цена продажи";
+                firstLine += $";{Resources.SELL_PRICE_SHORT}";
             if (showPriceOfStock)
-                firstLine += ";Цена остаток";
+                firstLine += $";{Resources.PRICE_OF_STOCKS_SHORT}";
             if (showSizes && in_pos != null)
-                firstLine += ";Размеры";
+                firstLine += $";{Resources.SIZES}";
             textLines.Add(firstLine);
 
             List<ArticleInStockExt> records = ArticleInStockExt.ReadTable(in_pos != null ? (int?)in_pos.Id : null, articlePrefix);
@@ -291,7 +283,7 @@ namespace FashionStoreWinForms.Forms
                 textLines.Add(line);
             }
 
-            string totalsLine = "\"ИТОГО (" + (in_pos != null ? in_pos.Name : "все точки") + "):\";" + totalCount.ToString();
+            string totalsLine = $"\"{Resources.TOTALS_CAP} (" + (in_pos != null ? in_pos.Name : Resources.ALL_WAREHOUSES_SHORT) + "):\";" + totalCount.ToString();
             if (showPriceOfPurchase)
                 totalsLine += ";";
             if (showPriceOfSale)
@@ -302,8 +294,9 @@ namespace FashionStoreWinForms.Forms
                 totalsLine += ";";
             textLines.Add(totalsLine);
 
-            // Сохраняем файл.
-            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), (in_pos != null ? in_pos.Name : "Всего") + ".csv");
+            // Saving file
+            // WARNING: We use warehouse name as in database; it can contain characters invalid for using as file name!
+            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), (in_pos != null ? in_pos.Name : Resources.TOTAL) + ".csv");
             if (File.Exists(filePath))
             {
                 try
@@ -312,7 +305,7 @@ namespace FashionStoreWinForms.Forms
                 }
                 catch
                 {
-                    MessageBox.Show(this, "Не удается сохранить отчет. Возможно, сейчас открыта его старая копия - ее нужно закрыть. Если ничего не помогает, нужно перезагрузить (выключить и затем снова включить) компьютер.", c_captionFault, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(this, Resources.UNABLE_TO_CREATE_REPORT_LONG, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
             }
@@ -324,7 +317,7 @@ namespace FashionStoreWinForms.Forms
                 }
             }
 
-            // Открываем файл.
+            // Open file
             System.Diagnostics.Process.Start(filePath);
         }
 
@@ -332,7 +325,7 @@ namespace FashionStoreWinForms.Forms
         {
             if (Registry.CurrentPointOfSale == null)
             {
-                MessageBox.Show(this, c_errNoCurrentPointOfSale, c_captionFault, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Resources.CURRENT_WAREHOUSE_NOT_SELECTED, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 

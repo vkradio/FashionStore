@@ -104,7 +104,7 @@ namespace FashionStoreWinForms.Widgets.Net
             int totalWidth, totalHeight;
             NetUtil.RenderLabels(_skuInStock.Article.Matrix, this, maxWidthCapX, maxWidthCapY, widthsCapX, widthsCapY, c_labelWidthThreshold, c_fieldHeight, c_fieldGap, out totalWidth, out totalHeight, out _labelsX, out _labelsY);
 
-            // Рисование кнопок.
+            // Drawing buttons.
             int xPos = maxWidthCapY + c_labelWidthThreshold * 2;
             int
                 cellsXCount = _skuInStock.Article.Matrix.CellsX.Count,
