@@ -9,9 +9,7 @@ namespace DalLegacy.SQLiteUtils
         /// 
         /// CultureInfo for comparing strings in case insensitive manner
         /// 
-        //static readonly CultureInfo s_cultureInfo = CultureInfo.CreateSpecificCulture("ru-RU");
-        //static readonly CultureInfo s_cultureInfo = CultureInfo.CreateSpecificCulture("en-US");
-        static readonly CompareInfo s_compareInfo = CultureInfo.CreateSpecificCulture("en-US").CompareInfo;
+        static readonly CompareInfo s_compareInfo = CultureInfo.CurrentUICulture.CompareInfo;
 
         /// 
         /// Does case-insensitive comparison using _cultureInfo
