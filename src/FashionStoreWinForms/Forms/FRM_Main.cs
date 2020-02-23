@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using ApplicationCore.Entities;
+using ApplicationCore.Interfaces;
 using DalLegacy;
 using FashionStoreWinForms.Properties;
 using FashionStoreWinForms.Sys;
@@ -12,11 +15,30 @@ using FashionStoreWinForms.Utils;
 using FashionStoreWinForms.Widgets.PageAddSku;
 using FashionStoreWinForms.Widgets.PageViewSku;
 using FashionStoreWinForms.Widgets.PointOfSaleSelector;
+using ViewModels;
+using WinFormsInfrastructure;
 
 namespace FashionStoreWinForms.Forms
 {
-    public partial class FRM_Main : Form
+    public partial class FRM_Main : Form, ILegacyWorkspaceContext
     {
+        readonly WorkspaceViewModel workspaceViewModel;
+
+        #region ILegacyWorkspaceContext implementation
+        public bool IsThereUnsavedEntry() =>
+            PAN_Workplace.Controls.Count != 0 &&
+            PAN_Workplace.Controls[0] is PanelAddSku panAddSku &&
+            panAddSku.Modified;
+
+        public void SetCurrentWarehouse(Warehouse warehouse)
+        {
+            PointOfSale oldPointOfSale = Registry.CurrentPointOfSale;
+            Registry.CurrentPointOfSale = PointOfSale.Restore(warehouse.WarehouseId);
+            if (oldPointOfSale.Id != Registry.CurrentPointOfSale.Id)
+                PAN_Workplace.Controls.Clear();
+        }
+        #endregion
+
         bool AskForSaveIfNeeded()
         {
             if (PAN_Workplace.Controls.Count != 0)
@@ -35,7 +57,7 @@ namespace FashionStoreWinForms.Forms
             return true;
         }
 
-        void FRM_Main_Load(object sender, EventArgs e)
+        async void FRM_Main_Load(object sender, EventArgs e)
         {
             Text = Program.GetVersionString();
 
@@ -55,19 +77,7 @@ namespace FashionStoreWinForms.Forms
             ConnectionRegistry.Init("Data Source=" + Settings.Default.DbPath);
             GlobalController.Init(this);
 
-            IList<PointOfSale> poses = PointOfSale.RestoreAll();
-            foreach (PointOfSale pos in poses)
-            {
-                if (!pos.Deleted)
-                    PAN_PointsOfSale.PointsOfSale.Add(pos);
-            }
-            PAN_PointsOfSale.UpdatePointsOfSale();
-            if (PAN_PointsOfSale.Controls.Count > 0)
-            {
-                PushButtonCheap firstButton = (PushButtonCheap)PAN_PointsOfSale.Controls[0];
-                Registry.CurrentPointOfSale = firstButton.PointOfSale;
-                firstButton.Active = true;
-            }
+            await ((WarehouseSelectorViewModel)warehouseSelector1.DataContext).Initialize();
         }
         void MI_Card_PointOfSale_Click(object sender, EventArgs e)
         {
@@ -88,13 +98,6 @@ namespace FashionStoreWinForms.Forms
         {
             using (FRM_UserSettings frm = new FRM_UserSettings())
                 frm.ShowDialog(this);
-        }
-        void PAN_PointsOfSale_PointOfSaleChanged(object in_sender, PointOfSalePanel.PointOfSaleEventArgs in_ea)
-        {
-            PointOfSale oldPointOfSale = Registry.CurrentPointOfSale;
-            Registry.CurrentPointOfSale = in_ea.PointOfSale;
-            if (oldPointOfSale.Id != Registry.CurrentPointOfSale.Id)
-                PAN_Workplace.Controls.Clear();
         }
         void PAN_PointsOfSale_BeforePointOfSaleChanged(object sender, PointOfSalePanel.BeforePointOfSaleChangedEventArgs e)
         {
@@ -157,9 +160,40 @@ namespace FashionStoreWinForms.Forms
             MessageBox.Show(this, Resources.BACKUP_COMPLETED, Resources.MESSAGE, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        #region Temporary mock WarehouseService
+        class MockWarehouseService: IWarehouseManagementService
+        {
+            static readonly IEnumerable<Warehouse> warehouses = new Warehouse[] {
+                new Warehouse { WarehouseId = 1, OrdinalNumber = 5, Name = "Country" },
+                new Warehouse { WarehouseId = 2, OrdinalNumber = 7, Name = "7 Cats" },
+                new Warehouse { WarehouseId = 3, OrdinalNumber = 0, Name = "Central Market", IsDeleted = true },
+                new Warehouse { WarehouseId = 4, OrdinalNumber = 1, Name = "Home" },
+                new Warehouse { WarehouseId = 5, OrdinalNumber = 4, Name = "Oriental" },
+                new Warehouse { WarehouseId = 6, OrdinalNumber = 3, Name = "Ivanoff", IsDeleted = true },
+                new Warehouse { WarehouseId = 7, OrdinalNumber = 6, Name = "Comfort", IsDeleted = true },
+                new Warehouse { WarehouseId = 8, OrdinalNumber = 2, Name = "New Terra" }
+            };
+
+            public Task<IEnumerable<Warehouse>> GetFunctioningOrderedWarehousesAsync() => Task.FromResult<IEnumerable<Warehouse>>(
+                warehouses
+                    .Where(w => w.IsDeleted = false)
+                    .OrderBy(w => w.OrdinalNumber)
+            );
+
+            public Task<Warehouse> GetWarehouse(int warehouseId) => Task.FromResult(warehouses.SingleOrDefault(w => w.WarehouseId == warehouseId));
+        }
+        #endregion
+
         public FRM_Main()
         {
             InitializeComponent();
+
+
+            var dialogService = new DialogService();
+            var warehouseMgmtService = new MockWarehouseService();
+            workspaceViewModel = new WorkspaceViewModel(dialogService, warehouseMgmtService, this);
+
+            warehouseSelector1.DataContext = workspaceViewModel.WarehouseSelector;
         }
 
         public void AddSku()

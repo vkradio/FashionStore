@@ -1,42 +1,97 @@
 ﻿using ApplicationCore.Entities;
+using ApplicationCore.Interfaces;
+using Ardalis.GuardClauses;
+using MvvmInfrastructure;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ViewModels
 {
-    public class WarehouseSelectorViewModel
+    public class WarehouseSelectorViewModel : PropertyChangeNotifier
     {
-        public WarehouseSelectorViewModel(IEnumerable<Warehouse> orderedWarehouses)
+        bool ignoreChecksForUnsavedWorkspaceEntry;
+
+        readonly WorkspaceViewModel workspaceViewModel;
+        readonly IDialogService dialogService;
+        readonly IWarehouseManagementService warehouseManagementService;
+
+        #region Private underlying fields
+        ObservableCollection<WarehouseButtonViewModel> selectorButtons;
+        WarehouseButtonViewModel selectedWarehouse;
+        #endregion
+
+        #region Public properties and actions
+        public ObservableCollection<WarehouseButtonViewModel> SelectorButtons
         {
-            SelectorButtons = orderedWarehouses
-                .Select(w => new WarehouseSelectorButtonViewModel(this))
-                .ToList();
+            get => selectorButtons;
+
+            set
+            {
+                selectorButtons = value;
+                OnPropertyChanged(nameof(SelectorButtons));
+            }
         }
 
-        public IEnumerable<WarehouseSelectorButtonViewModel> SelectorButtons { get; }
-
-        public void SelectButton(WarehouseSelectorButtonViewModel button)
+        public WarehouseButtonViewModel SelectedWarehouse
         {
-            // Defensive: Check out if it exists in the collection
-            var existingButton = SelectorButtons
-                .Where(b => b == button)
-                .SingleOrDefault();
-            if (existingButton == null)
-                throw new InvalidOperationException($"Argument {nameof(button)} contains button which do not exists in the collection.");
+            get => selectedWarehouse;
 
-            if (!existingButton.IsSelected)
+            set
             {
-                // Switch off the old selected button
-                SelectorButtons
-                    .Where(b => b.IsSelected)
-                    .ToList()
-                    .ForEach(b => b.IsSelected = false);
-
-                // Switch on the new one
-                existingButton.IsSelected = true;
+                if (ignoreChecksForUnsavedWorkspaceEntry)
+                {
+                    selectedWarehouse = value;
+                    OnPropertyChanged(nameof(SelectedWarehouse));
+                }
+                else
+                {
+                    if (selectedWarehouse != value)
+                    {
+                        if (!workspaceViewModel.IsThereUnsavedEntry() ||
+                            dialogService.PresentDialog("Не сохранять?", DialogOptionsEnum.YesNoCancel) == DialogResultEnum.Yes)
+                        {
+                            selectedWarehouse = value;
+                            OnPropertyChanged(nameof(SelectedWarehouse));
+                        }
+                        else
+                        {
+                            ignoreChecksForUnsavedWorkspaceEntry = true;
+                            SelectedWarehouse = selectedWarehouse;
+                            ignoreChecksForUnsavedWorkspaceEntry = false;
+                        }
+                    }
+                }
             }
+        }
+        #endregion
+
+        public WarehouseSelectorViewModel(WorkspaceViewModel workspaceViewModel, IDialogService dialogService, IWarehouseManagementService warehouseManagementService)
+        {
+            Guard.Against.Null(workspaceViewModel, nameof(workspaceViewModel));
+            Guard.Against.Null(dialogService, nameof(dialogService));
+            Guard.Against.Null(warehouseManagementService, nameof(warehouseManagementService));
+
+            this.workspaceViewModel = workspaceViewModel;
+            this.dialogService = dialogService;
+            this.warehouseManagementService = warehouseManagementService;
+        }
+
+        public async Task Initialize()
+        {
+            ignoreChecksForUnsavedWorkspaceEntry = true;
+
+            var warehouses = await warehouseManagementService.GetFunctioningOrderedWarehousesAsync().ConfigureAwait(false);
+            var warehouseButtons = warehouses
+                .Select(wh => new WarehouseButtonViewModel(wh));
+
+            SelectorButtons = new ObservableCollection<WarehouseButtonViewModel>(warehouseButtons);
+            SelectedWarehouse = SelectorButtons.FirstOrDefault();
+
+            ignoreChecksForUnsavedWorkspaceEntry = false;
         }
     }
 }

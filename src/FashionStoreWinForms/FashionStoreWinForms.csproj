@@ -283,9 +283,17 @@
       <Project>{21a5914b-e4a4-4b82-a683-796d123d33aa}</Project>
       <Name>DalLegacy</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MvvmInfrastructure\MvvmInfrastructure.csproj">
+      <Project>{1c8f7c21-fd21-4abd-a07d-272d194bc052}</Project>
+      <Name>MvvmInfrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ViewModels\ViewModels.csproj">
       <Project>{38cb278b-0d6e-40eb-855f-ff9bb3307487}</Project>
       <Name>ViewModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WinFormsInfrastructure\WinFormsInfrastructure.csproj">
+      <Project>{0e955ea0-2cdd-4fd6-a154-1855a6e1a464}</Project>
+      <Name>WinFormsInfrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

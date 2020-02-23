@@ -44,7 +44,8 @@
             this.MI_Rep_PerPos = new System.Windows.Forms.ToolStripMenuItem();
             this.MI_Rep_Total = new System.Windows.Forms.ToolStripMenuItem();
             this.PAN_Workplace = new System.Windows.Forms.Panel();
-            this.PAN_PointsOfSale = new FashionStoreWinForms.Widgets.PointOfSaleSelector.PointOfSalePanel();
+            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
+            this.warehouseSelector1 = new FashionStoreWinForms.Widgets.WarehouseSelector();
             this.MNU_Main.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -150,21 +151,18 @@
             resources.ApplyResources(this.PAN_Workplace, "PAN_Workplace");
             this.PAN_Workplace.Name = "PAN_Workplace";
             // 
-            // PAN_PointsOfSale
+            // elementHost1
             // 
-            resources.ApplyResources(this.PAN_PointsOfSale, "PAN_PointsOfSale");
-            this.PAN_PointsOfSale.Name = "PAN_PointsOfSale";
-            this.PAN_PointsOfSale.PaddingLeft = 10;
-            this.PAN_PointsOfSale.PaddingTop = 10;
-            this.PAN_PointsOfSale.PointOfSaleChanged += new System.EventHandler<FashionStoreWinForms.Widgets.PointOfSaleSelector.PointOfSalePanel.PointOfSaleEventArgs>(this.PAN_PointsOfSale_PointOfSaleChanged);
-            this.PAN_PointsOfSale.BeforePointOfSaleChanged += new System.EventHandler<FashionStoreWinForms.Widgets.PointOfSaleSelector.PointOfSalePanel.BeforePointOfSaleChangedEventArgs>(this.PAN_PointsOfSale_BeforePointOfSaleChanged);
+            resources.ApplyResources(this.elementHost1, "elementHost1");
+            this.elementHost1.Name = "elementHost1";
+            this.elementHost1.Child = this.warehouseSelector1;
             // 
             // FRM_Main
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.elementHost1);
             this.Controls.Add(this.PAN_Workplace);
-            this.Controls.Add(this.PAN_PointsOfSale);
             this.Controls.Add(this.MNU_Main);
             this.KeyPreview = true;
             this.MainMenuStrip = this.MNU_Main;
@@ -195,7 +193,8 @@
         private System.Windows.Forms.ToolStripMenuItem MI_Report;
         private System.Windows.Forms.ToolStripMenuItem MI_Rep_PerPos;
         private System.Windows.Forms.ToolStripMenuItem MI_Rep_Total;
-        private Widgets.PointOfSaleSelector.PointOfSalePanel PAN_PointsOfSale;
+        private System.Windows.Forms.Integration.ElementHost elementHost1;
+        private Widgets.WarehouseSelector warehouseSelector1;
     }
 }
 

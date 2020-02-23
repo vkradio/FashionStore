@@ -9,24 +9,15 @@
              xmlns:vm="clr-namespace:ViewModels;assembly=ViewModels"
              d:DataContext="{d:DesignInstance vm:WarehouseSelectorViewModel}"
              d:DesignHeight="51" d:DesignWidth="377">
-    <UserControl.Resources>
-        <CollectionViewSource x:Key="SortedWarehouseButtons"
-                              Source="{Binding SelectorButtons}"
-                              IsLiveSortingRequested="True">
-            <CollectionViewSource.SortDescriptions>
-                <scm:SortDescription PropertyName="OrdinalNumber" Direction="Ascending" />
-            </CollectionViewSource.SortDescriptions>
-        </CollectionViewSource>
-    </UserControl.Resources>
     
     <Grid>
         <ListBox
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             x:Name="Buttons"
             Padding="0"
+            ItemsSource="{Binding SelectorButtons}"
+            SelectedItem="{Binding SelectedWarehouse}"
             >
-
-            <!--ItemsSource="{Binding Source={StaticResource SortedWarehouseButtons}}"-->
 
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -36,28 +27,9 @@
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderThickness="1" BorderBrush="Black">
-                        <Label Content="Biggest Mall Ever" Width="100" HorizontalContentAlignment="Center" FontSize="11"/>
-                    </Border>
+                    <Label Content="{Binding WarehouseName}" HorizontalContentAlignment="Center"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="Yellow"/>
-                        </Trigger>
-                    </Style.Triggers>
-                    <Style.Resources>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
-                    </Style.Resources>
-                </Style>
-            </ListBox.ItemContainerStyle>
-
-            <Label/>
-            <Label/>
         </ListBox>
     </Grid>
 </UserControl>
