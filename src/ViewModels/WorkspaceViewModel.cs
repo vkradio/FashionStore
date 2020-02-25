@@ -43,7 +43,10 @@ namespace ViewModels
             }
         }
 
-        public bool IsThereUnsavedEntry() => legacyWorkspaceContext.IsThereUnsavedEntry();
+        public bool IsItAllowedToChangeCurrentWarehouse()
+        {
+            return false;
+        }
         #endregion
 
         public WorkspaceViewModel(IDialogService dialogService, IWarehouseManagementService warehouseManagementService, ILegacyWorkspaceContext legacyWorkspaceContext)
@@ -56,7 +59,7 @@ namespace ViewModels
             this.warehouseManagementService = warehouseManagementService;
             this.legacyWorkspaceContext = legacyWorkspaceContext;
 
-            WarehouseSelector = new WarehouseSelectorViewModel(this, this.dialogService, this.warehouseManagementService);
+            WarehouseSelector = new WarehouseSelectorViewModel(this, this.warehouseManagementService);
             WarehouseSelector.PropertyChanged += async (s, e) =>
             {
                 if (e.PropertyName == nameof(WarehouseSelectorViewModel.SelectedWarehouse))

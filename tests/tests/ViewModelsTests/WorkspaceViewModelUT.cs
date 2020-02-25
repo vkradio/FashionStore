@@ -61,88 +61,6 @@ namespace ViewModelsTests
         }
 
         [Fact]
-        public void BeforeInitUnsavedEntryIsTrueIfTrue()
-        {
-            // Arrange
-            var mockDialogService = new Mock<IDialogService>();
-            var mockWarehouseMgmtSvc = new Mock<IWarehouseManagementService>();
-            var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
-            const bool thereIsUnsavedEntryValue = true;
-            mockLegacyWorkspace
-                .Setup(w => w.IsThereUnsavedEntry())
-                .Returns(thereIsUnsavedEntryValue);
-            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockWarehouseMgmtSvc.Object, mockLegacyWorkspace.Object);
-
-            // Act
-            var result = workspace.IsThereUnsavedEntry();
-
-            // Assert
-            Assert.True(result);
-        }
-
-        [Fact]
-        public void BeforeInitUnsavedEntryIsFalseIfFalse()
-        {
-            // Arrange
-            var mockDialogService = new Mock<IDialogService>();
-            var mockWarehouseMgmtSvc = new Mock<IWarehouseManagementService>();
-            var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
-            const bool thereIsNoUnsavedEntryValue = false;
-            mockLegacyWorkspace
-                .Setup(w => w.IsThereUnsavedEntry())
-                .Returns(thereIsNoUnsavedEntryValue);
-            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockWarehouseMgmtSvc.Object, mockLegacyWorkspace.Object);
-
-            // Act
-            var result = workspace.IsThereUnsavedEntry();
-
-            // Assert
-            Assert.False(result);
-        }
-
-        [Fact]
-        public async void AfterInitUnsavedEntryIsTrueIfTrue()
-        {
-            // Arrange
-            var mockDialogService = new Mock<IDialogService>();
-            var mockWarehouseMgmtSvc = new Mock<IWarehouseManagementService>();
-            var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
-            const bool thereIsUnsavedEntryValue = true;
-            mockLegacyWorkspace
-                .Setup(w => w.IsThereUnsavedEntry())
-                .Returns(thereIsUnsavedEntryValue);
-            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockWarehouseMgmtSvc.Object, mockLegacyWorkspace.Object);
-
-            // Act
-            await workspace.Initialize();
-            var result = workspace.IsThereUnsavedEntry();
-
-            // Assert
-            Assert.True(result);
-        }
-
-        [Fact]
-        public async void AfterInitUnsavedEntryIsFalseIfFalse()
-        {
-            // Arrange
-            var mockDialogService = new Mock<IDialogService>();
-            var mockWarehouseMgmtSvc = new Mock<IWarehouseManagementService>();
-            var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
-            const bool thereIsNoUnsavedEntryValue = false;
-            mockLegacyWorkspace
-                .Setup(w => w.IsThereUnsavedEntry())
-                .Returns(thereIsNoUnsavedEntryValue);
-            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockWarehouseMgmtSvc.Object, mockLegacyWorkspace.Object);
-
-            // Act
-            await workspace.Initialize();
-            var result = workspace.IsThereUnsavedEntry();
-
-            // Assert
-            Assert.False(result);
-        }
-
-        [Fact]
         public void BeforeInitWarehouseSelectorIsNotNull()
         {
             // Arrange
@@ -247,6 +165,145 @@ namespace ViewModelsTests
 
             // Assert
             Assert.Equal(firstWarehouse, currentWarehouse);
+        }
+
+        [Fact]
+        public void BeforeInitItIsAllowedToChangeWarehouseAndUnsavedEntryIsNotChecked()
+        {
+            // Arrange
+            var mockDialogService = new Mock<IDialogService>();
+            var mockWarehouseMgmtSvc = new Mock<IWarehouseManagementService>();
+            var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
+            var legacyWorkspaceCheckedForUnsavedEntry = false;
+            mockLegacyWorkspace
+                .Setup(legacy => legacy.IsThereUnsavedEntry())
+                .Callback(() => legacyWorkspaceCheckedForUnsavedEntry = true);
+            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockWarehouseMgmtSvc.Object, mockLegacyWorkspace.Object);
+
+            // Act
+            var result = workspace.IsItAllowedToChangeCurrentWarehouse();
+
+            // Assert
+            Assert.True(result);
+            Assert.False(legacyWorkspaceCheckedForUnsavedEntry);
+        }
+
+        [Fact]
+        public void AfterInitItIsForbiddenToChangeWarehouseIfThereAreUnsavedUserEntryAndUserCancelsReset()
+        {
+            // Arrange
+            var numberOfAsksForUser = 0;
+            var mockDialogService = new Mock<IDialogService>();
+            const DialogResultEnum userReply = DialogResultEnum.Cancel;
+            mockDialogService
+                .Setup(dialog => dialog.PresentDialog(It.IsAny<string>(), It.IsAny<DialogOptionsEnum>()))
+                .Callback(() => numberOfAsksForUser++)
+                .Returns(userReply);
+            var mockWarehouseMgmtSvc = new Mock<IWarehouseManagementService>();
+            var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
+            const bool thereIsUnsavedUserEntryValue = true;
+            var legacyWorkspaceCheckedForUnsavedEntry = false;
+            mockLegacyWorkspace
+                .Setup(legacy => legacy.IsThereUnsavedEntry())
+                .Callback(() => legacyWorkspaceCheckedForUnsavedEntry = true)
+                .Returns(thereIsUnsavedUserEntryValue);
+            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockWarehouseMgmtSvc.Object, mockLegacyWorkspace.Object);
+
+            // Act
+            var result = workspace.IsItAllowedToChangeCurrentWarehouse();
+
+            // Assert
+            Assert.False(result);
+            Assert.True(legacyWorkspaceCheckedForUnsavedEntry);
+            Assert.Equal(1, numberOfAsksForUser);
+        }
+
+        [Fact]
+        public void AfterInitItIsForbiddenToChangeWarehouseIfThereAreUnsavedUserEntryAndUserSaidNoToReset()
+        {
+            // Arrange
+            var numberOfAsksForUser = 0;
+            var mockDialogService = new Mock<IDialogService>();
+            const DialogResultEnum userReply = DialogResultEnum.No;
+            mockDialogService
+                .Setup(dialog => dialog.PresentDialog(It.IsAny<string>(), It.IsAny<DialogOptionsEnum>()))
+                .Callback(() => numberOfAsksForUser++)
+                .Returns(userReply);
+            var mockWarehouseMgmtSvc = new Mock<IWarehouseManagementService>();
+            var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
+            const bool thereIsUnsavedUserEntryValue = true;
+            var legacyWorkspaceCheckedForUnsavedEntry = false;
+            mockLegacyWorkspace
+                .Setup(legacy => legacy.IsThereUnsavedEntry())
+                .Callback(() => legacyWorkspaceCheckedForUnsavedEntry = true)
+                .Returns(thereIsUnsavedUserEntryValue);
+            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockWarehouseMgmtSvc.Object, mockLegacyWorkspace.Object);
+
+            // Act
+            var result = workspace.IsItAllowedToChangeCurrentWarehouse();
+
+            // Assert
+            Assert.False(result);
+            Assert.True(legacyWorkspaceCheckedForUnsavedEntry);
+            Assert.Equal(1, numberOfAsksForUser);
+        }
+
+        [Fact]
+        public void AfterInitItIsAllowedToChangeWarehouseIfThereAreUnsavedUserEntryAndUserSaidYesToReset()
+        {
+            // Arrange
+            var numberOfAsksForUser = 0;
+            var mockDialogService = new Mock<IDialogService>();
+            const DialogResultEnum userReply = DialogResultEnum.Yes;
+            mockDialogService
+                .Setup(dialog => dialog.PresentDialog(It.IsAny<string>(), It.IsAny<DialogOptionsEnum>()))
+                .Callback(() => numberOfAsksForUser++)
+                .Returns(userReply);
+            var mockWarehouseMgmtSvc = new Mock<IWarehouseManagementService>();
+            var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
+            const bool thereIsUnsavedUserEntryValue = true;
+            var legacyWorkspaceCheckedForUnsavedEntry = false;
+            mockLegacyWorkspace
+                .Setup(legacy => legacy.IsThereUnsavedEntry())
+                .Callback(() => legacyWorkspaceCheckedForUnsavedEntry = true)
+                .Returns(thereIsUnsavedUserEntryValue);
+            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockWarehouseMgmtSvc.Object, mockLegacyWorkspace.Object);
+
+            // Act
+            var result = workspace.IsItAllowedToChangeCurrentWarehouse();
+
+            // Assert
+            Assert.True(result);
+            Assert.True(legacyWorkspaceCheckedForUnsavedEntry);
+            Assert.Equal(1, numberOfAsksForUser);
+        }
+
+        [Fact]
+        public void AfterInitItIsAllowedToChangeWarehouseIfThereIsNoUnsavedUserEntry()
+        {
+            // Arrange
+            var numberOfAsksForUser = 0;
+            var mockDialogService = new Mock<IDialogService>();
+            mockDialogService
+                .Setup(dialog => dialog.PresentDialog(It.IsAny<string>(), It.IsAny<DialogOptionsEnum>()))
+                .Callback(() => numberOfAsksForUser++);
+            var mockWarehouseMgmtSvc = new Mock<IWarehouseManagementService>();
+            var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
+            const bool thereIsNoUnsavedUserEntryValue = false;
+            var legacyWorkspaceCheckedForUnsavedEntry = false;
+            mockLegacyWorkspace
+                .Setup(legacy => legacy.IsThereUnsavedEntry())
+                .Callback(() => legacyWorkspaceCheckedForUnsavedEntry = true)
+                .Returns(thereIsNoUnsavedUserEntryValue);
+            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockWarehouseMgmtSvc.Object, mockLegacyWorkspace.Object);
+
+            // Act
+            var result = workspace.IsItAllowedToChangeCurrentWarehouse();
+
+            // Assert
+            Assert.True(result);
+            Assert.True(legacyWorkspaceCheckedForUnsavedEntry);
+            Assert.Equal(0, numberOfAsksForUser);
         }
     }
 }
