@@ -6,6 +6,6 @@ namespace ViewModels
     {
         bool IsThereUnsavedEntry();
 
-        void SetCurrentWarehouse(Warehouse warehouse);
+        void SetCurrentStore(Store store);
     }
 }

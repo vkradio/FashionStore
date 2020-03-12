@@ -13,16 +13,16 @@ using Xunit;
 
 namespace ViewModelsTests
 {
-    public class WarehouseSelectorViewModelUT
+    public class StoreSelectorViewModelUT
     {
-        (Mock<IWarehouseManagementService>, WorkspaceViewModel) CreateBaseMocks()
+        (Mock<IStoreManagementService>, WorkspaceViewModel) CreateBaseMocks()
         {
             var mockDialogService = new Mock<IDialogService>();
-            var mockWhMgmtService = new Mock<IWarehouseManagementService>();
+            var mockStoreMgmtService = new Mock<IStoreManagementService>();
             var mockLegacyWorkspaceCtx = new Mock<ILegacyWorkspaceContext>();
-            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockWhMgmtService.Object, mockLegacyWorkspaceCtx.Object);
+            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockStoreMgmtService.Object, mockLegacyWorkspaceCtx.Object);
 
-            return (mockWhMgmtService, workspace);
+            return (mockStoreMgmtService, workspace);
         }
 
         [Fact]
@@ -30,184 +30,184 @@ namespace ViewModelsTests
         {
             // Arrange
             WorkspaceViewModel nullWorkspace = null;
-            var mockWhMgmtService = new Mock<IWarehouseManagementService>();
+            var mockStoreMgmtService = new Mock<IStoreManagementService>();
 
             // Act
-            var ex = Assert.Throws<ArgumentNullException>(() => new WarehouseSelectorViewModel(nullWorkspace, mockWhMgmtService.Object));
+            var ex = Assert.Throws<ArgumentNullException>(() => new StoreSelectorViewModel(nullWorkspace, mockStoreMgmtService.Object));
 
             // Assert
             Assert.NotNull(ex);
         }
 
         [Fact]
-        public void ConstructorThrowsIfWarehouseManagementServiceIsNull()
+        public void ConstructorThrowsIfStoreManagementServiceIsNull()
         {
             // Arrange
             var mockDialogService = new Mock<IDialogService>();
-            var mockWhMgmtService = new Mock<IWarehouseManagementService>();
+            var mockStoreMgmtService = new Mock<IStoreManagementService>();
             var mockLegacyWorkspaceCtx = new Mock<ILegacyWorkspaceContext>();
-            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockWhMgmtService.Object, mockLegacyWorkspaceCtx.Object);
-            IWarehouseManagementService nullWhMgmtService = null;
+            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockStoreMgmtService.Object, mockLegacyWorkspaceCtx.Object);
+            IStoreManagementService nullStoreMgmtService = null;
 
             // Act
-            var ex = Assert.Throws<ArgumentNullException>(() => new WarehouseSelectorViewModel(workspace, nullWhMgmtService));
+            var ex = Assert.Throws<ArgumentNullException>(() => new StoreSelectorViewModel(workspace, nullStoreMgmtService));
 
             // Assert
             Assert.NotNull(ex);
         }
 
         [Fact]
-        public void BeforeInitSelectorButtonsAndSelectedWarehouseAreNull()
+        public void BeforeInitSelectorButtonsAndSelectedStoreAreNull()
         {
             // Arrange
-            var (mockWhMgmtService, workspace) = CreateBaseMocks();
+            var (mockStoreMgmtService, workspace) = CreateBaseMocks();
 
             // Act
-            var whSelectorViewModel = new WarehouseSelectorViewModel(workspace, mockWhMgmtService.Object);
+            var storeSelectorViewModel = new StoreSelectorViewModel(workspace, mockStoreMgmtService.Object);
 
             // Assert
-            Assert.Null(whSelectorViewModel.SelectorButtons);
-            Assert.Null(whSelectorViewModel.SelectedWarehouse);
+            Assert.Null(storeSelectorViewModel.SelectorButtons);
+            Assert.Null(storeSelectorViewModel.SelectedStore);
         }
 
         [Fact]
-        public async void AfterInitFromEmptyWhCollectionSelectorButtonsIsEmptyButNotNullAndSelectedWhIsNull()
+        public async void AfterInitFromEmptyStoreCollectionSelectorButtonsIsEmptyButNotNullAndSelectedStoreIsNull()
         {
             // Arrange
-            var (mockWhMgmtService, workspace) = CreateBaseMocks();
-            var whSelectorViewModel = new WarehouseSelectorViewModel(workspace, mockWhMgmtService.Object);
+            var (mockStoreMgmtService, workspace) = CreateBaseMocks();
+            var storeSelectorViewModel = new StoreSelectorViewModel(workspace, mockStoreMgmtService.Object);
 
             // Act
-            await whSelectorViewModel.Initialize();
+            await storeSelectorViewModel.Initialize();
 
             // Assert
-            Assert.NotNull(whSelectorViewModel.SelectorButtons);
-            Assert.Empty(whSelectorViewModel.SelectorButtons);
-            Assert.Null(whSelectorViewModel.SelectedWarehouse);
+            Assert.NotNull(storeSelectorViewModel.SelectorButtons);
+            Assert.Empty(storeSelectorViewModel.SelectorButtons);
+            Assert.Null(storeSelectorViewModel.SelectedStore);
         }
 
         [Fact]
-        public async void AfterInitFromWhCollectionOf1SelectorButtonsAndSelectedWhAreProperlySet()
+        public async void AfterInitFromStoreCollectionOf1SelectorButtonsAndSelectedStoreAreProperlySet()
         {
             // Arrange
-            var (mockWhMgmtService, workspace) = CreateBaseMocks();
-            var whSelectorViewModel = new WarehouseSelectorViewModel(workspace, mockWhMgmtService.Object);
+            var (mockStoreMgmtService, workspace) = CreateBaseMocks();
+            var storeSelectorViewModel = new StoreSelectorViewModel(workspace, mockStoreMgmtService.Object);
 
-            var warehouseName = "warehouse 1";
-            var warehouse = new Warehouse { Name = warehouseName };
-            mockWhMgmtService
-                .Setup(service => service.GetFunctioningOrderedWarehousesAsync())
-                .ReturnsAsync(new Warehouse[] { warehouse });
+            var storeName = "store 1";
+            var store = new Store { Name = storeName };
+            mockStoreMgmtService
+                .Setup(service => service.GetFunctioningOrderedStoresAsync())
+                .ReturnsAsync(new Store[] { store });
 
             // Act
-            await whSelectorViewModel.Initialize();
+            await storeSelectorViewModel.Initialize();
 
             // Assert
-            Assert.Collection(whSelectorViewModel.SelectorButtons,
-                item => Assert.Equal(warehouseName, item.WarehouseName)
+            Assert.Collection(storeSelectorViewModel.SelectorButtons,
+                item => Assert.Equal(storeName, item.StoreName)
             );
-            Assert.Equal(warehouseName, whSelectorViewModel.SelectedWarehouse.WarehouseName);
+            Assert.Equal(storeName, storeSelectorViewModel.SelectedStore.StoreName);
         }
 
         [Fact]
-        public async void AfterInitFromWhCollectionOf5SelectorButtonsAndSelectedWhAreProperlySet()
+        public async void AfterInitFromStoreCollectionOf5SelectorButtonsAndSelectedStoreAreProperlySet()
         {
             // Arrange
-            var (mockWhMgmtService, workspace) = CreateBaseMocks();
-            var whSelectorViewModel = new WarehouseSelectorViewModel(workspace, mockWhMgmtService.Object);
+            var (mockStoreMgmtService, workspace) = CreateBaseMocks();
+            var storeSelectorViewModel = new StoreSelectorViewModel(workspace, mockStoreMgmtService.Object);
 
-            var warehouseName1 = "warehouse 1";
-            var warehouseName2 = "warehouse 2";
-            var warehouseName3 = "warehouse 3";
-            var warehouseName4 = "warehouse 4";
-            var warehouseName5 = "warehouse 5";
-            var warehouse1 = new Warehouse { Name = warehouseName1 };
-            var warehouse2 = new Warehouse { Name = warehouseName2 };
-            var warehouse3 = new Warehouse { Name = warehouseName3 };
-            var warehouse4 = new Warehouse { Name = warehouseName4 };
-            var warehouse5 = new Warehouse { Name = warehouseName5 };
-            mockWhMgmtService
-                .Setup(service => service.GetFunctioningOrderedWarehousesAsync())
-                .ReturnsAsync(new Warehouse[] { warehouse1, warehouse2, warehouse3, warehouse4, warehouse5 });
+            var storeName1 = "store 1";
+            var storeName2 = "store 2";
+            var storeName3 = "store 3";
+            var storeName4 = "store 4";
+            var storeName5 = "store 5";
+            var store1 = new Store { Name = storeName1 };
+            var store2 = new Store { Name = storeName2 };
+            var store3 = new Store { Name = storeName3 };
+            var store4 = new Store { Name = storeName4 };
+            var store5 = new Store { Name = storeName5 };
+            mockStoreMgmtService
+                .Setup(service => service.GetFunctioningOrderedStoresAsync())
+                .ReturnsAsync(new Store[] { store1, store2, store3, store4, store5 });
 
             // Act
-            await whSelectorViewModel.Initialize();
+            await storeSelectorViewModel.Initialize();
 
             // Assert
-            Assert.Collection(whSelectorViewModel.SelectorButtons,
-                item => Assert.Equal(warehouseName1, item.WarehouseName),
-                item => Assert.Equal(warehouseName2, item.WarehouseName),
-                item => Assert.Equal(warehouseName3, item.WarehouseName),
-                item => Assert.Equal(warehouseName4, item.WarehouseName),
-                item => Assert.Equal(warehouseName5, item.WarehouseName)
+            Assert.Collection(storeSelectorViewModel.SelectorButtons,
+                item => Assert.Equal(storeName1, item.StoreName),
+                item => Assert.Equal(storeName2, item.StoreName),
+                item => Assert.Equal(storeName3, item.StoreName),
+                item => Assert.Equal(storeName4, item.StoreName),
+                item => Assert.Equal(storeName5, item.StoreName)
             );
-            Assert.Equal(warehouseName1, whSelectorViewModel.SelectedWarehouse.WarehouseName);
+            Assert.Equal(storeName1, storeSelectorViewModel.SelectedStore.StoreName);
         }
 
         [Fact]
-        public async void AfterInitFromWhCollectionOf5NotificationOfSelectorButtonsAndSelectedWhAreFiredOnce()
+        public async void AfterInitFromStoreCollectionOf5NotificationOfSelectorButtonsAndSelectedStoreAreFiredOnce()
         {
             // Arrange
-            var (mockWhMgmtService, workspace) = CreateBaseMocks();
-            var whSelectorViewModel = new WarehouseSelectorViewModel(workspace, mockWhMgmtService.Object);
+            var (mockStoreMgmtService, workspace) = CreateBaseMocks();
+            var storeSelectorViewModel = new StoreSelectorViewModel(workspace, mockStoreMgmtService.Object);
             var propertyChangeRegistry = new Dictionary<string, int>();
-            whSelectorViewModel.PropertyChanged += (s, a) =>
+            storeSelectorViewModel.PropertyChanged += (s, a) =>
             {
-                Assert.Equal(whSelectorViewModel, s);
+                Assert.Equal(storeSelectorViewModel, s);
                 propertyChangeRegistry.Inc(a.PropertyName);
             };
-            mockWhMgmtService
-                .Setup(service => service.GetFunctioningOrderedWarehousesAsync())
+            mockStoreMgmtService
+                .Setup(service => service.GetFunctioningOrderedStoresAsync())
                 .ReturnsAsync(Enumerable
                     .Range(1, 5)
-                    .Select(i => new Warehouse { WarehouseId = i })
+                    .Select(i => new Store { Id = i })
                 );
 
             // Act
-            await whSelectorViewModel.Initialize();
+            await storeSelectorViewModel.Initialize();
 
             // Assert
-            Assert.Equal(5, whSelectorViewModel.SelectorButtons.Count());
+            Assert.Equal(5, storeSelectorViewModel.SelectorButtons.Count());
             Assert.Collection(propertyChangeRegistry,
                 item =>
                 {
-                    Assert.Equal(nameof(WarehouseSelectorViewModel.SelectorButtons), item.Key);
+                    Assert.Equal(nameof(StoreSelectorViewModel.SelectorButtons), item.Key);
                     Assert.Equal(1, item.Value);
                 },
                 item =>
                 {
-                    Assert.Equal(nameof(WarehouseSelectorViewModel.SelectedWarehouse), item.Key);
+                    Assert.Equal(nameof(StoreSelectorViewModel.SelectedStore), item.Key);
                     Assert.Equal(1, item.Value);
                 }
             );
         }
 
         [Fact]
-        public async void NoChangeNotificationsOnSelectingAlreadySelectedWarehouse()
+        public async void NoChangeNotificationsOnSelectingAlreadySelectedStore()
         {
             // Arrange
-            var (mockWhMgmtService, workspace) = CreateBaseMocks();
-            var whSelectorViewModel = new WarehouseSelectorViewModel(workspace, mockWhMgmtService.Object);
+            var (mockStoreMgmtService, workspace) = CreateBaseMocks();
+            var storeSelectorViewModel = new StoreSelectorViewModel(workspace, mockStoreMgmtService.Object);
             var propertyChangeRegistry = new Dictionary<string, int>();
-            whSelectorViewModel.PropertyChanged += (s, a) =>
+            storeSelectorViewModel.PropertyChanged += (s, a) =>
             {
-                Assert.Equal(whSelectorViewModel, s);
+                Assert.Equal(storeSelectorViewModel, s);
                 propertyChangeRegistry.Inc(a.PropertyName);
             };
-            var warehouses = Enumerable
+            var stores = Enumerable
                 .Range(1, 5)
-                .Select(i => new Warehouse { WarehouseId = i, Name = i.ToString(CultureInfo.InvariantCulture) })
+                .Select(i => new Store { Id = i, Name = i.ToString(CultureInfo.InvariantCulture) })
                 .ToList();
-            mockWhMgmtService
-                .Setup(service => service.GetFunctioningOrderedWarehousesAsync())
-                .ReturnsAsync(warehouses);
-            await whSelectorViewModel.Initialize();
+            mockStoreMgmtService
+                .Setup(service => service.GetFunctioningOrderedStoresAsync())
+                .ReturnsAsync(stores);
+            await storeSelectorViewModel.Initialize();
             propertyChangeRegistry.Clear();
-            Assert.Equal(5, whSelectorViewModel.SelectorButtons.Count());
-            Assert.Equal(1.ToString(CultureInfo.InvariantCulture), whSelectorViewModel.SelectedWarehouse.WarehouseName);
+            Assert.Equal(5, storeSelectorViewModel.SelectorButtons.Count());
+            Assert.Equal(1.ToString(CultureInfo.InvariantCulture), storeSelectorViewModel.SelectedStore.StoreName);
 
             // Act
-            whSelectorViewModel.SelectedWarehouse = whSelectorViewModel.SelectedWarehouse;
+            storeSelectorViewModel.SelectedStore = storeSelectorViewModel.SelectedStore;
 
             // Assert
             Assert.Empty(propertyChangeRegistry);

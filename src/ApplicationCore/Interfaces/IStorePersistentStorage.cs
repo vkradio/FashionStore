@@ -5,8 +5,8 @@ using System.Text;
 
 namespace ApplicationCore.Interfaces
 {
-    public interface IWarehousePersistentStorage
+    public interface IStorePersistentStorage
     {
-        IEnumerable<Warehouse> GetOrderedListOfFunctioningWarehouses();
+        IEnumerable<Store> GetOrderedListOfFunctioningStores();
     }
 }

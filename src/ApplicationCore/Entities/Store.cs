@@ -4,9 +4,9 @@ using System.Text;
 
 namespace ApplicationCore.Entities
 {
-    public class Warehouse
+    public class Store
     {
-        public int WarehouseId { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 

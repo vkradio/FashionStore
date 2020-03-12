@@ -160,8 +160,8 @@
     <Compile Include="Widgets\PointOfSaleSelector\PushButtonCheap.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Widgets\WarehouseSelector.xaml.cs">
-      <DependentUpon>WarehouseSelector.xaml</DependentUpon>
+    <Compile Include="Widgets\StoreSelector.xaml.cs">
+      <DependentUpon>StoreSelector.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Forms\FRM_Card_PointOfSale.resx">
       <DependentUpon>FRM_Card_PointOfSale.cs</DependentUpon>
@@ -302,7 +302,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Widgets\WarehouseSelector.xaml">
+    <Page Include="Widgets\StoreSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

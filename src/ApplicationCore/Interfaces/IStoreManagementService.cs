@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Interfaces
 {
-    public interface IWarehouseManagementService
+    public interface IStoreManagementService
     {
-        Task<IEnumerable<Warehouse>> GetFunctioningOrderedWarehousesAsync();
+        Task<IEnumerable<Store>> GetFunctioningOrderedStoresAsync();
 
-        Task<Warehouse> GetWarehouse(int warehouseId);
+        Task<Store> GetStore(int storeId);
     }
 }

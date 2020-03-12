@@ -30,10 +30,10 @@ namespace FashionStoreWinForms.Forms
             PAN_Workplace.Controls[0] is PanelAddSku panAddSku &&
             panAddSku.Modified;
 
-        public void SetCurrentWarehouse(Warehouse warehouse)
+        public void SetCurrentStore(Store warehouse)
         {
             PointOfSale oldPointOfSale = Registry.CurrentPointOfSale;
-            Registry.CurrentPointOfSale = PointOfSale.Restore(warehouse.WarehouseId);
+            Registry.CurrentPointOfSale = PointOfSale.Restore(warehouse.Id);
             if (oldPointOfSale.Id != Registry.CurrentPointOfSale.Id)
                 PAN_Workplace.Controls.Clear();
         }
@@ -77,7 +77,7 @@ namespace FashionStoreWinForms.Forms
             ConnectionRegistry.Init("Data Source=" + Settings.Default.DbPath);
             GlobalController.Init(this);
 
-            await ((WarehouseSelectorViewModel)warehouseSelector1.DataContext).Initialize();
+            await ((StoreSelectorViewModel)warehouseSelector1.DataContext).Initialize();
         }
         void MI_Card_PointOfSale_Click(object sender, EventArgs e)
         {
@@ -161,26 +161,26 @@ namespace FashionStoreWinForms.Forms
         }
 
         #region Temporary mock WarehouseService
-        class MockWarehouseService: IWarehouseManagementService
+        class MockWarehouseService: IStoreManagementService
         {
-            static readonly IEnumerable<Warehouse> warehouses = new Warehouse[] {
-                new Warehouse { WarehouseId = 1, OrdinalNumber = 5, Name = "Country" },
-                new Warehouse { WarehouseId = 2, OrdinalNumber = 7, Name = "7 Cats" },
-                new Warehouse { WarehouseId = 3, OrdinalNumber = 0, Name = "Central Market", IsDeleted = true },
-                new Warehouse { WarehouseId = 4, OrdinalNumber = 1, Name = "Home" },
-                new Warehouse { WarehouseId = 5, OrdinalNumber = 4, Name = "Oriental" },
-                new Warehouse { WarehouseId = 6, OrdinalNumber = 3, Name = "Ivanoff", IsDeleted = true },
-                new Warehouse { WarehouseId = 7, OrdinalNumber = 6, Name = "Comfort", IsDeleted = true },
-                new Warehouse { WarehouseId = 8, OrdinalNumber = 2, Name = "New Terra" }
+            static readonly IEnumerable<Store> warehouses = new Store[] {
+                new Store { Id = 1, OrdinalNumber = 5, Name = "Country" },
+                new Store { Id = 2, OrdinalNumber = 7, Name = "7 Cats" },
+                new Store { Id = 3, OrdinalNumber = 0, Name = "Central Market", IsDeleted = true },
+                new Store { Id = 4, OrdinalNumber = 1, Name = "Home" },
+                new Store { Id = 5, OrdinalNumber = 4, Name = "Oriental" },
+                new Store { Id = 6, OrdinalNumber = 3, Name = "Ivanoff", IsDeleted = true },
+                new Store { Id = 7, OrdinalNumber = 6, Name = "Comfort", IsDeleted = true },
+                new Store { Id = 8, OrdinalNumber = 2, Name = "New Terra" }
             };
 
-            public Task<IEnumerable<Warehouse>> GetFunctioningOrderedWarehousesAsync() => Task.FromResult<IEnumerable<Warehouse>>(
+            public Task<IEnumerable<Store>> GetFunctioningOrderedStoresAsync() => Task.FromResult<IEnumerable<Store>>(
                 warehouses
                     .Where(w => w.IsDeleted = false)
                     .OrderBy(w => w.OrdinalNumber)
             );
 
-            public Task<Warehouse> GetWarehouse(int warehouseId) => Task.FromResult(warehouses.SingleOrDefault(w => w.WarehouseId == warehouseId));
+            public Task<Store> GetStore(int warehouseId) => Task.FromResult(warehouses.SingleOrDefault(w => w.Id == warehouseId));
         }
         #endregion
 
@@ -193,7 +193,7 @@ namespace FashionStoreWinForms.Forms
             var warehouseMgmtService = new MockWarehouseService();
             workspaceViewModel = new WorkspaceViewModel(dialogService, warehouseMgmtService, this);
 
-            warehouseSelector1.DataContext = workspaceViewModel.WarehouseSelector;
+            warehouseSelector1.DataContext = workspaceViewModel.StoreSelector;
         }
 
         public void AddSku()

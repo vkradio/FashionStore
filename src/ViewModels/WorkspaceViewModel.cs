@@ -12,61 +12,61 @@ namespace ViewModels
     public class WorkspaceViewModel : PropertyChangeNotifier
     {
         readonly IDialogService dialogService;
-        readonly IWarehouseManagementService warehouseManagementService;
+        readonly IStoreManagementService storeManagementService;
         readonly ILegacyWorkspaceContext legacyWorkspaceContext;
 
         #region Private underlying fields
-        WarehouseSelectorViewModel warehouseSelector;
-        Warehouse currentWarehouse;
+        StoreSelectorViewModel storeSelector;
+        Store currentStore;
         #endregion
 
         #region Public properties and actions
-        public WarehouseSelectorViewModel WarehouseSelector
+        public StoreSelectorViewModel StoreSelector
         {
-            get => warehouseSelector;
+            get => storeSelector;
 
             set
             {
-                warehouseSelector = value;
-                OnPropertyChanged(nameof(WarehouseSelector));
+                storeSelector = value;
+                OnPropertyChanged(nameof(StoreSelector));
             }
         }
 
-        public Warehouse CurrentWarehouse
+        public Store CurrentStore
         {
-            get => currentWarehouse;
+            get => currentStore;
 
             set
             {
-                currentWarehouse = value;
-                OnPropertyChanged(nameof(CurrentWarehouse));
+                currentStore = value;
+                OnPropertyChanged(nameof(CurrentStore));
             }
         }
 
-        public bool IsItAllowedToChangeCurrentWarehouse()
+        public bool IsItAllowedToChangeCurrentStore()
         {
             return false;
         }
         #endregion
 
-        public WorkspaceViewModel(IDialogService dialogService, IWarehouseManagementService warehouseManagementService, ILegacyWorkspaceContext legacyWorkspaceContext)
+        public WorkspaceViewModel(IDialogService dialogService, IStoreManagementService storeManagementService, ILegacyWorkspaceContext legacyWorkspaceContext)
         {
             Guard.Against.Null(dialogService, nameof(dialogService));
-            Guard.Against.Null(warehouseManagementService, nameof(warehouseManagementService));
+            Guard.Against.Null(storeManagementService, nameof(storeManagementService));
             Guard.Against.Null(legacyWorkspaceContext, nameof(legacyWorkspaceContext));
 
             this.dialogService = dialogService;
-            this.warehouseManagementService = warehouseManagementService;
+            this.storeManagementService = storeManagementService;
             this.legacyWorkspaceContext = legacyWorkspaceContext;
 
-            WarehouseSelector = new WarehouseSelectorViewModel(this, this.warehouseManagementService);
-            WarehouseSelector.PropertyChanged += async (s, e) =>
+            StoreSelector = new StoreSelectorViewModel(this, this.storeManagementService);
+            StoreSelector.PropertyChanged += async (s, e) =>
             {
-                if (e.PropertyName == nameof(WarehouseSelectorViewModel.SelectedWarehouse))
-                    CurrentWarehouse = await warehouseManagementService.GetWarehouse(WarehouseSelector.SelectedWarehouse?.WarehouseId ?? -1).ConfigureAwait(false);
+                if (e.PropertyName == nameof(StoreSelectorViewModel.SelectedStore))
+                    CurrentStore = await storeManagementService.GetStore(StoreSelector.SelectedStore?.StoreId ?? -1).ConfigureAwait(false);
             };
         }
 
-        public async Task Initialize() => await WarehouseSelector.Initialize().ConfigureAwait(false);
+        public async Task Initialize() => await StoreSelector.Initialize().ConfigureAwait(false);
     }
 }
