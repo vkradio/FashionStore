@@ -35,7 +35,7 @@ namespace ViewModels
 
             set
             {
-                if (workspaceViewModel.IsItAllowedToChangeCurrentStore())
+                if (selectedStore != value && workspaceViewModel.IsItAllowedToChangeCurrentStore())
                 {
                     selectedStore = value;
                     OnPropertyChanged(nameof(SelectedStore));

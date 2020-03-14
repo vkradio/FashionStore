@@ -121,6 +121,54 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="MI_Cards.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 20</value>
+  </data>
+  <data name="MI_Cards.Text" xml:space="preserve">
+    <value>Cards</value>
+  </data>
+  <data name="MI_Settings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 20</value>
+  </data>
+  <data name="MI_Settings.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="MI_AddSku.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 20</value>
+  </data>
+  <data name="MI_AddSku.Text" xml:space="preserve">
+    <value>Add SKU</value>
+  </data>
+  <data name="MI_SearchSku.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 20</value>
+  </data>
+  <data name="MI_SearchSku.Text" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="MI_SalesJournal.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 20</value>
+  </data>
+  <data name="MI_SalesJournal.Text" xml:space="preserve">
+    <value>Sales history</value>
+  </data>
+  <data name="MI_Rep_PerPos.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="MI_Rep_PerPos.Text" xml:space="preserve">
+    <value>Stocks per store</value>
+  </data>
+  <data name="MI_Rep_Total.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="MI_Rep_Total.Text" xml:space="preserve">
+    <value>Stocks overall</value>
+  </data>
+  <data name="MI_Report.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 20</value>
+  </data>
+  <data name="MI_Report.Text" xml:space="preserve">
+    <value>Reports</value>
+  </data>
   <data name="MNU_Main.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -143,29 +191,17 @@
   <data name="&gt;&gt;MNU_Main.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="MI_Cards.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 20</value>
-  </data>
-  <data name="MI_Cards.Text" xml:space="preserve">
-    <value>Cards</value>
-  </data>
   <data name="MI_DressMatrix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="MI_DressMatrix.Text" xml:space="preserve">
     <value>Size chart layout</value>
   </data>
   <data name="MI_Card_PointOfSale.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="MI_Card_PointOfSale.Text" xml:space="preserve">
-    <value>Warehouse</value>
-  </data>
-  <data name="MI_Settings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 20</value>
-  </data>
-  <data name="MI_Settings.Text" xml:space="preserve">
-    <value>Settings</value>
+    <value>Store</value>
   </data>
   <data name="MI_Sql.Size" type="System.Drawing.Size, System.Drawing">
     <value>158, 22</value>
@@ -184,42 +220,6 @@
   </data>
   <data name="MI_Backup.Text" xml:space="preserve">
     <value>Backup</value>
-  </data>
-  <data name="MI_AddSku.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 20</value>
-  </data>
-  <data name="MI_AddSku.Text" xml:space="preserve">
-    <value>Add SKU</value>
-  </data>
-  <data name="MI_SearchSku.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 20</value>
-  </data>
-  <data name="MI_SearchSku.Text" xml:space="preserve">
-    <value>Search</value>
-  </data>
-  <data name="MI_SalesJournal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 20</value>
-  </data>
-  <data name="MI_SalesJournal.Text" xml:space="preserve">
-    <value>Sales history</value>
-  </data>
-  <data name="MI_Report.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 20</value>
-  </data>
-  <data name="MI_Report.Text" xml:space="preserve">
-    <value>Reports</value>
-  </data>
-  <data name="MI_Rep_PerPos.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
-  </data>
-  <data name="MI_Rep_PerPos.Text" xml:space="preserve">
-    <value>Stocks per warehouse</value>
-  </data>
-  <data name="MI_Rep_Total.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
-  </data>
-  <data name="MI_Rep_Total.Text" xml:space="preserve">
-    <value>Stocks overall</value>
   </data>
   <data name="PAN_Workplace.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>

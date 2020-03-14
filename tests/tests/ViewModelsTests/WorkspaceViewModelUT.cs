@@ -20,11 +20,28 @@ namespace ViewModelsTests
         {
             // Arrange
             IDialogService nullDialogService = null;
+            var mockLocalizationService = new Mock<ILocalizationService>();
             var mockStoreMgmtSvc = new Mock<IStoreManagementService>();
             var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
 
             // Act
-            var ex = Assert.Throws<ArgumentNullException>(() => new WorkspaceViewModel(nullDialogService, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object));
+            var ex = Assert.Throws<ArgumentNullException>(() => new WorkspaceViewModel(nullDialogService, mockLocalizationService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object));
+
+            // Assert
+            Assert.NotNull(ex);
+        }
+
+        [Fact]
+        public void ConstructorThrowsIfLocalizationServiceIsNull()
+        {
+            // Arrange
+            var mockDialogService = new Mock<IDialogService>();
+            ILocalizationService nullLocalizationService = null;
+            var mockStoreMgmtSvc = new Mock<IStoreManagementService>();
+            var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
+
+            // Act
+            var ex = Assert.Throws<ArgumentNullException>(() => new WorkspaceViewModel(mockDialogService.Object, nullLocalizationService, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object));
 
             // Assert
             Assert.NotNull(ex);
@@ -35,11 +52,12 @@ namespace ViewModelsTests
         {
             // Arrange
             var mockDialogService = new Mock<IDialogService>();
+            var mockLocalizationService = new Mock<ILocalizationService>();
             IStoreManagementService nullStoreMgmtSvc = null;
             var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
 
             // Act
-            var ex = Assert.Throws<ArgumentNullException>(() => new WorkspaceViewModel(mockDialogService.Object, nullStoreMgmtSvc, mockLegacyWorkspace.Object));
+            var ex = Assert.Throws<ArgumentNullException>(() => new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, nullStoreMgmtSvc, mockLegacyWorkspace.Object));
 
             // Assert
             Assert.NotNull(ex);
@@ -50,11 +68,12 @@ namespace ViewModelsTests
         {
             // Arrange
             var mockDialogService = new Mock<IDialogService>();
+            var mockLocalizationService = new Mock<ILocalizationService>();
             var mockStoreMgmtSvc = new Mock<IStoreManagementService>();
             ILegacyWorkspaceContext nullLegacyWorkspace = null;
 
             // Act
-            var ex = Assert.Throws<ArgumentNullException>(() => new WorkspaceViewModel(mockDialogService.Object, mockStoreMgmtSvc.Object, nullLegacyWorkspace));
+            var ex = Assert.Throws<ArgumentNullException>(() => new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, mockStoreMgmtSvc.Object, nullLegacyWorkspace));
 
             // Assert
             Assert.NotNull(ex);
@@ -65,9 +84,10 @@ namespace ViewModelsTests
         {
             // Arrange
             var mockDialogService = new Mock<IDialogService>();
+            var mockLocalizationService = new Mock<ILocalizationService>();
             var mockStoreMgmtSvc = new Mock<IStoreManagementService>();
             var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
-            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
+            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
 
             // Act
             var storeSelector = workspace.StoreSelector;
@@ -81,9 +101,10 @@ namespace ViewModelsTests
         {
             // Arrange
             var mockDialogService = new Mock<IDialogService>();
+            var mockLocalizationService = new Mock<ILocalizationService>();
             var mockStoreMgmtSvc = new Mock<IStoreManagementService>();
             var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
-            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
+            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
 
             // Act
             var currentStore = workspace.CurrentStore;
@@ -97,13 +118,14 @@ namespace ViewModelsTests
         {
             // Arrange
             var mockDialogService = new Mock<IDialogService>();
+            var mockLocalizationService = new Mock<ILocalizationService>();
             var mockStoreMgmtSvc = new Mock<IStoreManagementService>();
             var emptyStoreCollection = Array.Empty<Store>();
             mockStoreMgmtSvc
                 .Setup(wService => wService.GetFunctioningOrderedStoresAsync())
                 .ReturnsAsync(emptyStoreCollection);
             var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
-            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
+            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
 
             // Act
             await workspace.Initialize();
@@ -118,6 +140,7 @@ namespace ViewModelsTests
         {
             // Arrange
             var mockDialogService = new Mock<IDialogService>();
+            var mockLocalizationService = new Mock<ILocalizationService>();
             var mockStoreMgmtSvc = new Mock<IStoreManagementService>();
             var singleStore = new Store { Id = 1 };
             var singleStoreCollection = new Store[] { singleStore };
@@ -128,7 +151,7 @@ namespace ViewModelsTests
                 .Setup(wService => wService.GetStore(It.IsAny<int>()))
                 .ReturnsAsync(singleStore);
             var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
-            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
+            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
 
             // Act
             await workspace.Initialize();
@@ -143,6 +166,7 @@ namespace ViewModelsTests
         {
             // Arrange
             var mockDialogService = new Mock<IDialogService>();
+            var mockLocalizationService = new Mock<ILocalizationService>();
             var mockStoreMgmtSvc = new Mock<IStoreManagementService>();
             const string namePrefix = "Store ";
             var fiveStoreCollection = Enumerable
@@ -157,7 +181,7 @@ namespace ViewModelsTests
                 .Setup(wService => wService.GetStore(It.IsAny<int>()))
                 .ReturnsAsync(firstStore);
             var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
-            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
+            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
 
             // Act
             await workspace.Initialize();
@@ -172,13 +196,14 @@ namespace ViewModelsTests
         {
             // Arrange
             var mockDialogService = new Mock<IDialogService>();
+            var mockLocalizationService = new Mock<ILocalizationService>();
             var mockStoreMgmtSvc = new Mock<IStoreManagementService>();
             var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
             var legacyWorkspaceCheckedForUnsavedEntry = false;
             mockLegacyWorkspace
                 .Setup(legacy => legacy.IsThereUnsavedEntry())
                 .Callback(() => legacyWorkspaceCheckedForUnsavedEntry = true);
-            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
+            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
 
             // Act
             var result = workspace.IsItAllowedToChangeCurrentStore();
@@ -189,7 +214,7 @@ namespace ViewModelsTests
         }
 
         [Fact]
-        public void AfterInitItIsForbiddenToChangeStoreIfThereAreUnsavedUserEntryAndUserCancelsReset()
+        public async void AfterInitItIsForbiddenToChangeStoreIfThereAreUnsavedUserEntryAndUserCancelsReset()
         {
             // Arrange
             var numberOfAsksForUser = 0;
@@ -199,6 +224,7 @@ namespace ViewModelsTests
                 .Setup(dialog => dialog.PresentDialog(It.IsAny<string>(), It.IsAny<DialogOptionsEnum>()))
                 .Callback(() => numberOfAsksForUser++)
                 .Returns(userReply);
+            var mockLocalizationService = new Mock<ILocalizationService>();
             var mockStoreMgmtSvc = new Mock<IStoreManagementService>();
             var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
             const bool thereIsUnsavedUserEntryValue = true;
@@ -207,9 +233,10 @@ namespace ViewModelsTests
                 .Setup(legacy => legacy.IsThereUnsavedEntry())
                 .Callback(() => legacyWorkspaceCheckedForUnsavedEntry = true)
                 .Returns(thereIsUnsavedUserEntryValue);
-            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
+            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
 
             // Act
+            await workspace.Initialize();
             var result = workspace.IsItAllowedToChangeCurrentStore();
 
             // Assert
@@ -219,7 +246,7 @@ namespace ViewModelsTests
         }
 
         [Fact]
-        public void AfterInitItIsForbiddenToChangeStoreIfThereAreUnsavedUserEntryAndUserSaidNoToReset()
+        public async void AfterInitItIsForbiddenToChangeStoreIfThereAreUnsavedUserEntryAndUserSaidNoToReset()
         {
             // Arrange
             var numberOfAsksForUser = 0;
@@ -229,6 +256,7 @@ namespace ViewModelsTests
                 .Setup(dialog => dialog.PresentDialog(It.IsAny<string>(), It.IsAny<DialogOptionsEnum>()))
                 .Callback(() => numberOfAsksForUser++)
                 .Returns(userReply);
+            var mockLocalizationService = new Mock<ILocalizationService>();
             var mockStoreMgmtSvc = new Mock<IStoreManagementService>();
             var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
             const bool thereIsUnsavedUserEntryValue = true;
@@ -237,9 +265,10 @@ namespace ViewModelsTests
                 .Setup(legacy => legacy.IsThereUnsavedEntry())
                 .Callback(() => legacyWorkspaceCheckedForUnsavedEntry = true)
                 .Returns(thereIsUnsavedUserEntryValue);
-            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
+            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
 
             // Act
+            await workspace.Initialize();
             var result = workspace.IsItAllowedToChangeCurrentStore();
 
             // Assert
@@ -249,7 +278,7 @@ namespace ViewModelsTests
         }
 
         [Fact]
-        public void AfterInitItIsAllowedToChangeStoreIfThereAreUnsavedUserEntryAndUserSaidYesToReset()
+        public async void AfterInitItIsAllowedToChangeStoreIfThereAreUnsavedUserEntryAndUserSaidYesToReset()
         {
             // Arrange
             var numberOfAsksForUser = 0;
@@ -259,6 +288,7 @@ namespace ViewModelsTests
                 .Setup(dialog => dialog.PresentDialog(It.IsAny<string>(), It.IsAny<DialogOptionsEnum>()))
                 .Callback(() => numberOfAsksForUser++)
                 .Returns(userReply);
+            var mockLocalizationService = new Mock<ILocalizationService>();
             var mockStoreMgmtSvc = new Mock<IStoreManagementService>();
             var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
             const bool thereIsUnsavedUserEntryValue = true;
@@ -267,9 +297,10 @@ namespace ViewModelsTests
                 .Setup(legacy => legacy.IsThereUnsavedEntry())
                 .Callback(() => legacyWorkspaceCheckedForUnsavedEntry = true)
                 .Returns(thereIsUnsavedUserEntryValue);
-            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
+            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
 
             // Act
+            await workspace.Initialize();
             var result = workspace.IsItAllowedToChangeCurrentStore();
 
             // Assert
@@ -279,7 +310,7 @@ namespace ViewModelsTests
         }
 
         [Fact]
-        public void AfterInitItIsAllowedToChangeStoreIfThereIsNoUnsavedUserEntry()
+        public async void AfterInitItIsAllowedToChangeStoreIfThereIsNoUnsavedUserEntry()
         {
             // Arrange
             var numberOfAsksForUser = 0;
@@ -287,6 +318,7 @@ namespace ViewModelsTests
             mockDialogService
                 .Setup(dialog => dialog.PresentDialog(It.IsAny<string>(), It.IsAny<DialogOptionsEnum>()))
                 .Callback(() => numberOfAsksForUser++);
+            var mockLocalizationService = new Mock<ILocalizationService>();
             var mockStoreMgmtSvc = new Mock<IStoreManagementService>();
             var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
             const bool thereIsNoUnsavedUserEntryValue = false;
@@ -295,9 +327,10 @@ namespace ViewModelsTests
                 .Setup(legacy => legacy.IsThereUnsavedEntry())
                 .Callback(() => legacyWorkspaceCheckedForUnsavedEntry = true)
                 .Returns(thereIsNoUnsavedUserEntryValue);
-            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
+            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
 
             // Act
+            await workspace.Initialize();
             var result = workspace.IsItAllowedToChangeCurrentStore();
 
             // Assert

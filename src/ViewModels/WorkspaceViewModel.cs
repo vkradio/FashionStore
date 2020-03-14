@@ -12,8 +12,11 @@ namespace ViewModels
     public class WorkspaceViewModel : PropertyChangeNotifier
     {
         readonly IDialogService dialogService;
+        readonly ILocalizationService localizationService;
         readonly IStoreManagementService storeManagementService;
         readonly ILegacyWorkspaceContext legacyWorkspaceContext;
+
+        bool initialized;
 
         #region Private underlying fields
         StoreSelectorViewModel storeSelector;
@@ -45,17 +48,38 @@ namespace ViewModels
 
         public bool IsItAllowedToChangeCurrentStore()
         {
-            return false;
+            if (!initialized)
+            {
+                return true;
+            }
+
+            var unsavedEntry = legacyWorkspaceContext.IsThereUnsavedEntry();
+            if (unsavedEntry)
+            {
+                var userReply = dialogService.PresentDialog("question", DialogOptionsEnum.YesNoCancel);
+                return userReply == DialogResultEnum.Yes;
+            }
+            else
+            {
+                return true;
+            }
         }
         #endregion
 
-        public WorkspaceViewModel(IDialogService dialogService, IStoreManagementService storeManagementService, ILegacyWorkspaceContext legacyWorkspaceContext)
+        public WorkspaceViewModel(
+            IDialogService dialogService,
+            ILocalizationService localizationService,
+            IStoreManagementService storeManagementService,
+            ILegacyWorkspaceContext legacyWorkspaceContext
+        )
         {
             Guard.Against.Null(dialogService, nameof(dialogService));
+            Guard.Against.Null(localizationService, nameof(localizationService));
             Guard.Against.Null(storeManagementService, nameof(storeManagementService));
             Guard.Against.Null(legacyWorkspaceContext, nameof(legacyWorkspaceContext));
 
             this.dialogService = dialogService;
+            this.localizationService = localizationService;
             this.storeManagementService = storeManagementService;
             this.legacyWorkspaceContext = legacyWorkspaceContext;
 
@@ -67,6 +91,10 @@ namespace ViewModels
             };
         }
 
-        public async Task Initialize() => await StoreSelector.Initialize().ConfigureAwait(false);
+        public async Task Initialize()
+        {
+            await StoreSelector.Initialize().ConfigureAwait(false);
+            initialized = true;
+        }
     }
 }

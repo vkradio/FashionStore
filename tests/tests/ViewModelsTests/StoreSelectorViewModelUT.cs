@@ -18,9 +18,10 @@ namespace ViewModelsTests
         (Mock<IStoreManagementService>, WorkspaceViewModel) CreateBaseMocks()
         {
             var mockDialogService = new Mock<IDialogService>();
+            var mockLocalizationService = new Mock<ILocalizationService>();
             var mockStoreMgmtService = new Mock<IStoreManagementService>();
             var mockLegacyWorkspaceCtx = new Mock<ILegacyWorkspaceContext>();
-            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockStoreMgmtService.Object, mockLegacyWorkspaceCtx.Object);
+            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, mockStoreMgmtService.Object, mockLegacyWorkspaceCtx.Object);
 
             return (mockStoreMgmtService, workspace);
         }
@@ -43,10 +44,7 @@ namespace ViewModelsTests
         public void ConstructorThrowsIfStoreManagementServiceIsNull()
         {
             // Arrange
-            var mockDialogService = new Mock<IDialogService>();
-            var mockStoreMgmtService = new Mock<IStoreManagementService>();
-            var mockLegacyWorkspaceCtx = new Mock<ILegacyWorkspaceContext>();
-            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockStoreMgmtService.Object, mockLegacyWorkspaceCtx.Object);
+            var (mockStoreMgmtService, workspace) = CreateBaseMocks();
             IStoreManagementService nullStoreMgmtService = null;
 
             // Act

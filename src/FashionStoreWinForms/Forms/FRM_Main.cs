@@ -20,23 +20,27 @@ using WinFormsInfrastructure;
 
 namespace FashionStoreWinForms.Forms
 {
-    public partial class FRM_Main : Form, ILegacyWorkspaceContext
+    public partial class FRM_Main : Form, ILegacyWorkspaceContext, ILocalizationService
     {
         readonly WorkspaceViewModel workspaceViewModel;
 
-        #region ILegacyWorkspaceContext implementation
+        #region ILegacyWorkspaceContext
         public bool IsThereUnsavedEntry() =>
             PAN_Workplace.Controls.Count != 0 &&
             PAN_Workplace.Controls[0] is PanelAddSku panAddSku &&
             panAddSku.Modified;
 
-        public void SetCurrentStore(Store warehouse)
+        public void SetCurrentStore(Store store)
         {
             PointOfSale oldPointOfSale = Registry.CurrentPointOfSale;
-            Registry.CurrentPointOfSale = PointOfSale.Restore(warehouse.Id);
+            Registry.CurrentPointOfSale = PointOfSale.Restore(store.Id);
             if (oldPointOfSale.Id != Registry.CurrentPointOfSale.Id)
                 PAN_Workplace.Controls.Clear();
         }
+        #endregion
+
+        #region ILocalizationService
+        public string ASK_PROCEED_AND_ABANDON_FORM_DATA => Resources.ASK_PROCEED_AND_ABANDON_FORM_DATA;
         #endregion
 
         bool AskForSaveIfNeeded()
@@ -98,10 +102,6 @@ namespace FashionStoreWinForms.Forms
         {
             using (FRM_UserSettings frm = new FRM_UserSettings())
                 frm.ShowDialog(this);
-        }
-        void PAN_PointsOfSale_BeforePointOfSaleChanged(object sender, PointOfSalePanel.BeforePointOfSaleChangedEventArgs e)
-        {
-            e.AllowChange = AskForSaveIfNeeded();
         }
         void MI_AddSku_Click(object sender, EventArgs e) { AddSku(); }
         void MI_SearchSku_Click(object sender, EventArgs e) { SearchSku(); }
@@ -188,10 +188,9 @@ namespace FashionStoreWinForms.Forms
         {
             InitializeComponent();
 
-
             var dialogService = new DialogService();
             var warehouseMgmtService = new MockWarehouseService();
-            workspaceViewModel = new WorkspaceViewModel(dialogService, warehouseMgmtService, this);
+            workspaceViewModel = new WorkspaceViewModel(dialogService, this, warehouseMgmtService, this);
 
             warehouseSelector1.DataContext = workspaceViewModel.StoreSelector;
         }
@@ -366,9 +365,6 @@ namespace FashionStoreWinForms.Forms
             MakeReport(Registry.CurrentPointOfSale);
         }
 
-        void MI_Rep_Total_Click(object sender, EventArgs e)
-        {
-            MakeReport();
-        }
+        void MI_Rep_Total_Click(object sender, EventArgs e) => MakeReport();
     }
 }
