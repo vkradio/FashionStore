@@ -231,10 +231,11 @@ namespace FashionStoreWinForms.Forms
                 return;
 
             PAN_Workplace.Controls.Clear();
-            PanelViewSku panViewSku = new PanelViewSku();
-            //PAN_Workplace.Controls.Add(panViewSku);
-            panViewSku.Parent = PAN_Workplace;
-            panViewSku.Dock = DockStyle.Fill;
+            PanelViewSku panViewSku = new PanelViewSku
+            {
+                Parent = PAN_Workplace,
+                Dock = DockStyle.Fill
+            };
             panViewSku.NamePartTextBoxExt.Focus();
         }
 
