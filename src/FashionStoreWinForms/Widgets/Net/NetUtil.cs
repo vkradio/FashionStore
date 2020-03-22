@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-using ApplicationCore.Entities;
+using ApplicationCoreLegacy.Entities;
 
 namespace FashionStoreWinForms.Widgets.Net
 {
@@ -92,10 +92,7 @@ namespace FashionStoreWinForms.Widgets.Net
             }
             out_totalHeight = yPos + in_fieldGap * 2 + in_fieldHeight;
         }
-        public static void RenderLabels(DressMatrix in_netType, Control in_container, int in_maxWidthCapX, int in_maxWidthCapY, int[] in_widthCapX, int[] in_widthCapY, int in_labelWidthThreshold, int in_fieldHeight, int in_fieldGap, out int out_totalWidth, out int out_totalHeight)
-        {
-            Label[] labelsXStub, labelsYStub;
-            RenderLabels(in_netType, in_container, in_maxWidthCapX, in_maxWidthCapY, in_widthCapX, in_widthCapY, in_labelWidthThreshold, in_fieldHeight, in_fieldGap, out out_totalWidth, out out_totalHeight, out labelsXStub, out labelsYStub);
-        }
+        public static void RenderLabels(DressMatrix in_netType, Control in_container, int in_maxWidthCapX, int in_maxWidthCapY, int[] in_widthCapX, int[] in_widthCapY, int in_labelWidthThreshold, int in_fieldHeight, int in_fieldGap, out int out_totalWidth, out int out_totalHeight) =>
+            RenderLabels(in_netType, in_container, in_maxWidthCapX, in_maxWidthCapY, in_widthCapX, in_widthCapY, in_labelWidthThreshold, in_fieldHeight, in_fieldGap, out out_totalWidth, out out_totalHeight, out _, out _);
     };
 }

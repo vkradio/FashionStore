@@ -161,8 +161,8 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.elementHost1);
             this.Controls.Add(this.PAN_Workplace);
+            this.Controls.Add(this.elementHost1);
             this.Controls.Add(this.MNU_Main);
             this.KeyPreview = true;
             this.MainMenuStrip = this.MNU_Main;

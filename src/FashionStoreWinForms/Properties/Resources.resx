@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ALL_WAREHOUSES_SHORT" xml:space="preserve">
-    <value>all WHs</value>
+  <data name="ALL_STORES_SHORT" xml:space="preserve">
+    <value>all Stores</value>
   </data>
   <data name="APP_BRAND" xml:space="preserve">
     <value>Fashion Store</value>
@@ -173,7 +173,7 @@
     <value>Confirmation</value>
   </data>
   <data name="CONFIRM_MOVING_GOODS" xml:space="preserve">
-    <value>Move {1} units of SKU "{0}" to warehouse {3}?</value>
+    <value>Move {1} units of SKU "{0}" to store {2}?</value>
   </data>
   <data name="CONFIRM_SELECTED_DATE" xml:space="preserve">
     <value>{0} of {1} has been selected.
@@ -197,8 +197,8 @@ Continue?</value>
   <data name="CRITICAL_ERROR_MSG_SEND_FILE" xml:space="preserve">
     <value>Please send the file which you'll see now, to the developer, with description of your actions right before this error happened.</value>
   </data>
-  <data name="CURRENT_WAREHOUSE_NOT_SELECTED" xml:space="preserve">
-    <value>Current warehouse not selected.</value>
+  <data name="CURRENT_STORE_NOT_SELECTED" xml:space="preserve">
+    <value>Current store is not selected.</value>
   </data>
   <data name="ERR_PART_CELL_QTY" xml:space="preserve">
     <value>Allowed only integer positive number.</value>

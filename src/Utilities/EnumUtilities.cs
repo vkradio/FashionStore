@@ -7,9 +7,9 @@ namespace Utilities
     {
         public static TMapTo MapTo<T, TMapTo>(this T thisValue)
         {
-            var optionsName = Enum.GetName(typeof(T), thisValue).ToLower();
+            var optionsName = Enum.GetName(typeof(T), thisValue).ToUpperInvariant();
             var button = ((TMapTo[])Enum.GetValues(typeof(TMapTo)))
-                .Where(v => Enum.GetName(typeof(TMapTo), v).ToLower() == optionsName)
+                .Where(v => Enum.GetName(typeof(TMapTo), v).ToUpperInvariant() == optionsName)
                 .Single();
             return button;
         }

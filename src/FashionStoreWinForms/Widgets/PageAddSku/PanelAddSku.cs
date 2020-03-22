@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-using ApplicationCore.Entities;
+using ApplicationCoreLegacy.Entities;
 using DalLegacy;
 using FashionStoreWinForms.Forms;
 using FashionStoreWinForms.Properties;
@@ -20,17 +20,18 @@ namespace FashionStoreWinForms.Widgets.PageAddSku
         readonly string c_errInvalidQty = Resources.INVALID_SKU_QTY_IS_ENTERED + " " + Resources.ERR_PART_CELL_QTY;
         readonly string c_errInvalidCellQty = Resources.INVALID_SKU_QTY_IS_ENTERED_IN_CELL + " " + Resources.ERR_PART_CELL_QTY;
 
-        int         _oldNetTypeIndex    = -1;
-        int         _defaultHeight;
-        int         _defaultWidth;
-        bool        _modified;
+        readonly int _defaultHeight;
+        readonly int _defaultWidth;
+
+        int _oldNetTypeIndex = -1;
+        bool _modified;
         
         Article     _article;
         SkuInStock  _skuInStock;
 
         bool TryParsePrices(out int out_priceOfPurchase, out int out_priceOfSell)
         {
-            out_priceOfPurchase = out_priceOfSell = 0;
+            _ = out_priceOfSell = 0;
             if (!int.TryParse(T_PriceOfPurchase.Text, out out_priceOfPurchase) || out_priceOfPurchase < 0)
             {
                 T_PriceOfPurchase.Focus();
@@ -47,8 +48,7 @@ namespace FashionStoreWinForms.Widgets.PageAddSku
         }
         bool CreateNewArticle()
         {
-            int priceOfPurchase, priceOfSell;
-            bool success = TryParsePrices(out priceOfPurchase, out priceOfSell);
+            bool success = TryParsePrices(out int priceOfPurchase, out int priceOfSell);
             if (!success)
                 return false;
 
@@ -66,8 +66,7 @@ namespace FashionStoreWinForms.Widgets.PageAddSku
         }
         bool UpdateArticle()
         {
-            int priceOfPurchase, priceOfSell;
-            bool success = TryParsePrices(out priceOfPurchase, out priceOfSell);
+            bool success = TryParsePrices(out int priceOfPurchase, out int priceOfSell);
             if (!success)
                 return false;
 
@@ -117,8 +116,7 @@ namespace FashionStoreWinForms.Widgets.PageAddSku
                 return null;
             }
 
-            int value;
-            if (!int.TryParse(in_textBox.Text, out value) || value < 0)
+            if (!int.TryParse(in_textBox.Text, out int value) || value < 0)
                 return string.Format(c_errInvalidCellQty, in_cell.X, in_cell.Y);
             else
             {
@@ -192,9 +190,8 @@ namespace FashionStoreWinForms.Widgets.PageAddSku
         }
         void TryUpdateMargin()
         {
-            int priceOfPurchase, priceOfSale;
-            if (int.TryParse(T_PriceOfPurchase.Text, out priceOfPurchase) &&
-                int.TryParse(T_PriceOfSell.Text, out priceOfSale))
+            if (int.TryParse(T_PriceOfPurchase.Text, out int priceOfPurchase) &&
+                int.TryParse(T_PriceOfSell.Text, out int priceOfSale))
             {
                 T_Margin.Text = (priceOfSale - priceOfPurchase).ToString();
             }
@@ -204,17 +201,17 @@ namespace FashionStoreWinForms.Widgets.PageAddSku
         {
             GlobalController.SearchSkuAction();
         }
-        void T_PriceOfPurchase_TextChanged(object sender, EventArgs e)
+        void PriceOfPurchaseTextBox_TextChanged(object sender, EventArgs e)
         {
             _modified = true;
             TryUpdateMargin();
         }
-        void T_PriceOfSell_TextChanged(object sender, EventArgs e)
+        void PriceOfSellTextBox_TextChanged(object sender, EventArgs e)
         {
             _modified = true;
             TryUpdateMargin();
         }
-        void T_Name_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        void NameTextBox_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
                 B_Search_Click(sender, null);
@@ -384,14 +381,12 @@ namespace FashionStoreWinForms.Widgets.PageAddSku
             _skuInStock = null;
             foreach (Control ctrl in PAN_SkuParams.Controls)
             {
-                TextBox txt = ctrl as TextBox;
-                if (txt != null)
+                if (ctrl is TextBox txt)
                 {
                     txt.Text = string.Empty;
                     continue;
                 }
-                ComboBox cb = ctrl as ComboBox;
-                if (cb != null)
+                if (ctrl is ComboBox cb)
                 {
                     if (cb.Items.Count != 0)
                         cb.SelectedIndex = 0;
@@ -428,7 +423,7 @@ namespace FashionStoreWinForms.Widgets.PageAddSku
             _modified = false;
         }
 
-        public TextBox T_NameExt { get { return T_Name; } }
+        public TextBox NameTextBoxExt { get { return T_Name; } }
         public bool Modified { get { return _modified; } }
     }
 }

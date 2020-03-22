@@ -8,13 +8,13 @@ using System.Windows.Forms;
 
 using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
+using ApplicationCoreLegacy.Entities;
 using DalLegacy;
 using FashionStoreWinForms.Properties;
 using FashionStoreWinForms.Sys;
 using FashionStoreWinForms.Utils;
 using FashionStoreWinForms.Widgets.PageAddSku;
 using FashionStoreWinForms.Widgets.PageViewSku;
-using FashionStoreWinForms.Widgets.PointOfSaleSelector;
 using ViewModels;
 using WinFormsInfrastructure;
 
@@ -23,6 +23,7 @@ namespace FashionStoreWinForms.Forms
     public partial class FRM_Main : Form, ILegacyWorkspaceContext, ILocalizationService
     {
         readonly WorkspaceViewModel workspaceViewModel;
+        readonly IStoreManagementService storeManagementService;
 
         #region ILegacyWorkspaceContext
         public bool IsThereUnsavedEntry() =>
@@ -34,21 +35,20 @@ namespace FashionStoreWinForms.Forms
         {
             PointOfSale oldPointOfSale = Registry.CurrentPointOfSale;
             Registry.CurrentPointOfSale = PointOfSale.Restore(store.Id);
-            if (oldPointOfSale.Id != Registry.CurrentPointOfSale.Id)
+            if (oldPointOfSale?.Id != Registry.CurrentPointOfSale.Id)
                 PAN_Workplace.Controls.Clear();
         }
         #endregion
 
         #region ILocalizationService
-        public string ASK_PROCEED_AND_ABANDON_FORM_DATA => Resources.ASK_PROCEED_AND_ABANDON_FORM_DATA;
+        public string AskProceedAndAbandonFormData => Resources.ASK_PROCEED_AND_ABANDON_FORM_DATA;
         #endregion
 
         bool AskForSaveIfNeeded()
         {
             if (PAN_Workplace.Controls.Count != 0)
             {
-                PanelAddSku panAddSku = PAN_Workplace.Controls[0] as PanelAddSku;
-                if (panAddSku != null)
+                if (PAN_Workplace.Controls[0] is PanelAddSku panAddSku)
                 {
                     if (panAddSku.Modified)
                     {
@@ -81,7 +81,7 @@ namespace FashionStoreWinForms.Forms
             ConnectionRegistry.Init("Data Source=" + Settings.Default.DbPath);
             GlobalController.Init(this);
 
-            await ((StoreSelectorViewModel)warehouseSelector1.DataContext).Initialize();
+            await workspaceViewModel.Initialize();
         }
         void MI_Card_PointOfSale_Click(object sender, EventArgs e)
         {
@@ -138,8 +138,7 @@ namespace FashionStoreWinForms.Forms
                 DateTime today = DateTime.Today;
                 foreach (FileInfo fi in di.GetFiles())
                 {
-                    BackupParams fileParams;
-                    if (!BackupParams.TryParse(fi.Name, out fileParams) || fileParams.Date != today)
+                    if (!BackupParams.TryParse(fi.Name, out BackupParams fileParams) || fileParams.Date != today)
                         continue;
                     if (fileParams.Number > maxNumber)
                         maxNumber = fileParams.Number;
@@ -160,10 +159,10 @@ namespace FashionStoreWinForms.Forms
             MessageBox.Show(this, Resources.BACKUP_COMPLETED, Resources.MESSAGE, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        #region Temporary mock WarehouseService
-        class MockWarehouseService: IStoreManagementService
+        #region Temporary mock StoreService
+        class MockStoreService: IStoreManagementService
         {
-            static readonly IEnumerable<Store> warehouses = new Store[] {
+            static readonly IEnumerable<Store> stores = new Store[] {
                 new Store { Id = 1, OrdinalNumber = 5, Name = "Country" },
                 new Store { Id = 2, OrdinalNumber = 7, Name = "7 Cats" },
                 new Store { Id = 3, OrdinalNumber = 0, Name = "Central Market", IsDeleted = true },
@@ -175,12 +174,12 @@ namespace FashionStoreWinForms.Forms
             };
 
             public Task<IEnumerable<Store>> GetFunctioningOrderedStoresAsync() => Task.FromResult<IEnumerable<Store>>(
-                warehouses
-                    .Where(w => w.IsDeleted = false)
-                    .OrderBy(w => w.OrdinalNumber)
+                stores
+                    .Where(store => !store.IsDeleted)
+                    .OrderBy(store => store.OrdinalNumber)
             );
 
-            public Task<Store> GetStore(int warehouseId) => Task.FromResult(warehouses.SingleOrDefault(w => w.Id == warehouseId));
+            public Task<Store> GetStore(int id) => Task.FromResult(stores.SingleOrDefault(store => store.Id == id));
         }
         #endregion
 
@@ -189,8 +188,17 @@ namespace FashionStoreWinForms.Forms
             InitializeComponent();
 
             var dialogService = new DialogService();
-            var warehouseMgmtService = new MockWarehouseService();
-            workspaceViewModel = new WorkspaceViewModel(dialogService, this, warehouseMgmtService, this);
+            storeManagementService = new MockStoreService();
+            workspaceViewModel = new WorkspaceViewModel(dialogService, this, storeManagementService, this);
+            workspaceViewModel.StoreSelector.PropertyChanged += async (s, a) =>
+            {
+                if (a.PropertyName == nameof(StoreSelectorViewModel.SelectedStore))
+                {
+                    var storeVM = (StoreSelectorViewModel)s;
+                    var store = await storeManagementService.GetStore(storeVM.SelectedStore.StoreId);
+                    SetCurrentStore(store);
+                }
+            };
 
             warehouseSelector1.DataContext = workspaceViewModel.StoreSelector;
         }
@@ -199,7 +207,7 @@ namespace FashionStoreWinForms.Forms
         {
             if (Registry.CurrentPointOfSale == null)
             {
-                MessageBox.Show(this, Resources.CURRENT_WAREHOUSE_NOT_SELECTED, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Resources.CURRENT_STORE_NOT_SELECTED, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -209,13 +217,13 @@ namespace FashionStoreWinForms.Forms
             PAN_Workplace.Controls.Clear();
             PanelAddSku panAddSku = new PanelAddSku();
             PAN_Workplace.Controls.Add(panAddSku);
-            panAddSku.T_NameExt.Focus();
+            panAddSku.NameTextBoxExt.Focus();
         }
         public void SearchSku()
         {
             if (Registry.CurrentPointOfSale == null)
             {
-                MessageBox.Show(this, Resources.CURRENT_WAREHOUSE_NOT_SELECTED, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Resources.CURRENT_STORE_NOT_SELECTED, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -224,9 +232,10 @@ namespace FashionStoreWinForms.Forms
 
             PAN_Workplace.Controls.Clear();
             PanelViewSku panViewSku = new PanelViewSku();
+            //PAN_Workplace.Controls.Add(panViewSku);
             panViewSku.Parent = PAN_Workplace;
             panViewSku.Dock = DockStyle.Fill;
-            panViewSku.T_NamePartExt.Focus();
+            panViewSku.NamePartTextBoxExt.Focus();
         }
 
         void MakeReport(PointOfSale in_pos = null)
@@ -316,7 +325,7 @@ namespace FashionStoreWinForms.Forms
                 textLines.Add(line);
             }
 
-            string totalsLine = $"\"{Resources.TOTALS_CAP} (" + (in_pos != null ? in_pos.Name : Resources.ALL_WAREHOUSES_SHORT) + "):\";" + totalCount.ToString();
+            string totalsLine = $"\"{Resources.TOTALS_CAP} (" + (in_pos != null ? in_pos.Name : Resources.ALL_STORES_SHORT) + "):\";" + totalCount.ToString();
             if (showPriceOfPurchase)
                 totalsLine += ";";
             if (showPriceOfSale)
@@ -358,7 +367,7 @@ namespace FashionStoreWinForms.Forms
         {
             if (Registry.CurrentPointOfSale == null)
             {
-                MessageBox.Show(this, Resources.CURRENT_WAREHOUSE_NOT_SELECTED, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Resources.CURRENT_STORE_NOT_SELECTED, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 

@@ -18,16 +18,7 @@ namespace ViewModels
         #endregion
 
         #region Public properties and actions
-        public ObservableCollection<StoreButtonViewModel> SelectorButtons
-        {
-            get => selectorButtons;
-
-            set
-            {
-                selectorButtons = value;
-                OnPropertyChanged(nameof(SelectorButtons));
-            }
-        }
+        public ObservableCollection<StoreButtonViewModel> SelectorButtons => selectorButtons;
 
         public StoreButtonViewModel SelectedStore
         {
@@ -35,9 +26,10 @@ namespace ViewModels
 
             set
             {
-                if (selectedStore != value && workspaceViewModel.IsItAllowedToChangeCurrentStore())
+                if (selectedStore != value)
                 {
-                    selectedStore = value;
+                    if (workspaceViewModel.IsItAllowedToChangeCurrentStore())
+                        selectedStore = value;
                     OnPropertyChanged(nameof(SelectedStore));
                 }
             }
@@ -59,9 +51,10 @@ namespace ViewModels
             var storeButtons = stores
                 .Select(store => new StoreButtonViewModel(store));
 
-            SelectorButtons = new ObservableCollection<StoreButtonViewModel>(storeButtons);
-            var tmp = SelectorButtons.FirstOrDefault();
-            SelectedStore = tmp;
+            selectorButtons = new ObservableCollection<StoreButtonViewModel>(storeButtons);
+            OnPropertyChanged(nameof(SelectorButtons));
+
+            SelectedStore = SelectorButtons.FirstOrDefault();
         }
     }
 }

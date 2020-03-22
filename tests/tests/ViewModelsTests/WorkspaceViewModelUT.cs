@@ -1,13 +1,7 @@
-﻿using ApplicationCore.Entities;
-using ApplicationCore.Interfaces;
+﻿using ApplicationCore.Interfaces;
 using Moq;
 using MvvmInfrastructure;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using Utilities;
 using ViewModels;
 using Xunit;
 
@@ -97,101 +91,6 @@ namespace ViewModelsTests
         }
 
         [Fact]
-        public void BeforeInitCurrentStoreIsNull()
-        {
-            // Arrange
-            var mockDialogService = new Mock<IDialogService>();
-            var mockLocalizationService = new Mock<ILocalizationService>();
-            var mockStoreMgmtSvc = new Mock<IStoreManagementService>();
-            var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
-            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
-
-            // Act
-            var currentStore = workspace.CurrentStore;
-
-            // Assert
-            Assert.Null(currentStore);
-        }
-
-        [Fact]
-        public async void AfterInitCurrentStoreIsNullIfThereAreNoStores()
-        {
-            // Arrange
-            var mockDialogService = new Mock<IDialogService>();
-            var mockLocalizationService = new Mock<ILocalizationService>();
-            var mockStoreMgmtSvc = new Mock<IStoreManagementService>();
-            var emptyStoreCollection = Array.Empty<Store>();
-            mockStoreMgmtSvc
-                .Setup(wService => wService.GetFunctioningOrderedStoresAsync())
-                .ReturnsAsync(emptyStoreCollection);
-            var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
-            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
-
-            // Act
-            await workspace.Initialize();
-            var currentStore = workspace.CurrentStore;
-
-            // Assert
-            Assert.Null(currentStore);
-        }
-
-        [Fact]
-        public async void AfterInitCurrentStoreIsSetFromSingleStore()
-        {
-            // Arrange
-            var mockDialogService = new Mock<IDialogService>();
-            var mockLocalizationService = new Mock<ILocalizationService>();
-            var mockStoreMgmtSvc = new Mock<IStoreManagementService>();
-            var singleStore = new Store { Id = 1 };
-            var singleStoreCollection = new Store[] { singleStore };
-            mockStoreMgmtSvc
-                .Setup(wService => wService.GetFunctioningOrderedStoresAsync())
-                .ReturnsAsync(singleStoreCollection);
-            mockStoreMgmtSvc
-                .Setup(wService => wService.GetStore(It.IsAny<int>()))
-                .ReturnsAsync(singleStore);
-            var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
-            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
-
-            // Act
-            await workspace.Initialize();
-            var currentStore = workspace.CurrentStore;
-
-            // Assert
-            Assert.Equal(singleStore, currentStore);
-        }
-
-        [Fact]
-        public async void AfterInitCurrentStoreIsSetToFirstFrom5Stores()
-        {
-            // Arrange
-            var mockDialogService = new Mock<IDialogService>();
-            var mockLocalizationService = new Mock<ILocalizationService>();
-            var mockStoreMgmtSvc = new Mock<IStoreManagementService>();
-            const string namePrefix = "Store ";
-            var fiveStoreCollection = Enumerable
-                .Range(1, 5)
-                .Select(i => new Store { Id = i, Name = namePrefix + i.ToString(CultureInfo.InvariantCulture) })
-                .ToList();
-            var firstStore = fiveStoreCollection[0];
-            mockStoreMgmtSvc
-                .Setup(wService => wService.GetFunctioningOrderedStoresAsync())
-                .ReturnsAsync(fiveStoreCollection);
-            mockStoreMgmtSvc
-                .Setup(wService => wService.GetStore(It.IsAny<int>()))
-                .ReturnsAsync(firstStore);
-            var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
-            var workspace = new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
-
-            // Act
-            await workspace.Initialize();
-            var currentStore = workspace.CurrentStore;
-
-            // Assert
-            Assert.Equal(firstStore, currentStore);
-        }
-
-        [Fact]
         public void BeforeInitItIsAllowedToChangeStoreAndUnsavedEntryIsNotChecked()
         {
             // Arrange
@@ -236,7 +135,7 @@ namespace ViewModelsTests
             var workspace = new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
 
             // Act
-            await workspace.Initialize();
+            await workspace.Initialize().ConfigureAwait(true);
             var result = workspace.IsItAllowedToChangeCurrentStore();
 
             // Assert
@@ -268,7 +167,7 @@ namespace ViewModelsTests
             var workspace = new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
 
             // Act
-            await workspace.Initialize();
+            await workspace.Initialize().ConfigureAwait(true);
             var result = workspace.IsItAllowedToChangeCurrentStore();
 
             // Assert
@@ -300,7 +199,7 @@ namespace ViewModelsTests
             var workspace = new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
 
             // Act
-            await workspace.Initialize();
+            await workspace.Initialize().ConfigureAwait(true);
             var result = workspace.IsItAllowedToChangeCurrentStore();
 
             // Assert
@@ -330,7 +229,7 @@ namespace ViewModelsTests
             var workspace = new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object);
 
             // Act
-            await workspace.Initialize();
+            await workspace.Initialize().ConfigureAwait(true);
             var result = workspace.IsItAllowedToChangeCurrentStore();
 
             // Assert

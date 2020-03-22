@@ -151,15 +151,6 @@
     <Compile Include="Widgets\PageViewSku\PanelViewSku.Designer.cs">
       <DependentUpon>PanelViewSku.cs</DependentUpon>
     </Compile>
-    <Compile Include="Widgets\PointOfSaleSelector\PointOfSalePanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Widgets\PointOfSaleSelector\PointOfSalePanel.Designer.cs">
-      <DependentUpon>PointOfSalePanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Widgets\PointOfSaleSelector\PushButtonCheap.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Widgets\StoreSelector.xaml.cs">
       <DependentUpon>StoreSelector.xaml</DependentUpon>
     </Compile>
@@ -275,6 +266,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ApplicationCoreLegacy\ApplicationCoreLegacy.csproj">
+      <Project>{aa3f6843-6e5b-42d9-8bfb-ea12590def4b}</Project>
+      <Name>ApplicationCoreLegacy</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ApplicationCore\ApplicationCore.csproj">
       <Project>{d9544b13-3e6a-48da-a573-4b9b4a3e989a}</Project>
       <Name>ApplicationCore</Name>

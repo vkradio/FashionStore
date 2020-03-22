@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-using ApplicationCore.Entities;
+using ApplicationCoreLegacy.Entities;
 using DalLegacy;
 using FashionStoreWinForms.Properties;
 
@@ -10,17 +10,17 @@ namespace FashionStoreWinForms.Forms
 {
     public partial class FRM_SelectArticleByPriceOfPurchase : Form
     {
-        int?            _newPrice;
-        List<Article>   _articles;
+        readonly List<Article> _articles;
 
-        void LST_Prices_DoubleClick(object sender, EventArgs e)
+        int? _newPrice;
+
+        void PricesList_DoubleClick(object sender, EventArgs e)
         {
             DialogResult = System.Windows.Forms.DialogResult.OK;
         }
-        void B_NewPrice_Click(object sender, EventArgs e)
+        void NewPriceButton_Click(object sender, EventArgs e)
         {
-            int value;
-            if (!int.TryParse(T_NewPrice.Text, out value) || value < 0)
+            if (!int.TryParse(T_NewPrice.Text, out int value) || value < 0)
             {
                 MessageBox.Show(this, Resources.INVALID_COST_OF_PURCHASE_EXPLAINED, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 T_NewPrice.Focus();
@@ -38,11 +38,11 @@ namespace FashionStoreWinForms.Forms
             _newPrice = value;
             DialogResult = System.Windows.Forms.DialogResult.OK;
         }
-        void T_NewPrice_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        void NewPriceTextBox_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                B_NewPrice_Click(sender, null);
+                NewPriceButton_Click(sender, null);
             }
         }
 

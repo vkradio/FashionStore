@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ardalis.GuardClauses;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,6 +15,8 @@ namespace Utilities
         /// <param name="key">Key</param>
         public static void Inc<T>(this Dictionary<T, int> dictionary, T key)
         {
+            Guard.Against.Null(dictionary, nameof(dictionary));
+
             if (!dictionary.ContainsKey(key))
                 dictionary.Add(key, 1);
             else

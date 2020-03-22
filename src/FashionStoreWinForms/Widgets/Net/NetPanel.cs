@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-using ApplicationCore.Entities;
+using ApplicationCoreLegacy.Entities;
 
 namespace FashionStoreWinForms.Widgets.Net
 {
@@ -13,26 +13,21 @@ namespace FashionStoreWinForms.Widgets.Net
         const int c_height              = 20;
         const int c_labelWidthThreshold = 7;
 
-        DressMatrix _netType;
-        int[]       _widthCapX;
-        int[]       _widthCapY;
-        int         _totalWidth;
-        int         _totalHeight;
-        Color       _textBoxBackColor = TextBox.DefaultBackColor;
+        readonly DressMatrix _netType;
+        readonly int[]       _widthCapX;
+        readonly int[]       _widthCapY;
+        readonly int         _totalWidth;
+        readonly int         _totalHeight;
+        readonly Color       _textBoxBackColor = TextBox.DefaultBackColor;
 
         void SwitchLabelFont(Label in_label, bool in_toBold)
         {
             in_label.Font = new Font(in_label.Font, in_toBold ? FontStyle.Bold | FontStyle.Underline : FontStyle.Regular);
         }
-        void OnValueChange()
-        {
-            if (ValueChanged != null)
-                ValueChanged(this, null);
-        }
+        void OnValueChange() => ValueChanged?.Invoke(this, null);
         void CellTextChanged(TextBox in_textBox)
         {
-            int value;
-            if (int.TryParse(in_textBox.Text, out value))
+            if (int.TryParse(in_textBox.Text, out int value))
             {
                 if (value == 0)
                     in_textBox.BackColor = _textBoxBackColor;
@@ -52,13 +47,11 @@ namespace FashionStoreWinForms.Widgets.Net
         {
             NetUtil.Value cell = (NetUtil.Value)in_textBox.Tag;
             foreach (Control ctrl in Controls)
-                if (ctrl is Label)
+            {
+                if (ctrl is Label label)
                 {
-                    Label label = (Label)ctrl;
-
-                    if (ctrl.Tag is NetUtil.LabelValueX)
+                    if (ctrl.Tag is NetUtil.LabelValueX valueX)
                     {
-                        NetUtil.LabelValueX valueX = (NetUtil.LabelValueX)ctrl.Tag;
                         SwitchLabelFont(label, valueX.X == cell.X);
                     }
                     else
@@ -67,6 +60,7 @@ namespace FashionStoreWinForms.Widgets.Net
                         SwitchLabelFont(label, valueY.Y == cell.Y);
                     }
                 }
+            }
         }
 
         public NetPanel()
@@ -78,10 +72,9 @@ namespace FashionStoreWinForms.Widgets.Net
             _netType = in_netType;
 
             Graphics g = CreateGraphics();
-            
+
             // 1. Measure sizes.
-            int maxWidthCapX, maxWidthCapY;
-            NetUtil.MeasureNet(_netType, g, c_fieldWidth, out maxWidthCapX, out maxWidthCapY, out _widthCapX, out _widthCapY);
+            NetUtil.MeasureNet(_netType, g, c_fieldWidth, out int maxWidthCapX, out int maxWidthCapY, out _widthCapX, out _widthCapY);
 
             // 2. Render labels.
             NetUtil.RenderLabels(_netType, this, maxWidthCapX, maxWidthCapY, _widthCapX, _widthCapY, c_labelWidthThreshold, c_height, c_gap, out _totalWidth, out _totalHeight);
@@ -126,8 +119,7 @@ namespace FashionStoreWinForms.Widgets.Net
         {
             foreach (Control ctrl in Controls)
             {
-                TextBox txtBox = ctrl as TextBox;
-                if (txtBox != null)
+                if (ctrl is TextBox txtBox)
                 {
                     NetUtil.Value cell = (NetUtil.Value)txtBox.Tag;
                     if (cell.X == in_x && cell.Y == in_y)
@@ -145,14 +137,12 @@ namespace FashionStoreWinForms.Widgets.Net
             {
                 foreach (Control ctrl in Controls)
                 {
-                    TextBox txtBox = ctrl as TextBox;
-                    if (txtBox != null)
+                    if (ctrl is TextBox txtBox)
                     {
                         NetUtil.Value cell = (NetUtil.Value)txtBox.Tag;
                         if (cell.NameX == in_x && cell.NameY == in_y)
                         {
-                            int value;
-                            if (int.TryParse(txtBox.Text, out value) && value >= 0)
+                            if (int.TryParse(txtBox.Text, out int value) && value >= 0)
                                 return value;
                             else
                                 return 0;
@@ -168,9 +158,7 @@ namespace FashionStoreWinForms.Widgets.Net
             {
                 TextBox txtBox = FindCellTextBox(in_x, in_y);
 
-                int value;
-
-                return int.TryParse(txtBox.Text, out value) && value >= 0 ?
+                return int.TryParse(txtBox.Text, out int value) && value >= 0 ?
                     value :
                     0;
             }
@@ -186,12 +174,10 @@ namespace FashionStoreWinForms.Widgets.Net
                 int sum = 0;
                 foreach (Control ctrl in Controls)
                 {
-                    TextBox txtBox = ctrl as TextBox;
-                    if (txtBox != null)
+                    if (ctrl is TextBox txtBox)
                     {
                         NetUtil.Value cell = (NetUtil.Value)txtBox.Tag;
-                        int value;
-                        if (int.TryParse(txtBox.Text, out value) && value >= 0)
+                        if (int.TryParse(txtBox.Text, out int value) && value >= 0)
                             sum += value;
                     }
                 }

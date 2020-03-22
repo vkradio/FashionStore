@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows.Forms;
 
-using ApplicationCore.Entities;
+using ApplicationCoreLegacy.Entities;
 using FashionStoreWinForms.Properties;
 using FashionStoreWinForms.Sys;
 
@@ -38,8 +38,7 @@ namespace FashionStoreWinForms.Widgets.PageViewSku
                     this.Cursor = Cursors.WaitCursor;
                     Application.DoEvents();
 
-                    ManageSkuTable panTable = new ManageSkuTable(table, c_maxPositions);
-                    panTable.Parent = PAN_Lists;
+                    ManageSkuTable panTable = new ManageSkuTable(table, c_maxPositions) { Parent = PAN_Lists };
                     panTable.UpdateHeight();
                 }
                 finally
@@ -51,7 +50,7 @@ namespace FashionStoreWinForms.Widgets.PageViewSku
             }
         }
 
-        void B_Search_Click(object sender, EventArgs e)
+        void SearchButton_Click(object sender, EventArgs e)
         {
             if (T_NamePart.Text == string.Empty)
             {
@@ -72,10 +71,10 @@ namespace FashionStoreWinForms.Widgets.PageViewSku
                 B_Search.Enabled = true;
             }
         }
-        void T_NamePart_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        void NamePartTextBox_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                B_Search_Click(sender, null);
+                SearchButton_Click(sender, null);
         }
 
         public PanelViewSku()
@@ -83,7 +82,7 @@ namespace FashionStoreWinForms.Widgets.PageViewSku
             InitializeComponent();
         }
 
-        public TextBox T_NamePartExt { get { return T_NamePart; } }
+        public TextBox NamePartTextBoxExt { get { return T_NamePart; } }
 
         public void UpdateWOldSearch() { Search(false); }
     }

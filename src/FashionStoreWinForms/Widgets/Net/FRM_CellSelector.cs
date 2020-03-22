@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-using ApplicationCore.Entities;
+using ApplicationCoreLegacy.Entities;
 
 namespace FashionStoreWinForms.Widgets.Net
 {
@@ -10,9 +10,9 @@ namespace FashionStoreWinForms.Widgets.Net
     {
         class NetButton: UserControl
         {
-            CellInStock _cell;
-            int         _x;
-            int         _y;
+            readonly CellInStock _cell;
+            readonly int         _x;
+            readonly int         _y;
 
             public NetButton(Control in_parent, CellInStock in_cell, int in_cellX, int in_cellY, int in_buttonX, int in_buttonY, int in_width, int in_height)
             {
@@ -72,9 +72,9 @@ namespace FashionStoreWinForms.Widgets.Net
         const int c_fieldGap            = 6;
         const int c_labelWidthThreshold = 7;
 
-        SkuInStock  _skuInStock;
-        Label[]     _labelsX;
-        Label[]     _labelsY;
+        readonly SkuInStock  _skuInStock;
+        readonly Label[]     _labelsX;
+        readonly Label[]     _labelsY;
 
         void FRM_CellSelector_KeyDown(object sender, KeyEventArgs e)
         {
@@ -97,12 +97,9 @@ namespace FashionStoreWinForms.Widgets.Net
 
             Graphics g = CreateGraphics();
 
-            int maxWidthCapX, maxWidthCapY;
-            int[] widthsCapX, widthsCapY;
-            NetUtil.MeasureNet(_skuInStock.Article.Matrix, g, c_fieldWidth, out maxWidthCapX, out maxWidthCapY, out widthsCapX, out widthsCapY);
+            NetUtil.MeasureNet(_skuInStock.Article.Matrix, g, c_fieldWidth, out int maxWidthCapX, out int maxWidthCapY, out int[] widthsCapX, out int[] widthsCapY);
 
-            int totalWidth, totalHeight;
-            NetUtil.RenderLabels(_skuInStock.Article.Matrix, this, maxWidthCapX, maxWidthCapY, widthsCapX, widthsCapY, c_labelWidthThreshold, c_fieldHeight, c_fieldGap, out totalWidth, out totalHeight, out _labelsX, out _labelsY);
+            NetUtil.RenderLabels(_skuInStock.Article.Matrix, this, maxWidthCapX, maxWidthCapY, widthsCapX, widthsCapY, c_labelWidthThreshold, c_fieldHeight, c_fieldGap, out int totalWidth, out int totalHeight, out _labelsX, out _labelsY);
 
             // Drawing buttons.
             int xPos = maxWidthCapY + c_labelWidthThreshold * 2;

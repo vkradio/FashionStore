@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ALL_WAREHOUSES_SHORT" xml:space="preserve">
+  <data name="ALL_STORES_SHORT" xml:space="preserve">
     <value>все точки</value>
   </data>
   <data name="APP_BRAND" xml:space="preserve">
@@ -197,7 +197,7 @@
   <data name="CRITICAL_ERROR_MSG_SEND_FILE" xml:space="preserve">
     <value>Пожалуйста, отправьте файл, который сейчас увидите, с описанием ваших действий, после которых это произошло, разработчику программы.</value>
   </data>
-  <data name="CURRENT_WAREHOUSE_NOT_SELECTED" xml:space="preserve">
+  <data name="CURRENT_STORE_NOT_SELECTED" xml:space="preserve">
     <value>Не выбрана текущая точка продаж.</value>
   </data>
   <data name="ERR_PART_CELL_QTY" xml:space="preserve">

@@ -4,7 +4,7 @@ using System.Data.SQLite;
 
 using DalLegacy;
 
-namespace ApplicationCore.Entities
+namespace ApplicationCoreLegacy.Entities
 {
     [
         SPNames
@@ -39,20 +39,17 @@ namespace ApplicationCore.Entities
 
         public static DataTable ReadAll()
         {
-            using (SQLiteConnection conn = ConnectionRegistry.Instance.OpenNewConnection())
-            {
-                using (SQLiteCommand cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = "select * from dress_matrix order by id";
-                    cmd.CommandType = CommandType.Text;
-                    
-                    DataTable table = new DataTable();
-                    using (SQLiteDataAdapter a = new SQLiteDataAdapter(cmd))
-                        a.Fill(table);
+            using SQLiteConnection conn = ConnectionRegistry.Instance.OpenNewConnection();
+            using SQLiteCommand cmd = conn.CreateCommand();
 
-                    return table;
-                }
-            }
+            cmd.CommandText = "select * from dress_matrix order by id";
+            cmd.CommandType = CommandType.Text;
+
+            DataTable table = new DataTable();
+            using (SQLiteDataAdapter a = new SQLiteDataAdapter(cmd))
+                a.Fill(table);
+
+            return table;
         }
         public static List<DressMatrix> RestoreAll()
         {

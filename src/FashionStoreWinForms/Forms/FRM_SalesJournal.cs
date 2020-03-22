@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-using ApplicationCore.Entities;
+using ApplicationCoreLegacy.Entities;
 using FashionStoreWinForms.Properties;
 using FashionStoreWinForms.Sys;
 

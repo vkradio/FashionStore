@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows.Forms;
 
-using ApplicationCore.Entities;
+using ApplicationCoreLegacy.Entities;
 using FashionStoreWinForms.Forms;
 using FashionStoreWinForms.Properties;
 using FashionStoreWinForms.Sys;
@@ -16,15 +16,14 @@ namespace FashionStoreWinForms.Widgets.PageViewSku
     {
         readonly string[] c_months = DateTimeFormatInfo.CurrentInfo.MonthNames;
 
-        DataRow     _source;
-        SkuInStock  _skuInStock;
+        readonly DataRow _source;
+        SkuInStock _skuInStock;
         CellInStock _selectedCell;
 
         void TryUpdateMarginTotal()
         {
-            int amount, price;
-            if (int.TryParse(T_Amount.Text, out amount) &&
-                int.TryParse(T_PriceOfSell.Text, out price))
+            if (int.TryParse(T_Amount.Text, out int amount) &&
+                int.TryParse(T_PriceOfSell.Text, out int price))
             {
                 T_MarginTotal.Text = (amount * (price - _skuInStock.Article.PriceOfPurchase)).ToString();
             }
@@ -34,8 +33,8 @@ namespace FashionStoreWinForms.Widgets.PageViewSku
             }
         }
 
-        void T_Amount_TextChanged(object sender, System.EventArgs e) { TryUpdateMarginTotal(); }
-        void T_PriceOfSell_TextChanged(object sender, System.EventArgs e) { TryUpdateMarginTotal(); }
+        void AmountTextBox_TextChanged(object sender, System.EventArgs e) { TryUpdateMarginTotal(); }
+        void PriceOfSellTextBox_TextChanged(object sender, System.EventArgs e) { TryUpdateMarginTotal(); }
 
         void B_Net_Click(object sender, System.EventArgs e)
         {
@@ -61,8 +60,7 @@ namespace FashionStoreWinForms.Widgets.PageViewSku
                     T_Amount.Text = "1";
                 else
                 {
-                    int oldAmount;
-                    if (!int.TryParse(T_Amount.Text, out oldAmount) || oldAmount > _selectedCell.Amount)
+                    if (!int.TryParse(T_Amount.Text, out int oldAmount) || oldAmount > _selectedCell.Amount)
                         T_Amount.Text = _selectedCell.Amount.ToString();
                 }
             }
@@ -74,9 +72,7 @@ namespace FashionStoreWinForms.Widgets.PageViewSku
         }
         void B_Sell_Click(object sender, System.EventArgs e)
         {
-            int amount, unitPrice;
-
-            if (!int.TryParse(T_Amount.Text, out amount) || amount < 1)
+            if (!int.TryParse(T_Amount.Text, out int amount) || amount < 1)
             {
                 MessageBox.Show(this, Resources.INVALID_SKU_QTY_IS_ENTERED, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -86,7 +82,7 @@ namespace FashionStoreWinForms.Widgets.PageViewSku
                 MessageBox.Show(this, Resources.QTY_TOO_BIG_FOR_GIVEN_CELL, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-            if (!int.TryParse(T_PriceOfSell.Text, out unitPrice) || unitPrice < 0)
+            if (!int.TryParse(T_PriceOfSell.Text, out int unitPrice) || unitPrice < 0)
             {
                 MessageBox.Show(this, Resources.INVALID_UNIT_PRICE_OF_SELL, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -164,8 +160,7 @@ namespace FashionStoreWinForms.Widgets.PageViewSku
         }
         void B_Move_Click(object sender, System.EventArgs e)
         {
-            int amount;
-            if (!int.TryParse(T_Amount.Text, out amount) || amount < 1)
+            if (!int.TryParse(T_Amount.Text, out int amount) || amount < 1)
             {
                 MessageBox.Show(this, Resources.INVALID_SKU_QTY_IS_ENTERED, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;

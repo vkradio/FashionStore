@@ -44,7 +44,6 @@
             // 
             // PAN_Head
             // 
-            resources.ApplyResources(this.PAN_Head, "PAN_Head");
             this.PAN_Head.Controls.Add(this.label9);
             this.PAN_Head.Controls.Add(this.label8);
             this.PAN_Head.Controls.Add(this.label7);
@@ -54,6 +53,7 @@
             this.PAN_Head.Controls.Add(this.label3);
             this.PAN_Head.Controls.Add(this.label2);
             this.PAN_Head.Controls.Add(this.label1);
+            resources.ApplyResources(this.PAN_Head, "PAN_Head");
             this.PAN_Head.Name = "PAN_Head";
             // 
             // label9

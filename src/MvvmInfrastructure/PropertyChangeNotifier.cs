@@ -4,9 +4,9 @@ namespace MvvmInfrastructure
 {
     public class PropertyChangeNotifier : INotifyPropertyChanged
     {
-        bool busy;
+        readonly PropertyChangeNotifier parent;
 
-        protected PropertyChangeNotifier parent;
+        bool busy;
 
         public PropertyChangeNotifier() { }
 

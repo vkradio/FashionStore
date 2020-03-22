@@ -5,7 +5,7 @@ using System.Data.SQLite;
 using DalLegacy;
 using DalLegacy.Time;
 
-namespace ApplicationCore.Entities
+namespace ApplicationCoreLegacy.Entities
 {
     [
         SPNames
@@ -55,37 +55,35 @@ namespace ApplicationCore.Entities
         }
         public static CellInStock Restore(string in_x, string in_y, SkuInStock in_skuInStock)
         {
-            using (SQLiteConnection conn = ConnectionRegistry.Instance.OpenNewConnection())
-            using (SQLiteCommand cmd = conn.CreateCommand())
+            using SQLiteConnection conn = ConnectionRegistry.Instance.OpenNewConnection();
+            using SQLiteCommand cmd = conn.CreateCommand();
+
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "select *" +
+                             " from cell_in_stock" +
+                             " where point_of_sale_id = @in_pointOfSaleId" +
+                               " and article_id = @in_articleId" +
+                               " and x = @in_x" +
+                               " and y = @in_y";
+
+            cmd.Parameters.Add(new SQLiteParameter("@in_pointOfSaleId", in_skuInStock.PointOfSale.Id));
+            cmd.Parameters.Add(new SQLiteParameter("@in_articleId", in_skuInStock.Article.Id));
+            cmd.Parameters.Add(new SQLiteParameter("@in_x", in_x));
+            cmd.Parameters.Add(new SQLiteParameter("@in_y", in_y));
+
+            DataTable table = new DataTable();
+            using (SQLiteDataAdapter a = new SQLiteDataAdapter(cmd))
+                a.Fill(table);
+
+            if (table.Rows.Count == 0)
+                return null;
+            else if (table.Rows.Count == 1)
             {
-                cmd.CommandType = CommandType.Text;
-
-                cmd.CommandText = "select *" +
-                                 " from cell_in_stock" +
-                                 " where point_of_sale_id = @in_pointOfSaleId" +
-                                   " and article_id = @in_articleId" +
-                                   " and x = @in_x" +
-                                   " and y = @in_y";
-
-                cmd.Parameters.Add(new SQLiteParameter("@in_pointOfSaleId", in_skuInStock.PointOfSale.Id));
-                cmd.Parameters.Add(new SQLiteParameter("@in_articleId", in_skuInStock.Article.Id));
-                cmd.Parameters.Add(new SQLiteParameter("@in_x", in_x));
-                cmd.Parameters.Add(new SQLiteParameter("@in_y", in_y));
-                    
-                DataTable table = new DataTable();
-                using (SQLiteDataAdapter a = new SQLiteDataAdapter(cmd))
-                    a.Fill(table);
-
-                if (table.Rows.Count == 0)
-                    return null;
-                else if (table.Rows.Count == 1)
-                {
-                    DataRow row = table.Rows[0];
-                    return CellInStock.Restore((int)(long)row["id"], UnixEpoch.ToDateTime((long)row["modified"]), in_skuInStock, in_x, in_y, (int)(long)row["amount"]);
-                }
-                else
-                    throw new ApplicationException("CellInStock.Restore(string in_x, string in_y, SkuInStock in_skuInStock) returned more than 1 row.");
+                DataRow row = table.Rows[0];
+                return CellInStock.Restore((int)(long)row["id"], UnixEpoch.ToDateTime((long)row["modified"]), in_skuInStock, in_x, in_y, (int)(long)row["amount"]);
             }
+            else
+                throw new ApplicationException("CellInStock.Restore(string in_x, string in_y, SkuInStock in_skuInStock) returned more than 1 row.");
         }
 
         protected override void FillProps(System.Data.DataRow in_row)
