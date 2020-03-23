@@ -26,11 +26,11 @@ namespace ViewModels
 
             set
             {
-                if (selectedStore != value)
+                if (value != selectedStore)
                 {
                     if (workspaceViewModel.IsItAllowedToChangeCurrentStore())
                         selectedStore = value;
-                    OnPropertyChanged(nameof(SelectedStore));
+                    OnPropertyChanged();
                 }
             }
         }

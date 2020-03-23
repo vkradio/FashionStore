@@ -18,8 +18,11 @@ namespace ViewModels
 
             set
             {
-                storeName = value;
-                OnPropertyChanged(nameof(StoreName));
+                if (value != storeName)
+                {
+                    storeName = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -29,8 +32,11 @@ namespace ViewModels
 
             set
             {
-                storeId = value;
-                OnPropertyChanged(nameof(StoreId));
+                if (value != storeId)
+                {
+                    storeId = value;
+                    OnPropertyChanged();
+                }
             }
         }
         #endregion

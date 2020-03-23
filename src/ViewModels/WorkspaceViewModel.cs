@@ -25,8 +25,11 @@ namespace ViewModels
 
             set
             {
-                storeSelector = value;
-                OnPropertyChanged(nameof(StoreSelector));
+                if (value != storeSelector)
+                {
+                    storeSelector = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
