@@ -18,6 +18,42 @@ suitable at all for any “generic” fashion store.
 After many years I’m publishing it as an open source (with respective
 copyright permissions) as part of **my professional portfolio**.
 
+## Demonstration of my skills
+
+Current development is located inside of [efcore](https://github.com/vkradio/FashionStore/tree/efcore) branch.
+
+### 1. Project architecture
+
+The central part of the solution is an [ApplicationCore](https://github.com/vkradio/FashionStore/tree/efcore/src/ApplicationCore) subproject. It contains domain entities (according to DDD), service interfaces (to support DI) and other basic stuff. Entities, according to Single Responsibility principle, are almost 100% decoupled from any persistence storage infrastructure such as EF, JSON etc, they only contain Primary and Foreign Key properties when needed.
+
+User Interface (in it's modern WPF Store Selection control) employs MVVM pattern. ViewModels are located in the dedicated project [ViewModels](https://github.com/vkradio/FashionStore/tree/efcore/src/ViewModels), they are totally ignorant of UI infrastructure (they are not coupled to WinForms or WPF or any other such dependencies). ViewModels have dedicated [unit tests](https://github.com/vkradio/FashionStore/tree/efcore/tests/tests/ViewModelsTests).
+
+I do not use any third-party MVVM libraries here, so there is a simplest [MvvmInfrastructure](https://github.com/vkradio/FashionStore/tree/efcore/src/MvvmInfrastructure) project which contains reusable functionality such as subscription to property change events. Also I have a couple of miscellaneous utilities projects. And the remaining parts are legacy WinForms and custom DAL code which were just renamed to comply with modern practices.
+
+Accordance to Single Responsibility principle in solution structure, where projects are loosely coupled with each other, allow us to relatively easy refactor and and extend functionality. For example, near [FashionStoreWinForms](https://github.com/vkradio/FashionStore/tree/efcore/src/FashionStoreWinForms) I can add FashionStoreWinFormsCore project with migration to .NET Core 3 WinForms, or FashionStoreWpf, if I would need to port it to WPF, or even FashionStoreAngular, if there will be a need to create an Angular SPA. I can add Web API subproject which will be a bridge to storage and other core functionality, and I can even restructure project to a set of different microservices and serverless function groups. For example, one microservice could contain functionality for sales person and another one - for business administrator.
+
+### 2. Unit tests
+
+Here I employ xUnit with Moq.
+
+### 3. Other implementation details
+
+#### 3.1. Async
+
+I like **async** feature and TAP and use it whenever it's suitable to do - on external resources access (file, database, network) and on computationally intensive tasks.
+
+#### 3.2. Hybrid WPF/WinForms
+
+The whole legacy application is written in WinForms, but modern code is a WPF/MVVM code, which it injected to old app thanks to Hybrid capability and some DI.
+
+#### 3.3. Localization
+
+You can see here Russian localization resources, which are automatically used on PCs with Russian locale.
+
+#### 3.4. Code analyzers and guards
+
+Here I employ **Microsoft.CodeAnalysis.FxCopAnalyzers** to view and fix any warnings and hints to ensure my code-base is comply with modern style best practices. Also I use defensive programming technique, particularly, with help of **Ardalis.GuardClauses** library.
+
 ## Modern development plan
 
 Because this project was initially written so many years ago, **it does
