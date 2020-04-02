@@ -42,15 +42,19 @@ Here I employ xUnit with Moq.
 
 I like **async** feature and TAP and use it whenever it's suitable to do - on external resources access (file, database, network) and on computationally intensive tasks.
 
-#### 3.2. Hybrid WPF/WinForms
+#### 3.2. Nullable reference types
+
+Nullable reference types feature of C# 8 is enabled throughout almost all subprojects, except for legacy code.
+
+#### 3.3. Hybrid WPF/WinForms
 
 The whole legacy application is written in WinForms, but modern code is a WPF/MVVM code, which it injected to old app thanks to Hybrid capability and some DI.
 
-#### 3.3. Localization
+#### 3.4. Localization
 
 You can see here Russian localization resources, which are automatically used on PCs with Russian locale.
 
-#### 3.4. Code analyzers and guards
+#### 3.5. Code analyzers and guards
 
 Here I employ **Microsoft.CodeAnalysis.FxCopAnalyzers** to view and fix any warnings and hints to ensure my code-base is comply with modern style best practices. Also I use defensive programming technique, particularly, with help of **Ardalis.GuardClauses** library.
 
