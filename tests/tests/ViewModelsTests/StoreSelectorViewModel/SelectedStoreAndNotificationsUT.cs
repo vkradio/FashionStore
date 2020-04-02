@@ -15,8 +15,8 @@ namespace ViewModelsTests.StoreSelectorViewModel
     public class SelectedStoreAndNotificationsUT
     {
         (Mock<IStoreManagementService>, vm.WorkspaceViewModel) CreateBaseMocks(
-            Mock<vm.ILegacyWorkspaceContext> mockOverrideLegacyWorkspaceContext = null,
-            Mock<IDialogService> mockOverrideDialogService = null
+            Mock<vm.ILegacyWorkspaceContext>? mockOverrideLegacyWorkspaceContext = null,
+            Mock<IDialogService>? mockOverrideDialogService = null
         )
         {
             var mockDialogService = mockOverrideDialogService ?? new Mock<IDialogService>();
@@ -72,7 +72,7 @@ namespace ViewModelsTests.StoreSelectorViewModel
 
             const int nextStoreIndex = 1;
             var oldStore = workspace.StoreSelector.SelectedStore;
-            var nextStore = workspace.StoreSelector.SelectorButtons[nextStoreIndex];
+            var nextStore = workspace.StoreSelector.SelectorButtons![nextStoreIndex];
             Assert.NotEqual(oldStore, nextStore);
 
             // Act

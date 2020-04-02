@@ -4,6 +4,7 @@ using Moq;
 using MvvmInfrastructure;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using Utilities;
@@ -16,8 +17,8 @@ namespace ViewModelsTests
     public class StoreSelectorViewModelUT
     {
         (Mock<IStoreManagementService>, WorkspaceViewModel) CreateBaseMocks(
-            Mock<ILegacyWorkspaceContext> mockOverrideLegacyWorkspaceContext = null,
-            Mock<IDialogService> mockOverrideDialogService = null
+            Mock<ILegacyWorkspaceContext>? mockOverrideLegacyWorkspaceContext = null,
+            Mock<IDialogService>? mockOverrideDialogService = null
         )
         {
             var mockDialogService = mockOverrideDialogService ?? new Mock<IDialogService>();
@@ -33,11 +34,11 @@ namespace ViewModelsTests
         public void ConstructorThrowsIfWorkspaceViewModelIsNull()
         {
             // Arrange
-            WorkspaceViewModel nullWorkspace = null;
+            WorkspaceViewModel? nullWorkspace = null;
             var mockStoreMgmtService = new Mock<IStoreManagementService>();
 
             // Act
-            var ex = Assert.Throws<ArgumentNullException>(() => new vm.StoreSelectorViewModel(nullWorkspace, mockStoreMgmtService.Object));
+            var ex = Assert.Throws<ArgumentNullException>(() => new vm.StoreSelectorViewModel(nullWorkspace!, mockStoreMgmtService.Object));
 
             // Assert
             Assert.NotNull(ex);
@@ -48,10 +49,10 @@ namespace ViewModelsTests
         {
             // Arrange
             var (mockStoreMgmtService, workspace) = CreateBaseMocks();
-            IStoreManagementService nullStoreMgmtService = null;
+            IStoreManagementService? nullStoreMgmtService = null;
 
             // Act
-            var ex = Assert.Throws<ArgumentNullException>(() => new vm.StoreSelectorViewModel(workspace, nullStoreMgmtService));
+            var ex = Assert.Throws<ArgumentNullException>(() => new vm.StoreSelectorViewModel(workspace, nullStoreMgmtService!));
 
             // Assert
             Assert.NotNull(ex);
@@ -107,7 +108,7 @@ namespace ViewModelsTests
             Assert.Collection(storeSelectorViewModel.SelectorButtons,
                 item => Assert.Equal(storeName, item.StoreName)
             );
-            Assert.Equal(storeName, storeSelectorViewModel.SelectedStore.StoreName);
+            Assert.Equal(storeName, storeSelectorViewModel.SelectedStore!.StoreName);
         }
 
         [Fact]
@@ -142,7 +143,7 @@ namespace ViewModelsTests
                 item => Assert.Equal(storeName4, item.StoreName),
                 item => Assert.Equal(storeName5, item.StoreName)
             );
-            Assert.Equal(storeName1, storeSelectorViewModel.SelectedStore.StoreName);
+            Assert.Equal(storeName1, storeSelectorViewModel.SelectedStore!.StoreName);
         }
 
         [Fact]
@@ -168,7 +169,7 @@ namespace ViewModelsTests
             await storeSelectorViewModel.Initialize().ConfigureAwait(true);
 
             // Assert
-            Assert.Equal(5, storeSelectorViewModel.SelectorButtons.Count);
+            Assert.Equal(5, storeSelectorViewModel.SelectorButtons?.Count);
             Assert.Collection(propertyChangeRegistry,
                 item =>
                 {
@@ -204,8 +205,8 @@ namespace ViewModelsTests
                 .ReturnsAsync(stores);
             await storeSelectorViewModel.Initialize().ConfigureAwait(true);
             propertyChangeRegistry.Clear();
-            Assert.Equal(5, storeSelectorViewModel.SelectorButtons.Count);
-            Assert.Equal(1.ToString(CultureInfo.InvariantCulture), storeSelectorViewModel.SelectedStore.StoreName);
+            Assert.Equal(5, storeSelectorViewModel.SelectorButtons?.Count);
+            Assert.Equal(1.ToString(CultureInfo.InvariantCulture), storeSelectorViewModel.SelectedStore!.StoreName);
 
             // Act
             storeSelectorViewModel.SelectedStore = storeSelectorViewModel.SelectedStore;
@@ -246,7 +247,7 @@ namespace ViewModelsTests
             await workspace.Initialize().ConfigureAwait(true);
 
             const int nextStoreIndex = 1;
-            var nextStore = workspace.StoreSelector.SelectorButtons[nextStoreIndex];
+            var nextStore = workspace.StoreSelector.SelectorButtons![nextStoreIndex];
             Assert.NotEqual(nextStore, workspace.StoreSelector.SelectedStore);
 
             // Act
@@ -301,7 +302,7 @@ namespace ViewModelsTests
 
             const int nextStoreIndex = 1;
             var oldStore = workspace.StoreSelector.SelectedStore;
-            var nextStore = workspace.StoreSelector.SelectorButtons[nextStoreIndex];
+            var nextStore = workspace.StoreSelector.SelectorButtons![nextStoreIndex];
             Assert.NotEqual(nextStore, workspace.StoreSelector.SelectedStore);
 
             // Act
@@ -357,7 +358,7 @@ namespace ViewModelsTests
 
             const int nextStoreIndex = 1;
             var oldStore = workspace.StoreSelector.SelectedStore;
-            var nextStore = workspace.StoreSelector.SelectorButtons[nextStoreIndex];
+            var nextStore = workspace.StoreSelector.SelectorButtons![nextStoreIndex];
             Assert.NotEqual(nextStore, workspace.StoreSelector.SelectedStore);
 
             // Act

@@ -70,7 +70,8 @@ namespace ViewModels
             this.storeManagementService = storeManagementService;
             this.legacyWorkspaceContext = legacyWorkspaceContext;
 
-            StoreSelector = new StoreSelectorViewModel(this, this.storeManagementService);
+            storeSelector = new StoreSelectorViewModel(this, this.storeManagementService);
+            OnPropertyChanged(nameof(StoreSelector));
         }
 
         public async Task Initialize()

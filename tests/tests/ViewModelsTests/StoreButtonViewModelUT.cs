@@ -13,10 +13,10 @@ namespace ViewModelsTests
         public void WillThrowExceptionIfConstructorPassNullStore()
         {
             // Arrange
-            Store nullStore = null;
+            Store? nullStore = null;
 
             // Act
-            var ex = Assert.Throws<ArgumentNullException>(() => new StoreButtonViewModel(nullStore));
+            var ex = Assert.Throws<ArgumentNullException>(() => new StoreButtonViewModel(nullStore!));
 
             // Assert
             Assert.NotNull(ex);

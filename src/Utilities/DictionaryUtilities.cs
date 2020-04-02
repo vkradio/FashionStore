@@ -14,6 +14,7 @@ namespace Utilities
         /// <param name="dictionary">Dictionary</param>
         /// <param name="key">Key</param>
         public static void Inc<T>(this Dictionary<T, int> dictionary, T key)
+            where T : notnull
         {
             Guard.Against.Null(dictionary, nameof(dictionary));
 

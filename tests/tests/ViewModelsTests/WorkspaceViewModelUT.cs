@@ -13,13 +13,13 @@ namespace ViewModelsTests
         public void ConstructorThrowsIfDialogServiceIsNull()
         {
             // Arrange
-            IDialogService nullDialogService = null;
+            IDialogService? nullDialogService = null;
             var mockLocalizationService = new Mock<ILocalizationService>();
             var mockStoreMgmtSvc = new Mock<IStoreManagementService>();
             var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
 
             // Act
-            var ex = Assert.Throws<ArgumentNullException>(() => new WorkspaceViewModel(nullDialogService, mockLocalizationService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object));
+            var ex = Assert.Throws<ArgumentNullException>(() => new WorkspaceViewModel(nullDialogService!, mockLocalizationService.Object, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object));
 
             // Assert
             Assert.NotNull(ex);
@@ -30,12 +30,12 @@ namespace ViewModelsTests
         {
             // Arrange
             var mockDialogService = new Mock<IDialogService>();
-            ILocalizationService nullLocalizationService = null;
+            ILocalizationService? nullLocalizationService = null;
             var mockStoreMgmtSvc = new Mock<IStoreManagementService>();
             var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
 
             // Act
-            var ex = Assert.Throws<ArgumentNullException>(() => new WorkspaceViewModel(mockDialogService.Object, nullLocalizationService, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object));
+            var ex = Assert.Throws<ArgumentNullException>(() => new WorkspaceViewModel(mockDialogService.Object, nullLocalizationService!, mockStoreMgmtSvc.Object, mockLegacyWorkspace.Object));
 
             // Assert
             Assert.NotNull(ex);
@@ -47,11 +47,11 @@ namespace ViewModelsTests
             // Arrange
             var mockDialogService = new Mock<IDialogService>();
             var mockLocalizationService = new Mock<ILocalizationService>();
-            IStoreManagementService nullStoreMgmtSvc = null;
+            IStoreManagementService? nullStoreMgmtSvc = null;
             var mockLegacyWorkspace = new Mock<ILegacyWorkspaceContext>();
 
             // Act
-            var ex = Assert.Throws<ArgumentNullException>(() => new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, nullStoreMgmtSvc, mockLegacyWorkspace.Object));
+            var ex = Assert.Throws<ArgumentNullException>(() => new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, nullStoreMgmtSvc!, mockLegacyWorkspace.Object));
 
             // Assert
             Assert.NotNull(ex);
@@ -64,10 +64,10 @@ namespace ViewModelsTests
             var mockDialogService = new Mock<IDialogService>();
             var mockLocalizationService = new Mock<ILocalizationService>();
             var mockStoreMgmtSvc = new Mock<IStoreManagementService>();
-            ILegacyWorkspaceContext nullLegacyWorkspace = null;
+            ILegacyWorkspaceContext? nullLegacyWorkspace = null;
 
             // Act
-            var ex = Assert.Throws<ArgumentNullException>(() => new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, mockStoreMgmtSvc.Object, nullLegacyWorkspace));
+            var ex = Assert.Throws<ArgumentNullException>(() => new WorkspaceViewModel(mockDialogService.Object, mockLocalizationService.Object, mockStoreMgmtSvc.Object, nullLegacyWorkspace!));
 
             // Assert
             Assert.NotNull(ex);

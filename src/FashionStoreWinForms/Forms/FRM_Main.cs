@@ -22,6 +22,7 @@ namespace FashionStoreWinForms.Forms
 {
     public partial class FRM_Main : Form, ILegacyWorkspaceContext, ILocalizationService
     {
+#nullable enable
         readonly WorkspaceViewModel workspaceViewModel;
         readonly IStoreManagementService storeManagementService;
 
@@ -43,6 +44,7 @@ namespace FashionStoreWinForms.Forms
         #region ILocalizationService
         public string AskProceedAndAbandonFormData => Resources.ASK_PROCEED_AND_ABANDON_FORM_DATA;
         #endregion
+#nullable restore
 
         bool AskForSaveIfNeeded()
         {
@@ -85,23 +87,23 @@ namespace FashionStoreWinForms.Forms
         }
         void MI_Card_PointOfSale_Click(object sender, EventArgs e)
         {
-            using (FRM_Card_PointOfSale frm = new FRM_Card_PointOfSale())
-                frm.ShowDialog(this);
+            using FRM_Card_PointOfSale frm = new FRM_Card_PointOfSale();
+            frm.ShowDialog(this);
         }
         void MI_DressMatrix_Click(object sender, EventArgs e)
         {
-            using (FRM_DressMatrix frm = new FRM_DressMatrix())
-                frm.ShowDialog(this);
+            using FRM_DressMatrix frm = new FRM_DressMatrix();
+            frm.ShowDialog(this);
         }
         void MI_Sql_Click(object sender, EventArgs e)
         {
-            using (FRM_Sql frm = new FRM_Sql())
-                frm.ShowDialog(this);
+            using FRM_Sql frm = new FRM_Sql();
+            frm.ShowDialog(this);
         }
         void MI_UserSettings_Click(object sender, EventArgs e)
         {
-            using (FRM_UserSettings frm = new FRM_UserSettings())
-                frm.ShowDialog(this);
+            using FRM_UserSettings frm = new FRM_UserSettings();
+            frm.ShowDialog(this);
         }
         void MI_AddSku_Click(object sender, EventArgs e) { AddSku(); }
         void MI_SearchSku_Click(object sender, EventArgs e) { SearchSku(); }
@@ -109,8 +111,8 @@ namespace FashionStoreWinForms.Forms
         {
             PAN_Workplace.Controls.Clear();
 
-            using (FRM_SalesJournal frmSalesJournal = new FRM_SalesJournal())
-                frmSalesJournal.ShowDialog(this);
+            using FRM_SalesJournal frmSalesJournal = new FRM_SalesJournal();
+            frmSalesJournal.ShowDialog(this);
         }
         void MI_Backup_Click(object sender, EventArgs e)
         {
@@ -159,6 +161,7 @@ namespace FashionStoreWinForms.Forms
             MessageBox.Show(this, Resources.BACKUP_COMPLETED, Resources.MESSAGE, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+#nullable enable
         #region Temporary mock StoreService
         class MockStoreService: IStoreManagementService
         {
@@ -195,13 +198,14 @@ namespace FashionStoreWinForms.Forms
                 if (a.PropertyName == nameof(StoreSelectorViewModel.SelectedStore))
                 {
                     var storeVM = (StoreSelectorViewModel)s;
-                    var store = await storeManagementService.GetStore(storeVM.SelectedStore.StoreId);
+                    var store = await storeManagementService.GetStore(storeVM.SelectedStore!.StoreId);
                     SetCurrentStore(store);
                 }
             };
 
             warehouseSelector1.DataContext = workspaceViewModel.StoreSelector;
         }
+#nullable restore
 
         public void AddSku()
         {
@@ -250,17 +254,15 @@ namespace FashionStoreWinForms.Forms
 
             if (in_pos != null)
             {
-                using (FRM_ReportParams frmParams = new FRM_ReportParams())
-                {
-                    frmParams.ShowDialog(this);
-                    if (!frmParams.MakeReport)
-                        return;
-                    articlePrefix = frmParams.ArticlePrefix != string.Empty ? frmParams.ArticlePrefix : null;
-                    showPriceOfPurchase = Settings.Default.LastRepShowPriceOfPurchase;
-                    showPriceOfSale = Settings.Default.LastRepShowPriceOfSale;
-                    showPriceOfStock = Settings.Default.LastRepShowPriceOfStock;
-                    showSizes = Settings.Default.LastRepShowSizes;
-                }
+                using FRM_ReportParams frmParams = new FRM_ReportParams();
+                frmParams.ShowDialog(this);
+                if (!frmParams.MakeReport)
+                    return;
+                articlePrefix = frmParams.ArticlePrefix != string.Empty ? frmParams.ArticlePrefix : null;
+                showPriceOfPurchase = Settings.Default.LastRepShowPriceOfPurchase;
+                showPriceOfSale = Settings.Default.LastRepShowPriceOfSale;
+                showPriceOfStock = Settings.Default.LastRepShowPriceOfStock;
+                showSizes = Settings.Default.LastRepShowSizes;
             }
 
             List<string> textLines = new List<string>();

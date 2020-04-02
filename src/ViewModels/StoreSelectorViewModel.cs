@@ -13,14 +13,13 @@ namespace ViewModels
         readonly IStoreManagementService storeManagementService;
 
         #region Private underlying fields
-        ObservableCollection<StoreButtonViewModel> selectorButtons;
-        StoreButtonViewModel selectedStore;
+        StoreButtonViewModel? selectedStore;
         #endregion
 
         #region Public properties and actions
-        public ObservableCollection<StoreButtonViewModel> SelectorButtons => selectorButtons;
+        public ObservableCollection<StoreButtonViewModel>? SelectorButtons { get; private set; }
 
-        public StoreButtonViewModel SelectedStore
+        public StoreButtonViewModel? SelectedStore
         {
             get => selectedStore;
 
@@ -51,7 +50,7 @@ namespace ViewModels
             var storeButtons = stores
                 .Select(store => new StoreButtonViewModel(store));
 
-            selectorButtons = new ObservableCollection<StoreButtonViewModel>(storeButtons);
+            SelectorButtons = new ObservableCollection<StoreButtonViewModel>(storeButtons);
             OnPropertyChanged(nameof(SelectorButtons));
 
             SelectedStore = SelectorButtons.FirstOrDefault();

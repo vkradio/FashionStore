@@ -1,4 +1,7 @@
-﻿using MvvmInfrastructure;
+﻿#nullable enable
+
+using Ardalis.GuardClauses;
+using MvvmInfrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +16,10 @@ namespace WinFormsInfrastructure
     {
         public DialogResultEnum PresentDialog(string question, DialogOptionsEnum options)
         {
+            Guard.Against.NullOrEmpty(question, nameof(question));
+
             var button = options.MapTo<DialogOptionsEnum, MessageBoxButtons>();
-            var nonNullQuestion = question ?? string.Empty;
-            var dlgResult = MessageBox.Show(nonNullQuestion, nonNullQuestion.Length > 30 ? (question.Substring(0, 28) + "...") : nonNullQuestion, button);
+            var dlgResult = MessageBox.Show(question, question.Length > 30 ? (question.Substring(0, 28) + "...") : question, button);
             return dlgResult.MapTo<DialogResult, DialogResultEnum>();
         }
 
@@ -36,3 +40,5 @@ namespace WinFormsInfrastructure
         }
     }
 }
+
+#nullable restore

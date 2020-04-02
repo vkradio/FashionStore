@@ -45,7 +45,9 @@ namespace ViewModels
         {
             Guard.Against.Null(store, nameof(store));
 
-            StoreName = store.Name;
+            storeName = store.Name;
+            OnPropertyChanged(nameof(StoreName));
+
             StoreId = store.Id;
         }
     }
