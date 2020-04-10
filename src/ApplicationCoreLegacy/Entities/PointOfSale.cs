@@ -4,7 +4,7 @@ using System.Data.SQLite;
 
 using DalLegacy;
 
-namespace ApplicationCore.Entities
+namespace ApplicationCoreLegacy.Entities
 {
     [
         SPNames
@@ -23,32 +23,29 @@ namespace ApplicationCore.Entities
 
         public static DataTable ReadTable(int? in_excludeCurrentId = null, bool in_excludeDeleted = false)
         {
-            using (SQLiteConnection conn = ConnectionRegistry.Instance.OpenNewConnection())
+            using SQLiteConnection conn = ConnectionRegistry.Instance.OpenNewConnection();
+            using SQLiteCommand cmd = conn.CreateCommand();
+
+            string where = string.Empty;
+            if (in_excludeCurrentId.HasValue && in_excludeDeleted)
+                where = " where";
+            if (in_excludeCurrentId.HasValue)
+                where += $" \"id\" <> {in_excludeCurrentId.Value}";
+            if (in_excludeDeleted)
             {
-                using (SQLiteCommand cmd = conn.CreateCommand())
-                {
-                    string where = string.Empty;
-                    if (in_excludeCurrentId.HasValue && in_excludeDeleted)
-                        where = " where";
-                    if (in_excludeCurrentId.HasValue)
-                        where += $" \"id\" <> {in_excludeCurrentId.Value}";
-                    if (in_excludeDeleted)
-                    {
-                        if (in_excludeCurrentId.HasValue)
-                            where += " and";
-                        where += " deleted = 0";
-                    }
-
-                    cmd.CommandText = $"select * from point_of_sale{where} order by order_number";
-                    cmd.CommandType = CommandType.Text;
-                    
-                    DataTable table = new DataTable();
-                    using (SQLiteDataAdapter a = new SQLiteDataAdapter(cmd))
-                        a.Fill(table);
-
-                    return table;
-                }
+                if (in_excludeCurrentId.HasValue)
+                    where += " and";
+                where += " deleted = 0";
             }
+
+            cmd.CommandText = $"select * from point_of_sale{where} order by order_number";
+            cmd.CommandType = CommandType.Text;
+
+            DataTable table = new DataTable();
+            using (SQLiteDataAdapter a = new SQLiteDataAdapter(cmd))
+                a.Fill(table);
+
+            return table;
         }
         public static IList<PointOfSale> RestoreAll()
         {

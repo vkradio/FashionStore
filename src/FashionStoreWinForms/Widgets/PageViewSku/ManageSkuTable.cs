@@ -3,15 +3,15 @@ using System.Drawing;
 using System.Data;
 using System.Windows.Forms;
 
-using ApplicationCore.Entities;
+using ApplicationCoreLegacy.Entities;
 using FashionStoreWinForms.Sys;
 
 namespace FashionStoreWinForms.Widgets.PageViewSku
 {
     public partial class ManageSkuTable : UserControl
     {
-        DataTable   _source;
-        int         _itemsHeight;
+        readonly DataTable   _source;
+        readonly int         _itemsHeight;
 
         public ManageSkuTable()
         {

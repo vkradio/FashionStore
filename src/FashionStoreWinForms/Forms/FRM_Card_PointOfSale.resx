@@ -117,70 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="&gt;&gt;B_Delete.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="B_Read.Text" xml:space="preserve">
-    <value>Read</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="B_Delete.Text" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="B_Read.Location" type="System.Drawing.Point, System.Drawing">
-    <value>72, 13</value>
-  </data>
-  <data name="T_ReadId.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="B_Save.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;T_ReadId.Name" xml:space="preserve">
-    <value>T_ReadId</value>
-  </data>
-  <data name="&gt;&gt;B_Read.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;T_Name.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="B_Read.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="B_Delete.Location" type="System.Drawing.Point, System.Drawing">
-    <value>234, 13</value>
-  </data>
-  <data name="&gt;&gt;T_Name.Name" xml:space="preserve">
-    <value>T_Name</value>
-  </data>
-  <data name="B_Save.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 13</value>
-  </data>
-  <data name="B_Save.Text" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FRM_Card_PointOfSale</value>
+  <data name="T_ReadId.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 16</value>
   </data>
   <data name="T_ReadId.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 20</value>
   </data>
-  <data name="B_Delete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="T_ReadId.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 54</value>
+  <data name="&gt;&gt;T_ReadId.Name" xml:space="preserve">
+    <value>T_ReadId</value>
+  </data>
+  <data name="&gt;&gt;T_ReadId.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;T_ReadId.Parent" xml:space="preserve">
     <value>$this</value>
@@ -188,60 +140,41 @@
   <data name="&gt;&gt;T_ReadId.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="T_Name.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;B_Read.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>326, 88</value>
-  </data>
-  <data name="&gt;&gt;T_ReadId.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterScreen</value>
-  </data>
-  <data name="&gt;&gt;B_Delete.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;B_Delete.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;B_Read.Name" xml:space="preserve">
-    <value>B_Read</value>
-  </data>
-  <data name="&gt;&gt;B_Read.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="B_Read.Location" type="System.Drawing.Point, System.Drawing">
+    <value>72, 13</value>
   </data>
   <data name="B_Read.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="B_Read.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="T_Name.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 20</value>
+  <data name="B_Read.Text" xml:space="preserve">
+    <value>Read</value>
+  </data>
+  <data name="&gt;&gt;B_Read.Name" xml:space="preserve">
+    <value>B_Read</value>
+  </data>
+  <data name="&gt;&gt;B_Read.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;B_Read.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;B_Read.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="B_Save.Location" type="System.Drawing.Point, System.Drawing">
+    <value>153, 13</value>
   </data>
   <data name="B_Save.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="&gt;&gt;B_Save.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="B_Save.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 13</value>
+  <data name="B_Save.Text" xml:space="preserve">
+    <value>Save</value>
   </data>
   <data name="&gt;&gt;B_Save.Name" xml:space="preserve">
     <value>B_Save</value>
@@ -252,34 +185,101 @@
   <data name="&gt;&gt;B_Save.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="T_Name.Location" type="System.Drawing.Point, System.Drawing">
-    <value>67, 51</value>
+  <data name="&gt;&gt;B_Save.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="B_Delete.Location" type="System.Drawing.Point, System.Drawing">
+    <value>234, 13</value>
   </data>
-  <data name="&gt;&gt;B_Delete.Name" xml:space="preserve">
-    <value>B_Delete</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="T_ReadId.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 16</value>
-  </data>
-  <data name="&gt;&gt;T_Name.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="B_Delete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
   <data name="B_Delete.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Warehouse</value>
+  <data name="B_Delete.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="&gt;&gt;B_Delete.Name" xml:space="preserve">
+    <value>B_Delete</value>
+  </data>
+  <data name="&gt;&gt;B_Delete.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;B_Delete.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;B_Delete.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>26, 54</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 13</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="T_Name.Location" type="System.Drawing.Point, System.Drawing">
+    <value>67, 51</value>
+  </data>
+  <data name="T_Name.Size" type="System.Drawing.Size, System.Drawing">
+    <value>242, 20</value>
+  </data>
+  <data name="T_Name.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;T_Name.Name" xml:space="preserve">
+    <value>T_Name</value>
   </data>
   <data name="&gt;&gt;T_Name.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;T_Name.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;T_Name.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>326, 88</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Store</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FRM_Card_PointOfSale</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

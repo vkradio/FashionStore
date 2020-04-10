@@ -2,7 +2,7 @@
 using System.Data.SQLite;
 using System.Windows.Forms;
 
-using ApplicationCore.Entities;
+using ApplicationCoreLegacy.Entities;
 using FashionStoreWinForms.Properties;
 
 namespace FashionStoreWinForms.Forms
@@ -16,8 +16,7 @@ namespace FashionStoreWinForms.Forms
         PointOfSale GetObject()
         {
             PointOfSale result = null;
-            int id;
-            if (!int.TryParse(T_ReadId.Text, out id))
+            if (!int.TryParse(T_ReadId.Text, out int id))
             {
                 MessageBox.Show(Resources.INVALID_ID, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return result;

@@ -6,7 +6,7 @@ using System.Diagnostics;
 using DalLegacy;
 using DalLegacy.Time;
 
-namespace ApplicationCore.Entities
+namespace ApplicationCoreLegacy.Entities
 {
     [
         SPNames
@@ -154,104 +154,101 @@ namespace ApplicationCore.Entities
             _isNew = false;
         }
 
-        public static DocSale CreateNew(DateTime in_timeSold, Article in_article, PointOfSale in_pointOfSale, int in_unitPrice, int in_unitCount, CellInStock in_cell, bool in_paymentByCard)
-        {
-            DocSale result = new DocSale();
-            result._timeSold = in_timeSold;
-            result._articleId = in_article.Id;
-            result._articleName = in_article.Name;
-            result._articlePriceOfPurchase = in_article.PriceOfPurchase;
-            result._articlePriceOfSell = in_article.PriceOfSell;
-            result._pointOfSaleId = in_pointOfSale.Id;
-            result._pointOfSaleName = in_pointOfSale.Name;
-            result._unitPrice = in_unitPrice;
-            result._unitCount = in_unitCount;
-            result._cellX = in_cell.X;
-            result._cellY = in_cell.Y;
-            result._paymentByCard = in_paymentByCard;
-            return result;
-        }
+        public static DocSale CreateNew(DateTime in_timeSold, Article in_article, PointOfSale in_pointOfSale, int in_unitPrice, int in_unitCount, CellInStock in_cell, bool in_paymentByCard) =>
+            new DocSale
+            {
+                _timeSold = in_timeSold,
+                _articleId = in_article.Id,
+                _articleName = in_article.Name,
+                _articlePriceOfPurchase = in_article.PriceOfPurchase,
+                _articlePriceOfSell = in_article.PriceOfSell,
+                _pointOfSaleId = in_pointOfSale.Id,
+                _pointOfSaleName = in_pointOfSale.Name,
+                _unitPrice = in_unitPrice,
+                _unitCount = in_unitCount,
+                _cellX = in_cell.X,
+                _cellY = in_cell.Y,
+                _paymentByCard = in_paymentByCard
+            };
         public static DataTable ReadSalesJournal(PointOfSale in_pointOfSale, DateTime in_dateBegin, DateTime in_dateEnd, ShowRows in_displayMode)
         {
-            using (SQLiteConnection conn = ConnectionRegistry.Instance.OpenNewConnection())
-            using (SQLiteCommand cmd = conn.CreateCommand())
+            using SQLiteConnection conn = ConnectionRegistry.Instance.OpenNewConnection();
+            using SQLiteCommand cmd = conn.CreateCommand();
+
+            cmd.CommandType = CommandType.Text;
+
+            cmd.Parameters.Add(new SQLiteParameter("@in_pointOfSaleId", in_pointOfSale.Id));
+            cmd.Parameters.Add(new SQLiteParameter("@in_dateBegin", UnixEpoch.FromDateTime(in_dateBegin)));
+            cmd.Parameters.Add(new SQLiteParameter("@in_dateEndNext", UnixEpoch.FromDateTime(in_dateEnd.AddDays(1))));
+            string wherePayedByCard = string.Empty;
+            if (in_displayMode == ShowRows.OnlyCash || in_displayMode == ShowRows.OnlyCard)
             {
-                cmd.CommandType = CommandType.Text;
-
-                cmd.Parameters.Add(new SQLiteParameter("@in_pointOfSaleId", in_pointOfSale.Id));
-                cmd.Parameters.Add(new SQLiteParameter("@in_dateBegin", UnixEpoch.FromDateTime(in_dateBegin)));
-                cmd.Parameters.Add(new SQLiteParameter("@in_dateEndNext", UnixEpoch.FromDateTime(in_dateEnd.AddDays(1))));
-                string wherePayedByCard = string.Empty;
-                if (in_displayMode == ShowRows.OnlyCash || in_displayMode == ShowRows.OnlyCard)
-                {
-                    cmd.Parameters.Add(new SQLiteParameter("@in_payedByCard", in_displayMode == ShowRows.OnlyCash ? 0 : 1));
-                    wherePayedByCard = " and s.payment_by_card = @in_payedByCard";
-                }
-                    
-                cmd.CommandText = "select" +
-                                   " s.id," +
-                                   " date(s.time_sold, 'unixepoch', 'localtime') as time_sold," +
-                                   " s.art_name," +
-                                   " s.art_price_of_purchase," +
-                                   " s.art_price_of_sell," +
-                                   " s.unit_price," +
-                                   " s.unit_count," +
-                                   " (s.unit_price * s.unit_count) as price_sum," +
-                                   " s.cell_x," +
-                                   " s.cell_y" +
-                                 " from doc_sale s" +
-                                   " join doc d on d.id = s.id and d.time_cancelled is null" +
-                                 " where s.point_of_sale_id = @in_pointOfSaleId" +
-                                   " and @in_dateBegin <= s.time_sold and s.time_sold < @in_dateEndNext" +
-                                   wherePayedByCard +
-                                 " order by s.time_sold desc;";
-
-                DataTable table = new DataTable();
-                using (SQLiteDataAdapter a = new SQLiteDataAdapter(cmd))
-                    a.Fill(table);
-
-                return table;
+                cmd.Parameters.Add(new SQLiteParameter("@in_payedByCard", in_displayMode == ShowRows.OnlyCash ? 0 : 1));
+                wherePayedByCard = " and s.payment_by_card = @in_payedByCard";
             }
+
+            cmd.CommandText = "select" +
+                               " s.id," +
+                               " date(s.time_sold, 'unixepoch', 'localtime') as time_sold," +
+                               " s.art_name," +
+                               " s.art_price_of_purchase," +
+                               " s.art_price_of_sell," +
+                               " s.unit_price," +
+                               " s.unit_count," +
+                               " (s.unit_price * s.unit_count) as price_sum," +
+                               " s.cell_x," +
+                               " s.cell_y" +
+                             " from doc_sale s" +
+                               " join doc d on d.id = s.id and d.time_cancelled is null" +
+                             " where s.point_of_sale_id = @in_pointOfSaleId" +
+                               " and @in_dateBegin <= s.time_sold and s.time_sold < @in_dateEndNext" +
+                               wherePayedByCard +
+                             " order by s.time_sold desc;";
+
+            DataTable table = new DataTable();
+            using (SQLiteDataAdapter a = new SQLiteDataAdapter(cmd))
+                a.Fill(table);
+
+            return table;
         }
         public static Summary GetSummary(PointOfSale in_pointOfSale, DateTime in_dateBegin, DateTime in_dateEnd, ShowRows in_displayMode)
         {
-            using (SQLiteConnection conn = ConnectionRegistry.Instance.OpenNewConnection())
-            using (SQLiteCommand cmd = conn.CreateCommand())
+            using SQLiteConnection conn = ConnectionRegistry.Instance.OpenNewConnection();
+            using SQLiteCommand cmd = conn.CreateCommand();
+
+            cmd.CommandType = CommandType.Text;
+
+            cmd.Parameters.Add(new SQLiteParameter("@in_pointOfSaleId", in_pointOfSale.Id));
+            cmd.Parameters.Add(new SQLiteParameter("@in_dateBegin", UnixEpoch.FromDateTime(in_dateBegin)));
+            cmd.Parameters.Add(new SQLiteParameter("@in_dateEndNext", UnixEpoch.FromDateTime(in_dateEnd.AddDays(1))));
+            string wherePayedByCard = string.Empty;
+            if (in_displayMode == ShowRows.OnlyCash || in_displayMode == ShowRows.OnlyCard)
             {
-                cmd.CommandType = CommandType.Text;
-
-                cmd.Parameters.Add(new SQLiteParameter("@in_pointOfSaleId", in_pointOfSale.Id));
-                cmd.Parameters.Add(new SQLiteParameter("@in_dateBegin", UnixEpoch.FromDateTime(in_dateBegin)));
-                cmd.Parameters.Add(new SQLiteParameter("@in_dateEndNext", UnixEpoch.FromDateTime(in_dateEnd.AddDays(1))));
-                string wherePayedByCard = string.Empty;
-                if (in_displayMode == ShowRows.OnlyCash || in_displayMode == ShowRows.OnlyCard)
-                {
-                    cmd.Parameters.Add(new SQLiteParameter("@in_payedByCard", in_displayMode == ShowRows.OnlyCash ? 0 : 1));
-                    wherePayedByCard = " and s.payment_by_card = @in_payedByCard";
-                }
-
-                cmd.CommandText = "select" +
-                                   " COUNT(s.id) as cnt," +
-                                   " IFNULL(SUM(s.unit_price * s.unit_count), 0) as sm," +
-                                   " IFNULL(SUM(s.unit_price * s.unit_count - s.art_price_of_purchase * s.unit_count), 0) as profit" +
-                                 " from doc_sale s" +
-                                   " join doc d on d.id = s.id and d.time_cancelled is null" +
-                                 " where s.point_of_sale_id = @in_pointOfSaleId" +
-                                   " and @in_dateBegin <= s.time_sold and s.time_sold < @in_dateEndNext" +
-                                   wherePayedByCard;
-
-                DataTable table = new DataTable();
-                using (SQLiteDataAdapter a = new SQLiteDataAdapter(cmd))
-                    a.Fill(table);
-
-                DataRow row = table.Rows[0];
-                return new Summary()
-                {
-                    Count   = (int)(long)row["cnt"],
-                    Sum     = (int)(long)row["sm"],
-                    Profit  = (int)(long)row["profit"]
-                };
+                cmd.Parameters.Add(new SQLiteParameter("@in_payedByCard", in_displayMode == ShowRows.OnlyCash ? 0 : 1));
+                wherePayedByCard = " and s.payment_by_card = @in_payedByCard";
             }
+
+            cmd.CommandText = "select" +
+                               " COUNT(s.id) as cnt," +
+                               " IFNULL(SUM(s.unit_price * s.unit_count), 0) as sm," +
+                               " IFNULL(SUM(s.unit_price * s.unit_count - s.art_price_of_purchase * s.unit_count), 0) as profit" +
+                             " from doc_sale s" +
+                               " join doc d on d.id = s.id and d.time_cancelled is null" +
+                             " where s.point_of_sale_id = @in_pointOfSaleId" +
+                               " and @in_dateBegin <= s.time_sold and s.time_sold < @in_dateEndNext" +
+                               wherePayedByCard;
+
+            DataTable table = new DataTable();
+            using (SQLiteDataAdapter a = new SQLiteDataAdapter(cmd))
+                a.Fill(table);
+
+            DataRow row = table.Rows[0];
+            return new Summary()
+            {
+                Count = (int)(long)row["cnt"],
+                Sum = (int)(long)row["sm"],
+                Profit = (int)(long)row["profit"]
+            };
         }
 
         public Doc Doc { get { return _doc; } }

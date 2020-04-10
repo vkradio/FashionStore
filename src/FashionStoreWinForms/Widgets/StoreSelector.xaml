@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="FashionStoreWinForms.Widgets.WarehouseSelector"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FashionStoreWinForms.Widgets"
+             mc:Ignorable="d" 
+             xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             xmlns:vm="clr-namespace:ViewModels;assembly=ViewModels"
+             d:DataContext="{d:DesignInstance vm:StoreSelectorViewModel}"
+             d:DesignHeight="51" d:DesignWidth="377">
+    
+    <Grid>
+        <ListBox
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            x:Name="Buttons"
+            Padding="0"
+            ItemsSource="{Binding SelectorButtons}"
+            SelectedItem="{Binding SelectedStore, Delay=10}"
+            >
+
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label
+                        Content="{Binding StoreName}"
+                        HorizontalContentAlignment="Center"
+                        FontSize="15"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

@@ -1,4 +1,4 @@
-﻿using ApplicationCore.Entities;
+﻿using ApplicationCoreLegacy.Entities;
 
 namespace FashionStoreWinForms.Sys
 {

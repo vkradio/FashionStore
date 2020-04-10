@@ -3,7 +3,7 @@
 using DalLegacy;
 using DalLegacy.Time;
 
-namespace ApplicationCore.Entities
+namespace ApplicationCoreLegacy.Entities
 {
     [
         SPNames
@@ -47,12 +47,7 @@ namespace ApplicationCore.Entities
                 in_sp.AddParameter(c_timeCancelledParam, (long?)null);
         }
 
-        public static Doc CreateNew(DocType in_type)
-        {
-            Doc result = new Doc();
-            result._type = in_type;
-            return result;
-        }
+        public static Doc CreateNew(DocType type) => new Doc { _type = type };
 
         public DocType Type { get { return _type; } }
         public DateTime TimeCreated { get { return _timeCreated; } }

@@ -48,13 +48,13 @@
             resources.ApplyResources(this.B_Search, "B_Search");
             this.B_Search.Name = "B_Search";
             this.B_Search.UseVisualStyleBackColor = true;
-            this.B_Search.Click += new System.EventHandler(this.B_Search_Click);
+            this.B_Search.Click += new System.EventHandler(this.SearchButton_Click);
             // 
             // T_NamePart
             // 
             resources.ApplyResources(this.T_NamePart, "T_NamePart");
             this.T_NamePart.Name = "T_NamePart";
-            this.T_NamePart.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.T_NamePart_PreviewKeyDown);
+            this.T_NamePart.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.NamePartTextBox_PreviewKeyDown);
             // 
             // PAN_Lists
             // 

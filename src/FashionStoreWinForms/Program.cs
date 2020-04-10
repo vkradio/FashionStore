@@ -33,8 +33,7 @@ namespace FashionStoreWinForms
 
             //Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("ru-RU");
 
-            bool singleInstance;
-            _mutex = new Mutex(true, Assembly.GetExecutingAssembly().FullName, out singleInstance);
+            _mutex = new Mutex(true, Assembly.GetExecutingAssembly().FullName, out bool singleInstance);
             if (!singleInstance)
             {
                 MessageBox.Show(string.Format(Resources.PROGRAM_ALREADY_LAUCHED, Resources.APP_BRAND), Resources.ATTENTION, MessageBoxButtons.OK, MessageBoxIcon.Stop);

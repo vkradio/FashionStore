@@ -1,28 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using ApplicationCore.Entities;
+using ApplicationCore.Interfaces;
+using ApplicationCoreLegacy.Entities;
 using DalLegacy;
 using FashionStoreWinForms.Properties;
 using FashionStoreWinForms.Sys;
 using FashionStoreWinForms.Utils;
 using FashionStoreWinForms.Widgets.PageAddSku;
 using FashionStoreWinForms.Widgets.PageViewSku;
-using FashionStoreWinForms.Widgets.PointOfSaleSelector;
+using ViewModels;
+using WinFormsInfrastructure;
 
 namespace FashionStoreWinForms.Forms
 {
-    public partial class FRM_Main : Form
+    public partial class FRM_Main : Form, ILegacyWorkspaceContext, ILocalizationService
     {
+#nullable enable
+        readonly WorkspaceViewModel workspaceViewModel;
+        readonly IStoreManagementService storeManagementService;
+
+        #region ILegacyWorkspaceContext
+        public bool IsThereUnsavedEntry() =>
+            PAN_Workplace.Controls.Count != 0 &&
+            PAN_Workplace.Controls[0] is PanelAddSku panAddSku &&
+            panAddSku.Modified;
+
+        public void SetCurrentStore(Store store)
+        {
+            PointOfSale oldPointOfSale = Registry.CurrentPointOfSale;
+            Registry.CurrentPointOfSale = PointOfSale.Restore(store.Id);
+            if (oldPointOfSale?.Id != Registry.CurrentPointOfSale.Id)
+                PAN_Workplace.Controls.Clear();
+        }
+        #endregion
+
+        #region ILocalizationService
+        public string AskProceedAndAbandonFormData => Resources.ASK_PROCEED_AND_ABANDON_FORM_DATA;
+        #endregion
+#nullable restore
+
         bool AskForSaveIfNeeded()
         {
             if (PAN_Workplace.Controls.Count != 0)
             {
-                PanelAddSku panAddSku = PAN_Workplace.Controls[0] as PanelAddSku;
-                if (panAddSku != null)
+                if (PAN_Workplace.Controls[0] is PanelAddSku panAddSku)
                 {
                     if (panAddSku.Modified)
                     {
@@ -35,7 +63,7 @@ namespace FashionStoreWinForms.Forms
             return true;
         }
 
-        void FRM_Main_Load(object sender, EventArgs e)
+        async void FRM_Main_Load(object sender, EventArgs e)
         {
             Text = Program.GetVersionString();
 
@@ -55,50 +83,27 @@ namespace FashionStoreWinForms.Forms
             ConnectionRegistry.Init("Data Source=" + Settings.Default.DbPath);
             GlobalController.Init(this);
 
-            IList<PointOfSale> poses = PointOfSale.RestoreAll();
-            foreach (PointOfSale pos in poses)
-            {
-                if (!pos.Deleted)
-                    PAN_PointsOfSale.PointsOfSale.Add(pos);
-            }
-            PAN_PointsOfSale.UpdatePointsOfSale();
-            if (PAN_PointsOfSale.Controls.Count > 0)
-            {
-                PushButtonCheap firstButton = (PushButtonCheap)PAN_PointsOfSale.Controls[0];
-                Registry.CurrentPointOfSale = firstButton.PointOfSale;
-                firstButton.Active = true;
-            }
+            await workspaceViewModel.Initialize();
         }
         void MI_Card_PointOfSale_Click(object sender, EventArgs e)
         {
-            using (FRM_Card_PointOfSale frm = new FRM_Card_PointOfSale())
-                frm.ShowDialog(this);
+            using FRM_Card_PointOfSale frm = new FRM_Card_PointOfSale();
+            frm.ShowDialog(this);
         }
         void MI_DressMatrix_Click(object sender, EventArgs e)
         {
-            using (FRM_DressMatrix frm = new FRM_DressMatrix())
-                frm.ShowDialog(this);
+            using FRM_DressMatrix frm = new FRM_DressMatrix();
+            frm.ShowDialog(this);
         }
         void MI_Sql_Click(object sender, EventArgs e)
         {
-            using (FRM_Sql frm = new FRM_Sql())
-                frm.ShowDialog(this);
+            using FRM_Sql frm = new FRM_Sql();
+            frm.ShowDialog(this);
         }
         void MI_UserSettings_Click(object sender, EventArgs e)
         {
-            using (FRM_UserSettings frm = new FRM_UserSettings())
-                frm.ShowDialog(this);
-        }
-        void PAN_PointsOfSale_PointOfSaleChanged(object in_sender, PointOfSalePanel.PointOfSaleEventArgs in_ea)
-        {
-            PointOfSale oldPointOfSale = Registry.CurrentPointOfSale;
-            Registry.CurrentPointOfSale = in_ea.PointOfSale;
-            if (oldPointOfSale.Id != Registry.CurrentPointOfSale.Id)
-                PAN_Workplace.Controls.Clear();
-        }
-        void PAN_PointsOfSale_BeforePointOfSaleChanged(object sender, PointOfSalePanel.BeforePointOfSaleChangedEventArgs e)
-        {
-            e.AllowChange = AskForSaveIfNeeded();
+            using FRM_UserSettings frm = new FRM_UserSettings();
+            frm.ShowDialog(this);
         }
         void MI_AddSku_Click(object sender, EventArgs e) { AddSku(); }
         void MI_SearchSku_Click(object sender, EventArgs e) { SearchSku(); }
@@ -106,8 +111,8 @@ namespace FashionStoreWinForms.Forms
         {
             PAN_Workplace.Controls.Clear();
 
-            using (FRM_SalesJournal frmSalesJournal = new FRM_SalesJournal())
-                frmSalesJournal.ShowDialog(this);
+            using FRM_SalesJournal frmSalesJournal = new FRM_SalesJournal();
+            frmSalesJournal.ShowDialog(this);
         }
         void MI_Backup_Click(object sender, EventArgs e)
         {
@@ -135,8 +140,7 @@ namespace FashionStoreWinForms.Forms
                 DateTime today = DateTime.Today;
                 foreach (FileInfo fi in di.GetFiles())
                 {
-                    BackupParams fileParams;
-                    if (!BackupParams.TryParse(fi.Name, out fileParams) || fileParams.Date != today)
+                    if (!BackupParams.TryParse(fi.Name, out BackupParams fileParams) || fileParams.Date != today)
                         continue;
                     if (fileParams.Number > maxNumber)
                         maxNumber = fileParams.Number;
@@ -157,16 +161,57 @@ namespace FashionStoreWinForms.Forms
             MessageBox.Show(this, Resources.BACKUP_COMPLETED, Resources.MESSAGE, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+#nullable enable
+        #region Temporary mock StoreService
+        class MockStoreService: IStoreManagementService
+        {
+            static readonly IEnumerable<Store> stores = new Store[] {
+                new Store { Id = 1, OrdinalNumber = 5, Name = "Country" },
+                new Store { Id = 2, OrdinalNumber = 7, Name = "7 Cats" },
+                new Store { Id = 3, OrdinalNumber = 0, Name = "Central Market", IsDeleted = true },
+                new Store { Id = 4, OrdinalNumber = 1, Name = "Home" },
+                new Store { Id = 5, OrdinalNumber = 4, Name = "Oriental" },
+                new Store { Id = 6, OrdinalNumber = 3, Name = "Ivanoff", IsDeleted = true },
+                new Store { Id = 7, OrdinalNumber = 6, Name = "Comfort", IsDeleted = true },
+                new Store { Id = 8, OrdinalNumber = 2, Name = "New Terra" }
+            };
+
+            public Task<IEnumerable<Store>> GetFunctioningOrderedStoresAsync() => Task.FromResult<IEnumerable<Store>>(
+                stores
+                    .Where(store => !store.IsDeleted)
+                    .OrderBy(store => store.OrdinalNumber)
+            );
+
+            public Task<Store> GetStore(int id) => Task.FromResult(stores.SingleOrDefault(store => store.Id == id));
+        }
+        #endregion
+
         public FRM_Main()
         {
             InitializeComponent();
+
+            var dialogService = new DialogService();
+            storeManagementService = new MockStoreService();
+            workspaceViewModel = new WorkspaceViewModel(dialogService, this, storeManagementService, this);
+            workspaceViewModel.StoreSelector.PropertyChanged += async (s, a) =>
+            {
+                if (a.PropertyName == nameof(StoreSelectorViewModel.SelectedStore))
+                {
+                    var storeVM = (StoreSelectorViewModel)s;
+                    var store = await storeManagementService.GetStore(storeVM.SelectedStore!.StoreId);
+                    SetCurrentStore(store);
+                }
+            };
+
+            warehouseSelector1.DataContext = workspaceViewModel.StoreSelector;
         }
+#nullable restore
 
         public void AddSku()
         {
             if (Registry.CurrentPointOfSale == null)
             {
-                MessageBox.Show(this, Resources.CURRENT_WAREHOUSE_NOT_SELECTED, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Resources.CURRENT_STORE_NOT_SELECTED, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -176,13 +221,13 @@ namespace FashionStoreWinForms.Forms
             PAN_Workplace.Controls.Clear();
             PanelAddSku panAddSku = new PanelAddSku();
             PAN_Workplace.Controls.Add(panAddSku);
-            panAddSku.T_NameExt.Focus();
+            panAddSku.NameTextBoxExt.Focus();
         }
         public void SearchSku()
         {
             if (Registry.CurrentPointOfSale == null)
             {
-                MessageBox.Show(this, Resources.CURRENT_WAREHOUSE_NOT_SELECTED, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Resources.CURRENT_STORE_NOT_SELECTED, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -190,10 +235,12 @@ namespace FashionStoreWinForms.Forms
                 return;
 
             PAN_Workplace.Controls.Clear();
-            PanelViewSku panViewSku = new PanelViewSku();
-            panViewSku.Parent = PAN_Workplace;
-            panViewSku.Dock = DockStyle.Fill;
-            panViewSku.T_NamePartExt.Focus();
+            PanelViewSku panViewSku = new PanelViewSku
+            {
+                Parent = PAN_Workplace,
+                Dock = DockStyle.Fill
+            };
+            panViewSku.NamePartTextBoxExt.Focus();
         }
 
         void MakeReport(PointOfSale in_pos = null)
@@ -207,17 +254,15 @@ namespace FashionStoreWinForms.Forms
 
             if (in_pos != null)
             {
-                using (FRM_ReportParams frmParams = new FRM_ReportParams())
-                {
-                    frmParams.ShowDialog(this);
-                    if (!frmParams.MakeReport)
-                        return;
-                    articlePrefix = frmParams.ArticlePrefix != string.Empty ? frmParams.ArticlePrefix : null;
-                    showPriceOfPurchase = Settings.Default.LastRepShowPriceOfPurchase;
-                    showPriceOfSale = Settings.Default.LastRepShowPriceOfSale;
-                    showPriceOfStock = Settings.Default.LastRepShowPriceOfStock;
-                    showSizes = Settings.Default.LastRepShowSizes;
-                }
+                using FRM_ReportParams frmParams = new FRM_ReportParams();
+                frmParams.ShowDialog(this);
+                if (!frmParams.MakeReport)
+                    return;
+                articlePrefix = frmParams.ArticlePrefix != string.Empty ? frmParams.ArticlePrefix : null;
+                showPriceOfPurchase = Settings.Default.LastRepShowPriceOfPurchase;
+                showPriceOfSale = Settings.Default.LastRepShowPriceOfSale;
+                showPriceOfStock = Settings.Default.LastRepShowPriceOfStock;
+                showSizes = Settings.Default.LastRepShowSizes;
             }
 
             List<string> textLines = new List<string>();
@@ -283,7 +328,7 @@ namespace FashionStoreWinForms.Forms
                 textLines.Add(line);
             }
 
-            string totalsLine = $"\"{Resources.TOTALS_CAP} (" + (in_pos != null ? in_pos.Name : Resources.ALL_WAREHOUSES_SHORT) + "):\";" + totalCount.ToString();
+            string totalsLine = $"\"{Resources.TOTALS_CAP} (" + (in_pos != null ? in_pos.Name : Resources.ALL_STORES_SHORT) + "):\";" + totalCount.ToString();
             if (showPriceOfPurchase)
                 totalsLine += ";";
             if (showPriceOfSale)
@@ -325,16 +370,13 @@ namespace FashionStoreWinForms.Forms
         {
             if (Registry.CurrentPointOfSale == null)
             {
-                MessageBox.Show(this, Resources.CURRENT_WAREHOUSE_NOT_SELECTED, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, Resources.CURRENT_STORE_NOT_SELECTED, Resources.FAILURE, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
             MakeReport(Registry.CurrentPointOfSale);
         }
 
-        void MI_Rep_Total_Click(object sender, EventArgs e)
-        {
-            MakeReport();
-        }
+        void MI_Rep_Total_Click(object sender, EventArgs e) => MakeReport();
     }
 }

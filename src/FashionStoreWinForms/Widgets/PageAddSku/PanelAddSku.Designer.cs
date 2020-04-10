@@ -76,7 +76,7 @@
             this.T_Name.AcceptsReturn = true;
             resources.ApplyResources(this.T_Name, "T_Name");
             this.T_Name.Name = "T_Name";
-            this.T_Name.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.T_Name_PreviewKeyDown);
+            this.T_Name.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.NameTextBox_PreviewKeyDown);
             // 
             // L_Name
             // 
@@ -154,7 +154,7 @@
             // 
             resources.ApplyResources(this.T_PriceOfSell, "T_PriceOfSell");
             this.T_PriceOfSell.Name = "T_PriceOfSell";
-            this.T_PriceOfSell.TextChanged += new System.EventHandler(this.T_PriceOfSell_TextChanged);
+            this.T_PriceOfSell.TextChanged += new System.EventHandler(this.PriceOfSellTextBox_TextChanged);
             // 
             // L_PriceOfSell
             // 
@@ -165,7 +165,7 @@
             // 
             resources.ApplyResources(this.T_PriceOfPurchase, "T_PriceOfPurchase");
             this.T_PriceOfPurchase.Name = "T_PriceOfPurchase";
-            this.T_PriceOfPurchase.TextChanged += new System.EventHandler(this.T_PriceOfPurchase_TextChanged);
+            this.T_PriceOfPurchase.TextChanged += new System.EventHandler(this.PriceOfPurchaseTextBox_TextChanged);
             // 
             // L_PriceOfPurchase
             // 

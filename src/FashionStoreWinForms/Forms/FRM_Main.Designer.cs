@@ -44,13 +44,13 @@
             this.MI_Rep_PerPos = new System.Windows.Forms.ToolStripMenuItem();
             this.MI_Rep_Total = new System.Windows.Forms.ToolStripMenuItem();
             this.PAN_Workplace = new System.Windows.Forms.Panel();
-            this.PAN_PointsOfSale = new FashionStoreWinForms.Widgets.PointOfSaleSelector.PointOfSalePanel();
+            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
+            this.warehouseSelector1 = new FashionStoreWinForms.Widgets.WarehouseSelector();
             this.MNU_Main.SuspendLayout();
             this.SuspendLayout();
             // 
             // MNU_Main
             // 
-            resources.ApplyResources(this.MNU_Main, "MNU_Main");
             this.MNU_Main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MI_Cards,
             this.MI_Settings,
@@ -58,91 +58,92 @@
             this.MI_SearchSku,
             this.MI_SalesJournal,
             this.MI_Report});
+            resources.ApplyResources(this.MNU_Main, "MNU_Main");
             this.MNU_Main.Name = "MNU_Main";
             // 
             // MI_Cards
             // 
-            resources.ApplyResources(this.MI_Cards, "MI_Cards");
             this.MI_Cards.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MI_DressMatrix,
             this.MI_Card_PointOfSale});
             this.MI_Cards.Name = "MI_Cards";
+            resources.ApplyResources(this.MI_Cards, "MI_Cards");
             // 
             // MI_DressMatrix
             // 
-            resources.ApplyResources(this.MI_DressMatrix, "MI_DressMatrix");
             this.MI_DressMatrix.Name = "MI_DressMatrix";
+            resources.ApplyResources(this.MI_DressMatrix, "MI_DressMatrix");
             this.MI_DressMatrix.Click += new System.EventHandler(this.MI_DressMatrix_Click);
             // 
             // MI_Card_PointOfSale
             // 
-            resources.ApplyResources(this.MI_Card_PointOfSale, "MI_Card_PointOfSale");
             this.MI_Card_PointOfSale.Name = "MI_Card_PointOfSale";
+            resources.ApplyResources(this.MI_Card_PointOfSale, "MI_Card_PointOfSale");
             this.MI_Card_PointOfSale.Click += new System.EventHandler(this.MI_Card_PointOfSale_Click);
             // 
             // MI_Settings
             // 
-            resources.ApplyResources(this.MI_Settings, "MI_Settings");
             this.MI_Settings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MI_Sql,
             this.MI_UserSettings,
             this.MI_Backup});
             this.MI_Settings.Name = "MI_Settings";
+            resources.ApplyResources(this.MI_Settings, "MI_Settings");
             // 
             // MI_Sql
             // 
-            resources.ApplyResources(this.MI_Sql, "MI_Sql");
             this.MI_Sql.Name = "MI_Sql";
+            resources.ApplyResources(this.MI_Sql, "MI_Sql");
             this.MI_Sql.Click += new System.EventHandler(this.MI_Sql_Click);
             // 
             // MI_UserSettings
             // 
-            resources.ApplyResources(this.MI_UserSettings, "MI_UserSettings");
             this.MI_UserSettings.Name = "MI_UserSettings";
+            resources.ApplyResources(this.MI_UserSettings, "MI_UserSettings");
             this.MI_UserSettings.Click += new System.EventHandler(this.MI_UserSettings_Click);
             // 
             // MI_Backup
             // 
-            resources.ApplyResources(this.MI_Backup, "MI_Backup");
             this.MI_Backup.Name = "MI_Backup";
+            resources.ApplyResources(this.MI_Backup, "MI_Backup");
             this.MI_Backup.Click += new System.EventHandler(this.MI_Backup_Click);
             // 
             // MI_AddSku
             // 
-            resources.ApplyResources(this.MI_AddSku, "MI_AddSku");
             this.MI_AddSku.Name = "MI_AddSku";
+            resources.ApplyResources(this.MI_AddSku, "MI_AddSku");
             this.MI_AddSku.Click += new System.EventHandler(this.MI_AddSku_Click);
             // 
             // MI_SearchSku
             // 
-            resources.ApplyResources(this.MI_SearchSku, "MI_SearchSku");
             this.MI_SearchSku.Name = "MI_SearchSku";
+            resources.ApplyResources(this.MI_SearchSku, "MI_SearchSku");
             this.MI_SearchSku.Click += new System.EventHandler(this.MI_SearchSku_Click);
             // 
             // MI_SalesJournal
             // 
-            resources.ApplyResources(this.MI_SalesJournal, "MI_SalesJournal");
             this.MI_SalesJournal.Name = "MI_SalesJournal";
+            resources.ApplyResources(this.MI_SalesJournal, "MI_SalesJournal");
             this.MI_SalesJournal.Click += new System.EventHandler(this.MI_SalesJournal_Click);
             // 
             // MI_Report
             // 
-            resources.ApplyResources(this.MI_Report, "MI_Report");
             this.MI_Report.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MI_Rep_PerPos,
             this.MI_Rep_Total});
             this.MI_Report.Name = "MI_Report";
+            resources.ApplyResources(this.MI_Report, "MI_Report");
             // 
             // MI_Rep_PerPos
             // 
-            resources.ApplyResources(this.MI_Rep_PerPos, "MI_Rep_PerPos");
             this.MI_Rep_PerPos.Name = "MI_Rep_PerPos";
+            resources.ApplyResources(this.MI_Rep_PerPos, "MI_Rep_PerPos");
             this.MI_Rep_PerPos.Click += new System.EventHandler(this.MI_Rep_PerPos_Click);
             // 
             // MI_Rep_Total
             // 
-            resources.ApplyResources(this.MI_Rep_Total, "MI_Rep_Total");
             this.MI_Rep_Total.Name = "MI_Rep_Total";
+            resources.ApplyResources(this.MI_Rep_Total, "MI_Rep_Total");
             this.MI_Rep_Total.Click += new System.EventHandler(this.MI_Rep_Total_Click);
             // 
             // PAN_Workplace
@@ -150,21 +151,18 @@
             resources.ApplyResources(this.PAN_Workplace, "PAN_Workplace");
             this.PAN_Workplace.Name = "PAN_Workplace";
             // 
-            // PAN_PointsOfSale
+            // elementHost1
             // 
-            resources.ApplyResources(this.PAN_PointsOfSale, "PAN_PointsOfSale");
-            this.PAN_PointsOfSale.Name = "PAN_PointsOfSale";
-            this.PAN_PointsOfSale.PaddingLeft = 10;
-            this.PAN_PointsOfSale.PaddingTop = 10;
-            this.PAN_PointsOfSale.PointOfSaleChanged += new System.EventHandler<FashionStoreWinForms.Widgets.PointOfSaleSelector.PointOfSalePanel.PointOfSaleEventArgs>(this.PAN_PointsOfSale_PointOfSaleChanged);
-            this.PAN_PointsOfSale.BeforePointOfSaleChanged += new System.EventHandler<FashionStoreWinForms.Widgets.PointOfSaleSelector.PointOfSalePanel.BeforePointOfSaleChangedEventArgs>(this.PAN_PointsOfSale_BeforePointOfSaleChanged);
+            resources.ApplyResources(this.elementHost1, "elementHost1");
+            this.elementHost1.Name = "elementHost1";
+            this.elementHost1.Child = this.warehouseSelector1;
             // 
             // FRM_Main
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.PAN_Workplace);
-            this.Controls.Add(this.PAN_PointsOfSale);
+            this.Controls.Add(this.elementHost1);
             this.Controls.Add(this.MNU_Main);
             this.KeyPreview = true;
             this.MainMenuStrip = this.MNU_Main;
@@ -187,7 +185,6 @@
         private System.Windows.Forms.ToolStripMenuItem MI_Sql;
         private System.Windows.Forms.ToolStripMenuItem MI_UserSettings;
         private System.Windows.Forms.ToolStripMenuItem MI_DressMatrix;
-        private Widgets.PointOfSaleSelector.PointOfSalePanel PAN_PointsOfSale;
         private System.Windows.Forms.Panel PAN_Workplace;
         private System.Windows.Forms.ToolStripMenuItem MI_AddSku;
         private System.Windows.Forms.ToolStripMenuItem MI_SearchSku;
@@ -196,6 +193,8 @@
         private System.Windows.Forms.ToolStripMenuItem MI_Report;
         private System.Windows.Forms.ToolStripMenuItem MI_Rep_PerPos;
         private System.Windows.Forms.ToolStripMenuItem MI_Rep_Total;
+        private System.Windows.Forms.Integration.ElementHost elementHost1;
+        private Widgets.WarehouseSelector warehouseSelector1;
     }
 }
 

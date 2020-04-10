@@ -61,11 +61,11 @@ namespace FashionStoreWinForms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to all WHs.
+        ///   Looks up a localized string similar to all Stores.
         /// </summary>
-        internal static string ALL_WAREHOUSES_SHORT {
+        internal static string ALL_STORES_SHORT {
             get {
-                return ResourceManager.GetString("ALL_WAREHOUSES_SHORT", resourceCulture);
+                return ResourceManager.GetString("ALL_STORES_SHORT", resourceCulture);
             }
         }
         
@@ -214,7 +214,7 @@ namespace FashionStoreWinForms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Move {1} units of SKU &quot;{0}&quot; to warehouse {3}?.
+        ///   Looks up a localized string similar to Move {1} units of SKU &quot;{0}&quot; to store {2}?.
         /// </summary>
         internal static string CONFIRM_MOVING_GOODS {
             get {
@@ -296,11 +296,11 @@ namespace FashionStoreWinForms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current warehouse not selected..
+        ///   Looks up a localized string similar to Current store is not selected..
         /// </summary>
-        internal static string CURRENT_WAREHOUSE_NOT_SELECTED {
+        internal static string CURRENT_STORE_NOT_SELECTED {
             get {
-                return ResourceManager.GetString("CURRENT_WAREHOUSE_NOT_SELECTED", resourceCulture);
+                return ResourceManager.GetString("CURRENT_STORE_NOT_SELECTED", resourceCulture);
             }
         }
         

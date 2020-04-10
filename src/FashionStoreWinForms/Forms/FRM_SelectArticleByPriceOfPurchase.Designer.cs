@@ -67,20 +67,20 @@
             resources.ApplyResources(this.LST_Prices, "LST_Prices");
             this.LST_Prices.FormattingEnabled = true;
             this.LST_Prices.Name = "LST_Prices";
-            this.LST_Prices.DoubleClick += new System.EventHandler(this.LST_Prices_DoubleClick);
+            this.LST_Prices.DoubleClick += new System.EventHandler(this.PricesList_DoubleClick);
             // 
             // T_NewPrice
             // 
             resources.ApplyResources(this.T_NewPrice, "T_NewPrice");
             this.T_NewPrice.Name = "T_NewPrice";
-            this.T_NewPrice.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.T_NewPrice_PreviewKeyDown);
+            this.T_NewPrice.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.NewPriceTextBox_PreviewKeyDown);
             // 
             // B_NewPrice
             // 
             resources.ApplyResources(this.B_NewPrice, "B_NewPrice");
             this.B_NewPrice.Name = "B_NewPrice";
             this.B_NewPrice.UseVisualStyleBackColor = true;
-            this.B_NewPrice.Click += new System.EventHandler(this.B_NewPrice_Click);
+            this.B_NewPrice.Click += new System.EventHandler(this.NewPriceButton_Click);
             // 
             // FRM_SelectArticleByPriceOfPurchase
             // 

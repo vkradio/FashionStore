@@ -77,13 +77,13 @@
             // 
             resources.ApplyResources(this.T_Amount, "T_Amount");
             this.T_Amount.Name = "T_Amount";
-            this.T_Amount.TextChanged += new System.EventHandler(this.T_Amount_TextChanged);
+            this.T_Amount.TextChanged += new System.EventHandler(this.AmountTextBox_TextChanged);
             // 
             // T_PriceOfSell
             // 
             resources.ApplyResources(this.T_PriceOfSell, "T_PriceOfSell");
             this.T_PriceOfSell.Name = "T_PriceOfSell";
-            this.T_PriceOfSell.TextChanged += new System.EventHandler(this.T_PriceOfSell_TextChanged);
+            this.T_PriceOfSell.TextChanged += new System.EventHandler(this.PriceOfSellTextBox_TextChanged);
             // 
             // T_MarginTotal
             // 

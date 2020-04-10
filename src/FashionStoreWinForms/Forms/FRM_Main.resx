@@ -117,236 +117,82 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;MNU_Main.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PAN_Workplace.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;MI_Report.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MI_DressMatrix.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MI_SalesJournal.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="MI_SalesJournal.Text" xml:space="preserve">
-    <value>Sales history</value>
-  </data>
-  <data name="&gt;&gt;MI_Report.Name" xml:space="preserve">
-    <value>MI_Report</value>
-  </data>
-  <data name="MI_Settings.Text" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="MI_Cards.Text" xml:space="preserve">
-    <value>Cards</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="PAN_Workplace.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="PAN_PointsOfSale.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
+  <metadata name="MNU_Main.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="PAN_Workplace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 76</value>
-  </data>
-  <data name="&gt;&gt;MI_Rep_Total.Name" xml:space="preserve">
-    <value>MI_Rep_Total</value>
-  </data>
-  <data name="MI_Card_PointOfSale.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
-  </data>
-  <data name="MNU_Main.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;PAN_PointsOfSale.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="MI_AddSku.Text" xml:space="preserve">
-    <value>Add SKU</value>
-  </data>
-  <data name="MI_UserSettings.Text" xml:space="preserve">
-    <value>User settings</value>
-  </data>
-  <data name="&gt;&gt;MNU_Main.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;MI_Settings.Name" xml:space="preserve">
-    <value>MI_Settings</value>
-  </data>
-  <data name="MI_Rep_Total.Text" xml:space="preserve">
-    <value>Stocks overall</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="MI_Backup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 22</value>
-  </data>
-  <data name="&gt;&gt;PAN_Workplace.Name" xml:space="preserve">
-    <value>PAN_Workplace</value>
-  </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterScreen</value>
-  </data>
-  <data name="MI_Settings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 20</value>
-  </data>
-  <data name="MI_Report.Text" xml:space="preserve">
-    <value>Reports</value>
-  </data>
-  <data name="PAN_Workplace.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;PAN_Workplace.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;MI_Backup.Name" xml:space="preserve">
-    <value>MI_Backup</value>
-  </data>
-  <data name="MI_SearchSku.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 20</value>
-  </data>
-  <data name="&gt;&gt;MI_Cards.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MI_UserSettings.Name" xml:space="preserve">
-    <value>MI_UserSettings</value>
-  </data>
-  <data name="MI_Report.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 20</value>
-  </data>
-  <data name="&gt;&gt;MI_Rep_Total.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PAN_PointsOfSale.Type" xml:space="preserve">
-    <value>FashionStoreWinForms.Widgets.PointOfSaleSelector.PointOfSalePanel, FashionStoreWinForms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;MI_DressMatrix.Name" xml:space="preserve">
-    <value>MI_DressMatrix</value>
-  </data>
-  <data name="&gt;&gt;MI_Settings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="MI_Rep_PerPos.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
-  </data>
   <data name="MNU_Main.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
-  </data>
-  <data name="MI_AddSku.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 20</value>
-  </data>
-  <data name="&gt;&gt;MI_Sql.Name" xml:space="preserve">
-    <value>MI_Sql</value>
-  </data>
-  <data name="&gt;&gt;PAN_Workplace.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="MI_DressMatrix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
-  </data>
-  <data name="PAN_PointsOfSale.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 24</value>
-  </data>
-  <data name="&gt;&gt;MI_Card_PointOfSale.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MI_Sql.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="MI_Sql.Text" xml:space="preserve">
-    <value>SQL commands</value>
-  </data>
-  <data name="PAN_PointsOfSale.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;MI_UserSettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PAN_PointsOfSale.Size" type="System.Drawing.Size, System.Drawing">
-    <value>670, 52</value>
-  </data>
-  <data name="&gt;&gt;PAN_PointsOfSale.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;MI_Card_PointOfSale.Name" xml:space="preserve">
-    <value>MI_Card_PointOfSale</value>
-  </data>
-  <data name="&gt;&gt;MI_AddSku.Name" xml:space="preserve">
-    <value>MI_AddSku</value>
-  </data>
-  <data name="MI_DressMatrix.Text" xml:space="preserve">
-    <value>Size chart layout</value>
-  </data>
-  <data name="MI_Sql.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 22</value>
-  </data>
-  <data name="MI_Rep_PerPos.Text" xml:space="preserve">
-    <value>Stocks per warehouse</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FRM_Main</value>
-  </data>
-  <data name="&gt;&gt;MI_SearchSku.Name" xml:space="preserve">
-    <value>MI_SearchSku</value>
-  </data>
-  <data name="MI_UserSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 22</value>
-  </data>
-  <data name="MI_Rep_Total.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
-  </data>
-  <data name="MI_Backup.Text" xml:space="preserve">
-    <value>Backup</value>
-  </data>
-  <data name="MI_Card_PointOfSale.Text" xml:space="preserve">
-    <value>Warehouse</value>
-  </data>
-  <data name="MI_Cards.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 20</value>
   </data>
   <data name="MNU_Main.Size" type="System.Drawing.Size, System.Drawing">
     <value>670, 24</value>
   </data>
-  <data name="&gt;&gt;PAN_PointsOfSale.Name" xml:space="preserve">
-    <value>PAN_PointsOfSale</value>
-  </data>
-  <data name="&gt;&gt;MI_SearchSku.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MI_Rep_PerPos.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MI_Rep_PerPos.Name" xml:space="preserve">
-    <value>MI_Rep_PerPos</value>
-  </data>
-  <data name="PAN_Workplace.Size" type="System.Drawing.Size, System.Drawing">
-    <value>670, 377</value>
-  </data>
-  <data name="&gt;&gt;MI_SalesJournal.Name" xml:space="preserve">
-    <value>MI_SalesJournal</value>
-  </data>
-  <data name="PAN_Workplace.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="MNU_Main.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
   </data>
   <data name="&gt;&gt;MNU_Main.Name" xml:space="preserve">
     <value>MNU_Main</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>670, 453</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;MNU_Main.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;MNU_Main.Parent" xml:space="preserve">
     <value>$this</value>
+  </data>
+  <data name="&gt;&gt;MNU_Main.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="MI_Cards.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 20</value>
+  </data>
+  <data name="MI_Cards.Text" xml:space="preserve">
+    <value>Cards</value>
+  </data>
+  <data name="MI_DressMatrix.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 22</value>
+  </data>
+  <data name="MI_DressMatrix.Text" xml:space="preserve">
+    <value>Size chart layout</value>
+  </data>
+  <data name="MI_Card_PointOfSale.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 22</value>
+  </data>
+  <data name="MI_Card_PointOfSale.Text" xml:space="preserve">
+    <value>Store</value>
+  </data>
+  <data name="MI_Settings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 20</value>
+  </data>
+  <data name="MI_Settings.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="MI_Sql.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 22</value>
+  </data>
+  <data name="MI_Sql.Text" xml:space="preserve">
+    <value>SQL commands</value>
+  </data>
+  <data name="MI_UserSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 22</value>
+  </data>
+  <data name="MI_UserSettings.Text" xml:space="preserve">
+    <value>User settings</value>
+  </data>
+  <data name="MI_Backup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 22</value>
+  </data>
+  <data name="MI_Backup.Text" xml:space="preserve">
+    <value>Backup</value>
+  </data>
+  <data name="MI_AddSku.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 20</value>
+  </data>
+  <data name="MI_AddSku.Text" xml:space="preserve">
+    <value>Add SKU</value>
+  </data>
+  <data name="MI_SearchSku.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 20</value>
   </data>
   <data name="MI_SearchSku.Text" xml:space="preserve">
     <value>Search</value>
@@ -354,19 +200,185 @@
   <data name="MI_SalesJournal.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 20</value>
   </data>
-  <data name="&gt;&gt;MI_AddSku.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="MI_SalesJournal.Text" xml:space="preserve">
+    <value>Sales history</value>
   </data>
-  <data name="&gt;&gt;MI_Cards.Name" xml:space="preserve">
-    <value>MI_Cards</value>
+  <data name="MI_Report.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 20</value>
   </data>
-  <data name="&gt;&gt;MI_Backup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="MI_Report.Text" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="MI_Rep_PerPos.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 22</value>
+  </data>
+  <data name="MI_Rep_PerPos.Text" xml:space="preserve">
+    <value>Stocks per store</value>
+  </data>
+  <data name="MI_Rep_Total.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 22</value>
+  </data>
+  <data name="MI_Rep_Total.Text" xml:space="preserve">
+    <value>Stocks overall</value>
+  </data>
+  <data name="PAN_Workplace.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="PAN_Workplace.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="PAN_Workplace.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 76</value>
+  </data>
+  <data name="PAN_Workplace.Size" type="System.Drawing.Size, System.Drawing">
+    <value>670, 377</value>
+  </data>
+  <data name="PAN_Workplace.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;PAN_Workplace.Name" xml:space="preserve">
+    <value>PAN_Workplace</value>
+  </data>
+  <data name="&gt;&gt;PAN_Workplace.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PAN_Workplace.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PAN_Workplace.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="elementHost1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="elementHost1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 24</value>
+  </data>
+  <data name="elementHost1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>670, 52</value>
+  </data>
+  <data name="elementHost1.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="elementHost1.Text" xml:space="preserve">
+    <value>elementHost1</value>
+  </data>
+  <data name="&gt;&gt;elementHost1.Name" xml:space="preserve">
+    <value>elementHost1</value>
+  </data>
+  <data name="&gt;&gt;elementHost1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Integration.ElementHost, WindowsFormsIntegration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</value>
+  </data>
+  <data name="&gt;&gt;elementHost1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;elementHost1.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="MNU_Main.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>670, 453</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="&gt;&gt;MI_Cards.Name" xml:space="preserve">
+    <value>MI_Cards</value>
+  </data>
+  <data name="&gt;&gt;MI_Cards.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MI_DressMatrix.Name" xml:space="preserve">
+    <value>MI_DressMatrix</value>
+  </data>
+  <data name="&gt;&gt;MI_DressMatrix.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MI_Card_PointOfSale.Name" xml:space="preserve">
+    <value>MI_Card_PointOfSale</value>
+  </data>
+  <data name="&gt;&gt;MI_Card_PointOfSale.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MI_Settings.Name" xml:space="preserve">
+    <value>MI_Settings</value>
+  </data>
+  <data name="&gt;&gt;MI_Settings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MI_Sql.Name" xml:space="preserve">
+    <value>MI_Sql</value>
+  </data>
+  <data name="&gt;&gt;MI_Sql.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MI_UserSettings.Name" xml:space="preserve">
+    <value>MI_UserSettings</value>
+  </data>
+  <data name="&gt;&gt;MI_UserSettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MI_Backup.Name" xml:space="preserve">
+    <value>MI_Backup</value>
+  </data>
+  <data name="&gt;&gt;MI_Backup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MI_AddSku.Name" xml:space="preserve">
+    <value>MI_AddSku</value>
+  </data>
+  <data name="&gt;&gt;MI_AddSku.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MI_SearchSku.Name" xml:space="preserve">
+    <value>MI_SearchSku</value>
+  </data>
+  <data name="&gt;&gt;MI_SearchSku.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MI_SalesJournal.Name" xml:space="preserve">
+    <value>MI_SalesJournal</value>
+  </data>
+  <data name="&gt;&gt;MI_SalesJournal.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MI_Report.Name" xml:space="preserve">
+    <value>MI_Report</value>
+  </data>
+  <data name="&gt;&gt;MI_Report.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MI_Rep_PerPos.Name" xml:space="preserve">
+    <value>MI_Rep_PerPos</value>
+  </data>
+  <data name="&gt;&gt;MI_Rep_PerPos.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MI_Rep_Total.Name" xml:space="preserve">
+    <value>MI_Rep_Total</value>
+  </data>
+  <data name="&gt;&gt;MI_Rep_Total.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;warehouseSelector1.Name" xml:space="preserve">
+    <value>warehouseSelector1</value>
+  </data>
+  <data name="&gt;&gt;warehouseSelector1.Type" xml:space="preserve">
+    <value>WindowsFormsIntegration.Design.HostedComponent, WindowsFormsIntegration.Design, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FRM_Main</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
