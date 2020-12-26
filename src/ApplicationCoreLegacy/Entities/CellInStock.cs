@@ -7,6 +7,9 @@ using DalLegacy.Time;
 
 namespace ApplicationCoreLegacy.Entities
 {
+    /// <summary>
+    /// New name: SkuSizeInStock
+    /// </summary>
     [
         SPNames
         (

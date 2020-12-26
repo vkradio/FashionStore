@@ -8,6 +8,9 @@ using DalLegacy.Time;
 
 namespace ApplicationCoreLegacy.Entities
 {
+    /// <summary>
+    /// New name: Sku
+    /// </summary>
     [
         SPNames
         (
