@@ -33,9 +33,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationCoreLegacy", "sr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "design", "design", "{B6FB1121-D255-47D9-84E3-017756A5BAD6}"
 	ProjectSection(SolutionItems) = preProject
+		design\DDD_new.uml = design\DDD_new.uml
 		design\DDD_old.uml = design\DDD_old.uml
 		design\DDD_old_Main.png = design\DDD_old_Main.png
 		design\DDD_old_Sales.png = design\DDD_old_Sales.png
+		design\WebAPI_inventory.txt = design\WebAPI_inventory.txt
+		design\WebAPI_sales.txt = design\WebAPI_sales.txt
 	EndProjectSection
 EndProject
 Global

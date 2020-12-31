@@ -1,0 +1,41 @@
+I. Sell a Product.
+
+POST /api/sales/sell/<product-id>
+params (with example values):
+{
+	"storeId": 2,
+	"cellX": "167",
+	"cellY": "60",
+	"unitPrice": 20.0,
+	"units": 2,
+	"paidByCard": 18.0,
+	"paidInCash": 2.0
+}
+
+
+
+II. Product return.
+
+POST /api/sales/return/<product-id>
+params (with example values):
+{
+	"storeId": 2,
+	"cellX": "167",
+	"cellY": "60",
+	"unitPrice": 20.0,
+	"units": 2,
+	"returnedInCash": 20.0
+}
+
+
+
+III. View sales register.
+
+GET /api/sales/register/store/<id>
+Optional URL params:
+first-date/<first-date>	- limit list by the minimum date (time part is ignored)
+last-date/<last-date>	- limit list by the maximum date (time part is ignored; including sales during this last day)
+paid-by/<means>			- where <means> is either "cash" or "card"; otherwise all means are included
+
+example (get sales for a single day, paid by a credit card):
+/api/sales/register/store/2/first-date/2020-11-02/last-date/2020-11-02/paid-by/card

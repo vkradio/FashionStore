@@ -26,14 +26,14 @@ namespace ApplicationCore.Entities
         public SizeChart SizeChart { get; set; } = default!;
 
         /// <summary>
-        /// Purchasing cost
+        /// Purchase price
         /// </summary>
-        public decimal PurchasingCost { get; set; }
+        public decimal PurchasePrice { get; set; }
 
         /// <summary>
-        /// Price
+        /// Retail Price
         /// </summary>
-        public decimal Price { get; set; }
+        public decimal RetailPrice { get; set; }
 
         /// <summary>
         /// Time of the last change

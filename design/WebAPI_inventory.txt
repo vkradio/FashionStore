@@ -1,0 +1,171 @@
+I. Viewing list of Stores (and selecting the "current" one at the UI side).
+
+GET /api/inventory/stores			- list of all active stores (ordered by ordinal number)
+    /api/inventory/stores/show/all	- also include inactive ones (ordered by ordinal number)
+
+
+
+II. Searching for Products with an appropriate name.
+
+GET /api/inventory/find-products/<name-beginning>/at-store/<store-id>	- list all Products at a given store; search by beginning of the name (order by name)
+example: /api/inventory/find-products/name%2012/at-store/2
+[
+	{
+		"name": "shirt 1234",
+		"purchasePrice": 14.0,
+		"retailPrice": 16.0,
+		"inStock": 1
+	},
+	{
+		"name": "shirt 1246",
+		"purchasePrice": 14.5,
+		"retailPrice": 17.0,
+		"inStock": 3
+	}
+]
+
+
+
+III. Getting Product IDs and purchase prices for one exact name.
+
+GET /api/inventory/product-ids-for/<name>/at-store/<store-id>
+example: /api/inventory/product-ids-for/shirt%201234/at-store/2
+[
+	{
+		"id": 34562,
+		"purchasePrice": 13.5
+	},
+	{
+		"id": 954560,
+		"purchasePrice": 14.0
+	}
+]
+
+
+
+IV. Getting Product details with stocks at a given Store.
+
+GET /api/inventory/products/<id>/at-store/<store-id>
+example: /api/inventory/products/1080/at-store/3
+{
+	"id": 1080,
+	"name": "suit 56",
+	"sizeChartId": 3,
+	"purchasePrice": 20.0,
+	"retailPrice": 26.0,
+	"modified": "2020-12-25T17:25:00",
+	"stocks": [
+		[0, 0, 0, 0, 0, 1, 0, 3],
+		[0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 4, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 2, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0]
+	]
+}
+
+
+
+V. Getting a Size chart.
+
+GET /api/inventory/size-charts/		- list all existing IDs
+GET /api/inventory/size-charts/<id> - get details of the specified size chart
+example: /api/inventory/size-charts/4
+{
+	"name": "shirt"
+	"cellsX": "164/170,170/176,176,176/182,184,182/188,188/194,Defective (0)",
+	"cellsY": "36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53"
+}
+
+
+
+VI. Save Product details: retail price and/or stocks (the latter one - at a given Store).
+
+6.1) Create a new Product.
+
+POST /api/inventory/products/
+example: /api/inventory/products/
+{
+	"name": "suit 1342",
+	"sizeChartId": 2,
+	"purchasePrice": 14.0,
+	"retailPrice": 19.99
+}
+will be returned: id of the new Product
+
+Note: "sizeChartId" may (and should) be omitted if we create a variant of the existing Product
+with a new purchase price.
+
+6.2) Update Product retail price.
+
+PUT /api/inventory/products/<id>
+example: /api/inventory/products/6892
+{
+	"retailPrice": 21.99
+}
+
+6.3) Set/update Product stocks for the given Store.
+
+PUT /api/inventory/products/<id>/at-store/<store-id>
+example: /api/inventory/products/567/at-store/3
+{
+	"stocks": [
+		[0, 0, 0, 0, 0, 1, 0, 3],
+		[0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 4, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 2, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0]
+	]
+}
+
+
+
+VII. Remove all Product stocks from the Store.
+
+DELETE /api/inventory/products/<id>/from-store/<store-id>
+
+Note: If, after removing stocks at the given Store, there will not be any stock of
+this Product at other Stores, the Product itself will be removed from the database too.
+
+
+
+VIII. Move Product stocks from one Store to another.
+
+POST /api/inventory/move/<product-id>
+params (with example values):
+{
+	"sourceStoreId": 2,
+	"destinationStoreId": 1,
+	"cellX": "167",
+	"cellY": "60",
+	"units": 1
+}
+
+This method is atomic and non-idempotent.
+
+
+
+IV. Inventory report.
+
+GET /api/inventory/report
+Optional URL parameters:
+at-store/<store-id>								- limit report by the store (otherwise, all stores will be included)
+product-name-begins/<product-name-beginning>	- limit by first letters in the Product name
+show-purchase-prices/<true-or-false>
+show-retail-prices/<true-or-false>
+show-stock-prices/<true-or-false>				- show the overall purchase cost of all those Products in stock
+detail-sizes/<true-or-false>					- show detailed stock by sizes
+
+
+
+
+брюки 125580/3  16 06 20
